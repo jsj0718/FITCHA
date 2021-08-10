@@ -1,0 +1,342 @@
+/* CSS VARIABLES */
+:root {
+  --primary: #141414;
+  --light: #F3F3F3;
+  --dark: 	#686868;
+}
+
+html, body {
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary);
+  color: var(--light);
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  padding-top: 60px;  
+}
+
+.wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+header {
+  padding: 20px 20px 0 20px;
+  position: fixed;
+  top: 0;
+  display: grid;  
+  grid-gap:5px;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas: 
+   "nt mn mn sb . . . "; 
+  background-color: var(--primary);
+  width: 100%;
+  margin-bottom: 0px;  
+}
+
+.netflixLogo {
+  grid-area: nt;
+  object-fit: cover;
+  width: 100px;
+  max-height: 100%;
+  
+  padding-left: 30px;
+  padding-top: 0px;  
+}
+
+.netflixLogo img {  
+  height: 35px;     
+}
+
+#logo {
+  color: #E50914;  
+  margin: 0; 
+  padding: 0; 
+}
+
+
+
+
+
+.main-nav {
+  grid-area: mn;
+  padding: 50px 30px 10px 20px;
+  margin: 0 auto;
+}
+
+.main-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin: 20px;  
+  padding: 20px;
+  background-color: rgba(255,0,0,0.5);
+  border-radius: 20px;
+  display: inline-block;
+  
+}
+
+.main-nav a:hover {
+  color: var(--dark);
+}
+
+.sub-nav {
+  grid-area: sb;
+  padding: 0 40px 0 40px;
+}
+
+.sub-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin: 5px;
+}
+
+.sub-nav a:hover {
+  color: var(--dark);
+}
+
+/* MAIN */
+#review-h1{
+	margin: 30px auto 0px 220px;
+	font-weight: bold;
+}
+.review-box{
+	display: flex;
+	width: 1200px;
+	height: 500px;
+/* 	border: 1px solid white; */
+	margin: 0px 200px 20px 200px;
+}
+
+#movie-img{
+	width: 300px;
+	height: 350px;
+	margin: 50px 20px 50px 20px;
+}
+.movie-info{
+/* 	display: flex; */
+	width: 250px;
+	height: 420px;
+/* 	border: 1px solid white; */
+	margin: 50px 20px 50px 0; 
+}
+
+#movie-content{
+	width: 250px;
+	height: 420px;
+	padding: 10px;
+	border: 1px solid white;
+}
+.write-box{
+	margin: 50px 20px 50px 0;
+	width: 500px;
+	height: 420px;
+	border: 1px solid white;
+}
+#review-writer{
+	width: 500px;
+	height: 40px;
+	padding: 10px;
+	border: 1px solid white;	
+}
+#review-title{
+	width: 500px;
+	height: 50px;
+	padding: 10px;
+	border: 1px solid white;	
+}
+#review-content{
+	width: 500px;
+	height: 330px;
+	padding: 10px;
+	border: 1px solid white;	
+}
+#comments{
+	
+	width: 1200px;
+	height: 500px;
+	margin: 80px 200px 20px 200px;
+}
+.comment-row{
+	display: flex;
+	
+}
+#new-comment{
+	width: 800px;
+	color: black;
+	margin: 20px 0px 20px 150px;
+}
+#comment-btn{
+	color: black;
+	height: 30px;
+	margin: 20px 0px 20px 10px;
+}
+
+#comment-box{
+	display: flex;
+}
+.comment-writer{
+	width: 200px;
+	font-size: 12px;
+	margin: 3px 3px 3px 30px;
+}
+.comment-date{
+	width: 200px;
+	font-size: 12px;
+	margin: 3px 3px 3px 1000px;
+}
+.comment-content{
+	width: 800px;
+	font-size: 15px;
+	margin: 3px 3px 3px 30px;
+}
+.hr{
+	color:gray;
+}
+
+
+
+
+
+
+
+/* FOOTER */
+footer {
+  padding: 20px;
+  text-align: center;
+  color: var(--dark);
+  margin: 10px;
+}
+
+/* MEDIA QUERIES */
+
+@media(max-width: 900px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+  }
+
+}
+
+@media(max-width: 700px) {
+
+  header {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "nt nt nt  .  .  . sb . . . "
+    "mn mn mn mn mn mn  mn mn mn mn";
+  }
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, minmax(100px, 1fr));
+  }
+
+  .sub-links ul {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+   
+}
+
+@media(max-width: 500px) {
+
+  .wrapper {
+    font-size: 15px;
+  }
+
+  header {
+    margin: 0;
+    padding: 20px 0 5px 0;
+    position: fixed;
+   
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas: 
+    "nt"    
+    "mn"
+    "sb";
+    text-align: center;
+  }
+
+  .netflixLogo {
+    max-width: 100%;
+    margin: auto;
+    padding-right: 20px;
+  }
+
+  .main-nav {
+    display: grid;
+    grid-gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 18px;
+    color: white;
+  }
+
+ 
+
+  .box {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;    
+  }
+
+  .box a:hover {
+    transition: transform .3s;
+    -ms-transform: scale(1);
+    -webkit-transform: scale(1);  
+    transform: scale(1.2);
+  }
+
+  .logos {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+  }
+
+  .sub-links ul {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(1, 1fr);
+    text-align: center;
+    font-size: 15px;
+  }
+
+  
+
+  
+   
+}

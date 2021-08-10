@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+:root {
+  --primary: #141414;
+  --light: #F3F3F3;
+  --dark:    #686868;
+}
+body{
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0;
+  background-color: var(--primary);
+  color: var(--light);
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  line-height: 1.4;
+}
+fieldset{
+ text-align: center;
+ width: 1200px;
+ margin: 0 auto;
+ border: 1px solid black;
+	
+}
+
+header{
+	display: inline-block;
+	clear: both;
+	position: relative;
+	margin: 0 auto;
+	background-image: url("")
+	
+		
+
+}
+.netflixLogo{
+	display: inline;
+	width: 1000px;
+	
+	
+}
+#logo{
+	position: absolute;
+	left:0;
+}
+section{
+ margin: 30px auto;
+ border-top: 1px solid red;
+  width: 1200px;
+}
+
+#title{
+	
+	width: 1000px;
+	text-align: center;
+	margin: 30px;
+
+	
+}
+.main-nav {
+  text-align: center;
+  padding: 50px 30px 10px 20px;
+  margin: 30px auto;
+}
+
+.main-nav a {
+  color: var(--light);
+  text-decoration: none;
+  margin-left: 30px;  
+  padding: 10px;
+  background-color: rgba(255,0,0,0.5);
+  border-radius: 20px;
+  display: inline-block;
+  
+}
+
+.main-nav a:hover {
+  color: var(--dark);
+}
+
+
+#search-box{
+  
+   width: 600px;
+   margin: 0 auto;
+  
+/*    border: 1px solid white; */
+  
+}
+
+#input-search{
+   width: 500px;
+   height: 10px;
+   border: 1px solid white;
+   border-radius: 20px;
+   background-color: rgba(255,255,255,0.8);
+   margin: 0 auto;
+   padding: 10px;
+   text-align: center;
+}
+#search-btn{
+   display: inline-block;
+   color:black;
+   
+}
+#recently, best{
+   
+   font-size: 24px;
+   color: white;
+   font-weight: bold;
+   margin:  30px 100px;
+}
+#review-box{ 
+	text-align: left;
+   width: 1200px;
+  
+   border-bottom: 1px solid red;
+}
+#review-title{
+   text-align: center;
+}
+
+.row{
+   display: inline-block;
+   margin: 30px 10px 0 50px;
+   
+}
+.thumbnail{
+   width: 242px;
+   background-color: rgba(255,255,255,0.5);
+   
+}
+.main-container {
+ width: 1200px;
+  padding: 50px;
+}
+
+.box {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(6, minmax(100px, 1fr));
+}
+
+.box a {
+  transition: transform .3s;  
+}
+
+.box a:hover {
+  transition: transform .3s;
+  -ms-transform: scale(1.4);
+  -webkit-transform: scale(1.4);  
+  transform: scale(1.4);
+}
+
+.box img {
+  border-radius: 2px;
+}
