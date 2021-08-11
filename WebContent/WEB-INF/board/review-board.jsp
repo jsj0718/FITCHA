@@ -7,13 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>FitCha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" >
-  <link rel="stylesheet" href="css/board/review-detail.css" >
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/comment.js"></script>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" >
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/board/review-board.css" >
+  <script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script>
+  <script src="${pageContext.request.contextPath}/js/board/comment.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 
-  <script src="main.js"></script>
 </head>
 <body>
 	 <div class="wrapper">
@@ -23,8 +22,8 @@
         <div>
          <nav class="sub-nav">
              <a id="login" href="#">로그인</a>     
-           <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
-             <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
+<!--            <a href="#"><i class="fas fa-search sub-nav-logo"></i></a> -->
+<!--              <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a> -->
             <a href="board-main.html">전체 게시판</a>
             <a href="#">나의 게시판</a>
             <a href="#">캘린더</a>
@@ -36,14 +35,14 @@
         <a id="logo" href="#home"><img src="img/fitcha.png" alt="Logo Image"></a>
       </div>      
 
-      <nav class="sub-nav">
-        <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
-        <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
-        <a href="#">Account</a>        
-      </nav>      
+<!--       <nav class="sub-nav"> -->
+<!--         <a href="#"><i class="fas fa-search sub-nav-logo"></i></a> -->
+<!--         <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a> -->
+<!--         <a href="#">Account</a>         -->
+<!--       </nav>       -->
     </header>
     <!-- END OF HEADER -->
-    <h1 id="review-h1">작성자님의 Review</h1>
+    <h1 id="review-h1">kangjisoo님의 Review</h1>
     <div class="review-box">
     	<div id="movie-img">
     		<img src="img/avenger.jpg" alt="Logo Image">
@@ -67,6 +66,10 @@
 			</div>
     	</div>
     </div>
+    <div id="update-btn">
+	    	<button type="submit">수정</button>
+	    	<button type="submit">삭제</button>
+    </div>
     <hr class="hr">
     <div id="comments">
 		<div class="comment-row">
@@ -82,6 +85,7 @@
 	    	<div class="comment-content">sample comment1</div>
 	    	<hr class="hr">
 	    </div>
+	 </div>
 
     
     

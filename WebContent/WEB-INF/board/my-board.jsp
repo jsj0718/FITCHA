@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<link rel="stylesheet"  href="css/board/mypage.css">
+<link rel="stylesheet"  href="${pageContext.request.contextPath}/css/board/my-board.css">
 <body>
 <fieldset>
 <header>
