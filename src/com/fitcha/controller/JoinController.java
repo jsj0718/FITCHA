@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fitcha.model.dao.MUserDAO;
 import com.fitcha.model.vo.MUserVO;
 
-@WebServlet("/index")
+@WebServlet("/main-join")
 public class JoinController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

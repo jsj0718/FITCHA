@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.fitcha.model.dao.MUserDAO;
 
 
-@WebServlet("/index")
+@WebServlet("/main-login")
 public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
