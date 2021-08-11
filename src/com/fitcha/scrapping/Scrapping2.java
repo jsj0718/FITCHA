@@ -111,7 +111,7 @@ public class Scrapping2 {
             mvo.setGrade(gradeVal);
             
             if (runningTimeStr.equals("")) {
-                mvo.setRunningTime(-1);
+                mvo.setRunningTime(0);
             } else {
                 mvo.setRunningTime(runningTime);
             }
@@ -121,7 +121,7 @@ public class Scrapping2 {
                 mvo.setOpenDate(openDate);
             }
             if(attendance.equals("")) {
-                mvo.setAttendance(-1);
+                mvo.setAttendance(0);
             } else {
                 mvo.setAttendance(attendanceNum);
             }
@@ -263,7 +263,7 @@ public class Scrapping2 {
             mvo.setGrade(gradeVal);
             
             if (runningTimeStr.equals("")) {
-                mvo.setRunningTime(-1);
+                mvo.setRunningTime(0);
             } else {
                 mvo.setRunningTime(runningTime);
             }
@@ -273,7 +273,7 @@ public class Scrapping2 {
                 mvo.setOpenDate(openDate);
             }
             if(attendance.equals("")) {
-                mvo.setAttendance(-1);
+                mvo.setAttendance(0);
             } else {
                 mvo.setAttendance(attendanceNum);
             }
@@ -310,6 +310,7 @@ public class Scrapping2 {
             sc3.movieAndStaff(movieCode);
             
         } catch(Exception e) {
+            System.out.println(mcode);
             e.printStackTrace();
         }
 	}
