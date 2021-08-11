@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    
+    
+    
+    
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="css/login.css">
-<script src="js/login.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/main/login.css">
+<script src="${pageContext.request.contextPath }/js/main/login.js"></script>
 </head>
 <body>
 	<div class="cotn_principal">
@@ -53,35 +59,38 @@
 									src="https://images.unsplash.com/42/U7Fc1sy5SCUDIu4tlJY3_NY_by_PhilippHenzler_philmotion.de.jpg?ixlib=rb-0.3.5&q=50&fm=jpg&crop=entropy&s=7686972873678f32efaf2cd79671673d"
 									alt="" />
 							</div>
+					<form action="${pageContext.request.contextPath}/main-login" method="post" name="loginForm">
 							<div class="cont_form_login">
 								<a href="#" onclick="ocultar_login_sign_up()"><i
 									class="material-icons">&#xE5C4;</i></a>
-					<form action="/login" method="post" name="loginForm">
 								<h2>LOGIN</h2>
-								<input type="text" placeholder="Id" /> <input type="password"
-									placeholder="Password" />
+								<input type="text" placeholder="Id" name="id" required/> 
+								<input type="password" placeholder="Password" name="pw" required/>
+								<span style="color:red; font-size=12px;">${requestScope.msg }</span>
 								<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
-					</form>
 							</div>
+					</form>
 
 
 
+					<form action="${pageContext.request.contextPath}/main-join" method="post" name="signUpForm" id="signUpSize">
 						<div class="cont_form_sign_up">
-							<a href="#" onclick="ocultar_login_sign_up()"><i
-								class="material-icons"></i></a>
-					<form action="#" method="post" name="signUpForm">
+							<a href="#" onclick="ocultar_login_sign_up()">
+								<i class="material-icons"></i>
+							</a>
 							<h2>SIGN UP</h2>
-							<input type="text" placeholder="Name" />
-							<input type="text" placeholder="Id" /> 
-							<input type="password" placeholder="Password" /> 
+							<input type="text" placeholder="Name" name="join-name"/>
+							<input type="text" placeholder="Id" name="join-id" /> 
+							<input type="password" placeholder="Password" name="join-pw" /> 
 							<input type="password" placeholder="Confirm Password" /><br>
-							
+							<input type="email" placeholder="EMAIL" name="join-email" />
 							<input type="radio" name="gender">Male, <input type="radio" name="gender">Female <br>
-							Birth Date: <input type="date">
+							Birth Date: <input type="date" name="birth">
+							<span style="color:red; font-size=12px;">${requestScope.msg }</span>
 							<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN UP</button>
 
-					</form>
 						</div>
+					</form>
 				</div>
 
 			</div>
