@@ -16,6 +16,8 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.fitcha.scrapping.Scrapping;
+
 
 public class MovieAPI {
 	// 상수 설정
@@ -101,7 +103,7 @@ public class MovieAPI {
                 String audiAcc = (String) movie.get("audiAcc");
 //                result.append(movieNm).append(", ").append(audiAcc).append("\n");
                 
-                if (!resultList.contains(movieNm) && Integer.parseInt(audiAcc) > 10000) {
+                if (!resultList.contains(movieNm) && Integer.parseInt(audiAcc) > 100000) {
                     resultList.add(movieNm);                    
                 }
             }
@@ -115,24 +117,23 @@ public class MovieAPI {
         MovieAPI api = new MovieAPI();
  
         // API 요청 (curPage는 매개변수)
-        for (int i=0; i>-120; i--) {
-        	api.requestAPI(i);
-        }
-        
-//        api.requestAPI("1");
-//        System.out.println(result);
-                
-        for (String title : resultList) {
-            System.out.println(title);
-        }
-        
-       
-        
-        
-//        for (String title : resultList) {
-//            Scrapping sc = new Scrapping();
-//            sc.selectMovieList(title);
+//        for (int i=0; i>-480; i--) {
+//        	api.requestAPI(i);
 //        }
+                        
+//        for (String title : resultList) {
+//            result.append("\"").append(title).append("\"").append(", ");
+//        }
+//        
+//        System.out.println(result);
+        
+  
+
+        for (String title : resultList) {
+            Scrapping sc = new Scrapping();
+            sc.selectMovieList(title);            
+        }
+        
     }
 
 }

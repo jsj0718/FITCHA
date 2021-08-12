@@ -37,7 +37,7 @@ public class MovieAndGenreDAO {
             return pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
         } finally {
             closeAll(null, pstmt, conn);
         }

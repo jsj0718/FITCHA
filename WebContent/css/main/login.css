@@ -302,11 +302,13 @@ transition: all 0.5s;
 z-index: 2;  
 }
 .cont_forms_active_login  >.cont_form_login {
+
 }
 
 .cont_form_sign_up {
   position: absolute;
   width: 320px;
+
 float: left;
   opacity: 0;
 display: none;
@@ -316,6 +318,9 @@ display: none;
 -o-transition: all 0.5s;
 transition: all 0.5s;
 color: white;
+}
+#signUpSize{
+	height: 700px;
 }
 
   

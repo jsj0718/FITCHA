@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.ArrayList;
 
 import com.fitcha.model.dbconn.DBConnect;
+import com.fitcha.model.vo.MovieAndStaffVO;
 import com.fitcha.model.vo.StaffVO;
 
 public class StaffDAO {
@@ -49,5 +51,38 @@ public class StaffDAO {
             closeAll(null, pstmt, conn);
         }
         return -1; // DB 오류
+    }
+    
+    // staffid로 staff 정보 조회
+    public StaffVO selectStaff(int staffId) {
+        String SQL = "SELECT STAFFID, NAME, BIRTH, IMG "
+                + "FROM STAFF "
+                + "WHERE STAFFID = ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        StaffVO svo = null;
+        try {
+            conn = DBConnect.getInstance();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setInt(1, staffId);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                svo = new StaffVO();
+                svo.setStaffId(rs.getInt(1));
+                svo.setName(rs.getString(2));
+                svo.setBirth(rs.getString(3));
+                svo.setImg(rs.getString(4));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, pstmt, conn);
+        }
+
+        return svo;
     }
 }
