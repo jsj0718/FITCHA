@@ -60,12 +60,12 @@
 			</div>
 			<div id="best-writer">
 				<div id="best-board-writer">
-					<p id="writer">작성자</p>
-					<p>kangjisoo</p>
+					<p id="writer-p">작성자</p>
+					<p id="writer">kangjisoo</p>
 				</div>
 				<div id="best-board-title">
-					<p id="title">제목</p>
-					<p><a href="#">어벤져스:인피니티 워 리뷰</a></p>
+					<p id="title-p">제목</p>
+					<p id="title"><a href="#">어벤져스:인피니티 워 리뷰</a></p>
 				</div>
 			</div>
 	    </div>
