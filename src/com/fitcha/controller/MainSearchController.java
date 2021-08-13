@@ -9,16 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/main-movie")
-public class MainController extends HttpServlet {
+@WebServlet("/main-search")
+public class MainSearchController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test/search.jsp");
         rd.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 	}
 
 }

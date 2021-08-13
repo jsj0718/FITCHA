@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+
+body { 
+/*  padding-top: 70px;  */
+    background-color: black;
+}
+
+.navbar {
+    background-color: black;
+    border: 0;
+    height: 50px;
+}
+
+.navbar-brand {
+    padding: 5px;
+    margin: 0px;
+}
+
+#fitcha {
+    padding: 0px;
+    margin: 0px;
+    height: 45px;
+    width: auto;
+}
+
+.row .thumnail img, .thumnail .poster-btn {
+    width: 171px;
+    height: 180px;
+
+}
+
+.container {
+    background-color: black;
+}
+
+.carousel-control {
+    width: 3%;
+}
+
+.contents-title {
+    font-size: 1.4vw;
+    color: #e5e5e5;
+    font-weight: 700;
+}

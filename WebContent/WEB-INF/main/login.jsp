@@ -24,8 +24,6 @@
                   <div class="col_md_login">
                      <div class="cont_ba_opcitiy">
 
-
-
                         <h2>LOGIN</h2>
                         <p>Please Click the Login Button</p>
                         <button class="btn_login" onclick="cambiar_login()">LOGIN</button>

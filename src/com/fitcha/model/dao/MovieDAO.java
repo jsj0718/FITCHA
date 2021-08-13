@@ -161,7 +161,7 @@ public class MovieDAO {
     
     // 상영 중인 영화면 관객수 순으로 조회
     public ArrayList<MovieVO> selectMovieByAttendance(int start, int end) {
-        String SQL = "SELECT * "
+        String SQL = "SELECT TITLE, POSTER, ATTENDANCE "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM ( "
                 + "            SELECT TITLE, POSTER, ATTENDANCE "
