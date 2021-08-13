@@ -16,7 +16,7 @@
 	
 	<filter>
 	  	<filter-name>encoding</filter-name>
-	  	<filter-class>kr.re.kitri.memo.filter.EncodingFilter</filter-class>
+	  	<filter-class>com.fitcha.filter.EncodingFilter</filter-class>
   	</filter>
   
   	<filter-mapping>

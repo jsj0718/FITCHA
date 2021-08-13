@@ -18,6 +18,7 @@ import com.fitcha.model.dao.MemoDAO;
 import com.fitcha.model.vo.MemoJson;
 import com.fitcha.model.vo.MemoVO;
 
+
 @WebServlet("/mcalendar")
 public class McalendarController extends HttpServlet {
        
@@ -27,7 +28,7 @@ public class McalendarController extends HttpServlet {
 		
 		if(id == null) {
 			//로그인 안된 상태
-			response.sendRedirect(request.getContextPath() + "/WEB-INF/main/login.jsp");
+			response.sendRedirect(request.getContextPath() + "/WEB-INF/main/login");
 		} else {
 			//로그인 상태
 			MemoDAO mdao = new MemoDAO();
@@ -49,7 +50,7 @@ public class McalendarController extends HttpServlet {
 //			request에 json값을 널어서 보내줌
 			request.setAttribute("mjson", json);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/mcalendar.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/mcalendar.jsp");
 			rd.forward(request, response);
 		}
 			
