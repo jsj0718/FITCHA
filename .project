@@ -28,4 +28,41 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/WEB-INF/lib/gson-2.8.6.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/lib/gson-2.8.6.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/json-20210307.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/lib/json-20210307.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/json-simple-1.1.1.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/lib/json-simple-1.1.1.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/jsoup-1.14.1.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/lib/jsoup-1.14.1.jar</locationURI>
+		</link>
+		<link>
+			<name>WebContent/WEB-INF/lib/ojdbc8.jar</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/lib/ojdbc8.jar</locationURI>
+		</link>
+		<link>
+			<name>src/com/fitcha/openapi/SecretKey.java</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/SecretKey.java</locationURI>
+		</link>
+		<link>
+			<name>src/com/fitcha/model/dbconn/SecretDB.java</name>
+			<type>1</type>
+			<locationURI>PARENT-3-PROJECT_LOC/Users/kitri/Documents/%EC%B9%B4%EC%B9%B4%EC%98%A4%ED%86%A1%20%EB%B0%9B%EC%9D%80%20%ED%8C%8C%EC%9D%BC/SecretDB.java</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

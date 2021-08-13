@@ -3,6 +3,7 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
+	
 	<display-name>FITCHA</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
@@ -12,4 +13,15 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<filter>
+	  	<filter-name>encoding</filter-name>
+	  	<filter-class>kr.re.kitri.memo.filter.EncodingFilter</filter-class>
+  	</filter>
+  
+  	<filter-mapping>
+	  	<filter-name>encoding</filter-name>
+	  		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  
 </web-app>
