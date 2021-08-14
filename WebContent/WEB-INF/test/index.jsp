@@ -81,37 +81,6 @@
 
   <div style="margin: 800px"></div>
 
-  <div class="container">
-    <h3 class="recommend-title">보고싶은 작품을 찾아보세요.</h3>
-    <form class="d-flex">
-      <!-- 장르 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 장르</option>
-          <option>드라마</option>
-          <option>판타지</option>
-        </select>
-      </div>
-      <!-- 나라 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 나라</option>
-          <option>한국</option>
-          <option>미국</option>
-        </select>
-      </div>
-      <!-- 선택 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>추천순</option>
-          <option>최신순</option>
-          <option>러닝타임순</option>
-        </select>
-      </div>
-    </form>
-  </div>
-
-
   <!-- 인기 컨텐츠 -->
 <!--   <div class="container mx-2"> -->
 <!--     <div class="contents-title">FITCHA 인기 콘텐츠</div> -->
@@ -143,141 +112,79 @@
 
   <!-- 최신 -->
   <div class="container">
-    <div class="contents-title">최신 컨텐츠</div>
-    <div id="carouselExampleIndicators2" class="carousel slide pb-3" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="contents-title mx-5">최신 컨텐츠</div>
+    <div id="recentIndicators" class="carousel slide pb-3" data-bs-ride="carousel">
+      <div class="carousel-indicators m-0" id="recent-bar">
+      
       </div>
-      <div class="carousel-inner p-4">
-        <div class="carousel-item active">
-          <div class="row" id="recent-1">
-          
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row" id="recent-2">
-          
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row" id="recent-3">
-          
-          </div>
-        </div>
+      <div class="carousel-inner px-3 py-2" id="recent-contents">
+
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev" style="width: 30px;">
+      <button class="carousel-control-prev" type="button" data-bs-target="#recentIndicators" data-bs-slide="prev" style="width: 30px;">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next" style="width: 30px;">
+      <button class="carousel-control-next" type="button" data-bs-target="#recentIndicators" data-bs-slide="next" style="width: 30px;">
         <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
       </button>
     </div>
   </div>
 
-  <!-- 성별 -->
+  <!-- 추천 -->
   <div class="container">
-    <div class="contents-title">성별 추천 컨텐츠</div>
-    <div id="carouselExampleIndicators3" class="carousel slide pb-3" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="contents-title mx-5">ID 님에게 추천하는 컨텐츠</div>
+    <div id="recommendIndicators" class="carousel slide pb-3" data-bs-ride="carousel">
+      <div class="carousel-indicators m-0" id="recommend-bar">
+      
       </div>
-      <div class="carousel-inner p-4">
-        <div class="carousel-item active">
-          <div class="row" id="gender-1">
-          
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row" id="gender-2">
-          
-          </div>
-        </div>
-        <div class="carousel-item">
-          <div class="row" id="gender-3">
-          
-          </div>
-        </div>
+      <div class="carousel-inner px-3 py-2" id="recommend-contents">
+
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev" style="width: 30px;">
+      <button class="carousel-control-prev" type="button" data-bs-target="#recommendIndicators" data-bs-slide="prev" style="width: 30px;">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next" style="width: 30px;">
+      <button class="carousel-control-next" type="button" data-bs-target="#recommendIndicators" data-bs-slide="next" style="width: 30px;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- 성별 -->
+  <div class="container">
+    <div class="contents-title mx-5">성별 추천 컨텐츠</div>
+    <div id="genderIndicators" class="carousel slide pb-3" data-bs-ride="carousel">
+      <div class="carousel-indicators m-0" id="gender-bar">
+      
+      </div>
+      <div class="carousel-inner px-3 py-2" id="gender-contents">
+
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#genderIndicators" data-bs-slide="prev" style="width: 30px;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#genderIndicators" data-bs-slide="next" style="width: 30px;">
         <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
       </button>
     </div>
   </div>
 
   <!-- 나이 -->
-  <!--     <div class="container"> -->
-  <!--         <div class="contents-title">나이별 추천 컨텐츠</div> -->
-  <!--         <div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="false"> -->
-  <!--             <ol class="carousel-indicators"> -->
-  <!--                 <li data-target="#myCarosel" data-slide-to="0" class="active"></li> -->
-  <!--                 <li data-target="#myCarosel" data-slide-to="1"></li> -->
-  <!--                 <li data-target="#myCarosel" data-slide-to="2"></li> -->
-  <!--             </ol> -->
-  <!--             <div class="carousel-inner"> -->
-  <!--                 <div class="item active"> -->
-  <!--                     <div class="row"> -->
+  <div class="container">
+    <div class="contents-title mx-5">나이별 추천 컨텐츠</div>
+    <div id="ageIndicators" class="carousel slide pb-3" data-bs-ride="carousel">
+      <div class="carousel-indicators m-0" id="age-bar">
+      
+      </div>
+      <div class="carousel-inner px-3 py-2" id="age-contents">
 
-  <!--                     </div> -->
-  <!--                 </div> -->
-  <!--                 <div class="item"> -->
-  <!--                     <div class="row"> -->
-
-  <!--                     </div> -->
-  <!--                 </div> -->
-  <!--                 <div class="item"> -->
-  <!--                     <div class="row"> -->
-
-  <!--                     </div> -->
-  <!--                 </div> -->
-  <!--             </div> -->
-
-  <!--             <a class="left carousel-control" href="#myCarousel3" data-slide="prev" onclick="$('#myCarousel3').carousel('prev')"> -->
-  <!--                 <span class="glyphicon glyphicon-chevron-left"></span> -->
-  <!--                 <span class="sr-only">Previous</span> -->
-  <!--             </a> -->
-  <!--             <a class="right carousel-control" href="#myCarousel3" data-slide="next" onclick="$('#myCarousel3').carousel('next')"> -->
-  <!--                 <span class="glyphicon glyphicon-chevron-right"></span> -->
-  <!--                  <span class="sr-only">Next</span> -->
-  <!--             </a> -->
-  <!--         </div> -->
-  <!--     </div> -->
-
-
-  <!-- 캐러셀 -->
-  <!--        <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="false"> -->
-  <!--            <ol class="carousel-indicators"> -->
-  <!--                <li data-target="#myCarosel1" data-slide-to="1" class="active"></li> -->
-  <!--                <li data-target="#myCarosel1" data-slide-to="2"></li> -->
-  <!--                <li data-target="#myCarosel1" data-slide-to="3"></li> -->
-  <!--            </ol> -->
-  <!--            <div class="carousel-inner"> -->
-  <!--                <div class="item active"> -->
-  <!--                    <div id="popular-contents" class="row"></div> -->
-  <!--                </div> -->
-  <!--                <div class="item"> -->
-  <!--                    <div class="row"></div> -->
-  <!--                </div> -->
-  <!--                <div class="item"> -->
-  <!--                    <div class="row"></div> -->
-  <!--                </div> -->
-  <!--            </div> -->
-
-  <!--            <a id="prev" class="left carousel-control" href="#myCarousel1" data-slide="prev" onclick="$('#myCarousel1').carousel('prev')"> -->
-  <!--                <span class="glyphicon glyphicon-chevron-left"></span>  -->
-  <!--                <span class="sr-only">Previous</span> -->
-  <!--            </a>  -->
-  <!--            <a id="next" class="right carousel-control" href="#myCarousel1" data-slide="next" onclick="$('#myCarousel1').carousel('next')"> -->
-  <!--                <span class="glyphicon glyphicon-chevron-right"></span>  -->
-  <!--                <span class="sr-only">Next</span> -->
-  <!--            </a> -->
-  <!--        </div> -->
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#ageIndicators" data-bs-slide="prev" style="width: 30px;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#ageIndicators" data-bs-slide="next" style="width: 30px;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
 
   <!-- 모달창 -->
   <div class="modal fade" id="myModal" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true">

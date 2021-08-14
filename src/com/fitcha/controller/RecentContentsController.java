@@ -20,11 +20,6 @@ import com.google.gson.JsonObject;
 @WebServlet("/recent-contents")
 public class RecentContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	}
-
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
         
         MovieDAO mdao = new MovieDAO();
@@ -48,6 +43,11 @@ public class RecentContentsController extends HttpServlet {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         out.print(jsonResponse);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    
 
 	}
 

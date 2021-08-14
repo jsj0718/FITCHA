@@ -18,15 +18,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/gender-contents")
-public class GenderContentsController extends HttpServlet {
+@WebServlet("/age-contents")
+public class AgeContentsController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
         
         MovieDAO mdao = new MovieDAO();
         
-        ArrayList<MovieVO> mlist = mdao.selectMovieByUserInfo("MALE", 1, 18);
+        ArrayList<MovieVO> mlist = mdao.selectMovieByUserInfo("YOUTH", 1, 18);
         
         JsonArray jsonArr = new JsonArray();
         

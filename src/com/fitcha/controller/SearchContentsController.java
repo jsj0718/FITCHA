@@ -11,22 +11,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fitcha.model.dao.MovieDAO;
-import com.fitcha.model.vo.BoardVO;
 import com.fitcha.model.vo.MovieVO;
-import com.fitcha.pagination.Pagination;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/gender-contents")
-public class GenderContentsController extends HttpServlet {
-	
+@WebServlet("/search-contents")
+public class SearchContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
         
+	    String genre = request.getParameter("genre");
+	    String country = request.getParameter("country");
+        String order = request.getParameter("order");
+        int index = Integer.parseInt(request.getParameter("index"));
+	    
         MovieDAO mdao = new MovieDAO();
         
-        ArrayList<MovieVO> mlist = mdao.selectMovieByUserInfo("MALE", 1, 18);
+        ArrayList<MovieVO> mlist = mdao.selectMovieBySearch(country, genre, order, index);
         
         JsonArray jsonArr = new JsonArray();
         
@@ -48,7 +50,7 @@ public class GenderContentsController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    
+	
 	}
 
 }

@@ -137,54 +137,72 @@ window.onload = function () {
 
   //         }
 
-  var postConnect = function (url, block) {
-    var xhrpost = new XMLHttpRequest();
+  var getConnect = function (url, block) {
+    var xhrget = new XMLHttpRequest();
 
     // 통신할 방식, url, 동기 여부 설정
-    xhrpost.open("POST", url, true);
-    // post 요청을 하기 위한 header 세팅
-    xhrpost.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhrget.open("GET", url, true);
     // 요청
-    xhrpost.send();
-    // 	        xhrpost.send("curpage="+curpage);
-    // 	        console.log(curpage);
+    xhrget.send();
     // 응답
-    xhrpost.onreadystatechange = function () {
-      if (xhrpost.readyState == XMLHttpRequest.DONE && xhrpost.status == 200) {
-        // 	            	var popularContents = document.querySelector(".item.active div");
-        var html = "";
-
-
-        // 응답 값 (서버로부터 받아온 데이터)
-        var jsonStr = xhrpost.responseText; // json 형태의 문자열
-        var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
-
-        console.log(jsonStr);
-        var block1 = document.querySelector("#" + block + "-1");
-        var block2 = document.querySelector("#" + block + "-2");
-        var block3 = document.querySelector("#" + block + "-3");
+    xhrget.onreadystatechange = function () {
+      if (xhrget.readyState == XMLHttpRequest.DONE && xhrget.status == 200) {
         
+        // 응답 값 (서버로부터 받아온 데이터)
+        var jsonStr = xhrget.responseText; // json 형태의 문자열
+        var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
+        
+        console.log(url);
+        console.log(jsonStr);
+
+        // html에 들어갈 요소 및 블록
+        var barBlock = document.querySelector("#" + block +"-bar");
+        var contentsBlock = document.querySelector("#" + block + "-contents");
+        var barHtml = "";
+        var contentsHtml = "";
+        
+//        
+//        <div class="carousel-item active" >
+//          <div class="row" id="recent-contents">
+//            <div class="col-xs-4 col-md-2 text-center">
+//              <img src="' + json[i].poster + '" class="rounded" alt="..." data-toggle="modal" data-target="#myModal">
+//            </div>
+//          </div>
+//        </div>
+
+
         for (var i = 0; i < json.length; i++) {
-          html += '<div class="col-xs-4 col-md-2 text-center"> ' +
-                      '<img src="' + json[i].poster + '" class="rounded" alt="..." data-toggle="modal" data-target="#myModal"> ' +
-                   '</div> ';
-          if (i < 6) {
-            block1.innerHTML = html;
-          } else if (i < 12) {
-            block2.innerHTML = html;
-          } else if (i < 18) {
-            block3.innerHTML = html;
+          if (i % 6 === 0 && i === 0) {
+            barHtml += '<button type="button" data-bs-target="#' + block + 'Indicators" data-bs-slide-to="' + (parseInt((i + 1) / 6)) + '" class="active" aria-current="true" aria-label="Slide ' + (parseInt(i / 6) + 1) + '"></button>';
+            contentsHtml += '<div class="carousel-item active" > ' +
+                              '<div class="row"> ';
           }
           
-          if (i % 6 === 5) {
-            html = "";
+          contentsHtml += '<div class="col-xs-4 col-md-2 text-center"> ' +
+                             '<img src="' + json[i].poster + '" class="rounded" alt="..."> ' +
+                          '</div> ';
+          
+          if (i === (json.length - 1)) {
+            contentsHtml +=   '</div> ' +
+                            '</div> ';
+          } else if (i % 6 === 5){
+            barHtml += '<button type="button" data-bs-target="#' + block + 'Indicators" data-bs-slide-to="' + (parseInt((i + 1) / 6)) + '" aria-label="Slide ' + (parseInt((i + 1) / 6) + 1) + '"></button>';
+            contentsHtml +=   '</div> ' +
+                            '</div> ' +
+                            '<div class="carousel-item" > ' +
+                              '<div class="row"> ';
           }
+          
+          barBlock.innerHTML = barHtml;
+          contentsBlock.innerHTML = contentsHtml;
         }
       }
     }
   }
 
-  postConnect("recent-contents", "recent");
-  postConnect("gender-contents", "gender");
+  getConnect("recent-contents", "recent");
+  getConnect("recommend-contents", "recommend");
+  getConnect("gender-contents", "gender");
+  getConnect("age-contents", "age");
   
 }

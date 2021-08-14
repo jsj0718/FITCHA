@@ -231,13 +231,14 @@ public class MovieDAO {
     
     // 유저가 선호하는 장르(최대 3개)를 평점순으로 추천
     public ArrayList<MovieVO> selectMovieByUser(String userId, int start, int end) {
-        String SQL = "SELECT * "
+        String SQL = "SELECT DISTINCT TITLE, POSTER "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM ( "
-                + "            SELECT M.TITLE, M.POSTER, M.RATE "
+                + "            SELECT M.TITLE, M.POSTER "
                 + "            FROM MOVIEANDGENRE MAG, MOVIE M, GENRE G "
                 + "            WHERE MAG.MOVIEID = M.MOVIEID "
                 + "            AND MAG.GENREID = G.GENREID "
+                + "            AND M.OPENDATE > '20000101' "
                 + "            AND MAG.GENREID IN (SELECT * "
                 + "                                FROM ( "
                 + "                                      SELECT GENREID "
@@ -267,7 +268,6 @@ public class MovieDAO {
                 MovieVO mvo = new MovieVO();
                 mvo.setTitle(rs.getString(1));
                 mvo.setPoster(rs.getString(2));
-                mvo.setRate(rs.getDouble(3));
                 
                 mlist.add(mvo);
             }
@@ -404,6 +404,51 @@ public class MovieDAO {
         return mlist;
     }
     
-    
+    // 조건에 맞는 영화 탐색
+    public ArrayList<MovieVO> selectMovieBySearch(String country, String genre, String order, int index) {
+        String SQL = "SELECT TITLE, POSTER "
+                + "FROM (SELECT ROWNUM AS RNUM, A.* "
+                + "      FROM (SELECT DISTINCT M.* "
+                + "            FROM (SELECT M.TITLE, M.POSTER "
+                + "                  FROM MOVIE M, GENRE G, MOVIEANDGENRE MAG "
+                + "                  WHERE MAG.MOVIEID = M.MOVIEID "
+                + "                  AND MAG.GENREID = G.GENREID "
+                + "                  AND M.COUNTRY LIKE ? "
+                + "                  AND G.GENRENAME LIKE ? "
+                + "                  AND M.OPENDATE IS NOT NULL "
+                + "                  AND M.COUNTRY IS NOT NULL) M "
+                + "            ORDER BY ? DESC) A) "
+                + "WHERE RNUM BETWEEN ? AND ?";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        ArrayList<MovieVO> mlist = new ArrayList<>();
+        int end = index * 50;
+        int start = end - 49;
+        try {
+            conn = DBConnect.getInstance();
+            pstmt = conn.prepareStatement(SQL);
+            pstmt.setString(1, "%" + country + "%");
+            pstmt.setString(2, "%" + genre + "%");
+            pstmt.setString(3, order);
+            pstmt.setInt(4, start);
+            pstmt.setInt(5, end);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                MovieVO mvo = new MovieVO();
+                mvo.setTitle(rs.getString(1));
+                mvo.setPoster(rs.getString(2));
+                mlist.add(mvo);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, pstmt, conn);
+        }
+
+        return mlist;
+    }
     
 }
