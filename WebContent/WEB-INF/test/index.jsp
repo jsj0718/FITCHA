@@ -6,86 +6,80 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FITCHA</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/test/css/index.css">
   <script src="${pageContext.request.contextPath }/test/js/home.js"></script>
 
 </head>
 <body>
-    
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
     <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">
-          <img id="fitcha" alt="FITCHA" src="${pageContext.request.contextPath }/img/fitcha.png">
-        </a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="#">홈</a>
+      <a class="navbar-brand" href="#">
+        <img id="fitcha" alt="FITCHA" src="${pageContext.request.contextPath }/img/fitcha.png">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">홈</a>
           </li>
-          <li>
-            <a href="${pageContext.request.contextPath }/main-search">탐색하기</a>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
           </li>
-          <li>
-            <a href="#">
-              My Page <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My Page</a>
           </li>
-          <li>
-            <a href="#">게시판</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">게시판</a>
           </li>
-          <li>
-            <a href="#">찜 목록</a>
+          <li class="nav-item">
+            <a class="nav-link" href="#">찜 목록</a>
           </li>
         </ul>
-        <!--          <form class="navbar-form navbar-left" role="search"> -->
-        <!--            <div class="form-group"> -->
-        <!--              <input type="text" class="form-control" placeholder="Search"> -->
-        <!--            </div> -->
-        <!--            <button type="submit" class="btn btn-default">Submit</button> -->
-        <!--          </form> -->
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-search"></span>
+        <ul class="navbar-nav">
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <a class="btn"><i class="fas fa-search" type="submit"></i></a>
+          </form>
+          <li><a class="btn"><i class="far fa-bell"></i></a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              회원 정보
             </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-bell"></span>
-            </a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              회원 정보 <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li>
-                <a href="#">회원 수정</a>
-              </li>
-              <li>
-                <a href="#">회원 탈퇴</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a href="#">로그아웃</a>
-              </li>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">회원 수정</a></li>
+              <li><a class="dropdown-item" href="#">회원 탈퇴</a></li>
+              <li class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">로그아웃</a></li>
             </ul>
           </li>
         </ul>
       </div>
-      <!-- /.navbar-collapse -->
     </div>
-    <!-- /.container-fluid -->
   </nav>
+
+  <!-- Carausel -->
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="${pageContext.request.contextPath }/img/배경.JPG" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="${pageContext.request.contextPath }/img/avenger.jpg" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 
   <div class="container">
     <h3 class="recommend-title">보고싶은 작품을 찾아보세요.</h3>
@@ -271,7 +265,6 @@
   <!-- /.modal -->
   
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
