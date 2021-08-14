@@ -24,7 +24,7 @@
       <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="#">홈</a>
+            <a class="nav-link active" href="${pageContext.request.contextPath }/main-movie">홈</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <div style="margin: 800px"></div>
+  <div style="height: 800px"></div>
 
   <!-- 인기 컨텐츠 -->
 <!--   <div class="container mx-2"> -->
