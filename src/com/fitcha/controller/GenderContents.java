@@ -18,8 +18,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/popular-contents")
-public class PopularContents extends HttpServlet {
+@WebServlet("/gender-contents")
+public class GenderContents extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    
@@ -35,16 +35,16 @@ public class PopularContents extends HttpServlet {
 	        curPage = "1";
 	    }
 	    
-	    int curPageInt = Integer.parseInt(curPage);
-	    int totalContent = mdao.selectMovieCountByAttendance();
-	    Pagination pagination = new Pagination(curPageInt, totalContent, 6);
+//	    int curPageInt = Integer.parseInt(curPage);
+//	    int totalContent = mdao.selectMovieCountByAttendance();
+//	    Pagination pagination = new Pagination(curPageInt, totalContent, 6);
+//	    
+//	    // 한 page 내 보여줘야하는 게시물의 첫 번째 Rownum
+//	    int start = (curPageInt * pagination.getContentCnt()) - (pagination.getContentCnt() - 1);
+//	    // 한 page 내 보여줘야하는 게시물의 마지막 Rownum
+//	    int end = curPageInt * pagination.getContentCnt();
 	    
-	    // 한 page 내 보여줘야하는 게시물의 첫 번째 Rownum
-	    int start = (curPageInt * pagination.getContentCnt()) - (pagination.getContentCnt() - 1);
-	    // 한 page 내 보여줘야하는 게시물의 마지막 Rownum
-	    int end = curPageInt * pagination.getContentCnt();
-	    
-	    ArrayList<MovieVO> mlist = mdao.selectMovieByAttendance(start, end);
+	    ArrayList<MovieVO> mlist = mdao.selectMovieByOpenDate(1, 6);
         
         JsonArray jsonArr = new JsonArray();
         

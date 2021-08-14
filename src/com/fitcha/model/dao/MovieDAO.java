@@ -120,7 +120,7 @@ public class MovieDAO {
     
     // 개봉일 순으로 조회
     public ArrayList<MovieVO> selectMovieByOpenDate(int start, int end) {
-        String SQL = "SELECT * "
+        String SQL = "SELECT TITLE, POSTER, OPENDATE "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM (SELECT TITLE, POSTER, OPENDATE "
                 + "            FROM MOVIE "
@@ -144,7 +144,7 @@ public class MovieDAO {
                 MovieVO mvo = new MovieVO();
                 mvo.setTitle(rs.getString(1));
                 mvo.setPoster(rs.getString(2));
-                mvo.setOpenDate(rs.getString(3));
+//                mvo.setOpenDate(rs.getString(3));
                 
                 mlist.add(mvo);
             }
@@ -156,6 +156,34 @@ public class MovieDAO {
         }
         
         return mlist;
+    }
+    
+    // 상영 중인 영화 수 가져오기
+    public int selectMovieCountByAttendance() {
+        String SQL = "SELECT COUNT(*) "
+                + "FROM MOVIE "
+                + "WHERE ATTENDANCE > 0";
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        int count = 0;
+        
+        try {
+            conn = DBConnect.getInstance();
+            pstmt = conn.prepareStatement(SQL);
+            rs = pstmt.executeQuery();
+            
+            while(rs.next()) {
+                count = rs.getInt(1);
+            }
+            return count;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, pstmt, conn);
+        }
+        
+        return -1;  // DB 오류
     }
 
     
@@ -187,7 +215,7 @@ public class MovieDAO {
                 MovieVO mvo = new MovieVO();
                 mvo.setTitle(rs.getString(1));
                 mvo.setPoster(rs.getString(2));
-                mvo.setOpenDate(rs.getString(3));
+//                mvo.setOpenDate(rs.getString(3));
                 
                 mlist.add(mvo);
             }
