@@ -165,7 +165,7 @@ window.onload = function () {
         var block3 = document.querySelector("#recent-3");
         
         for (var i = 0; i < json.length; i++) {
-          html += '<div class="col-xs-4 col-md-2"> ' +
+          html += '<div class="col-xs-4 col-md-2 text-center"> ' +
                       '<img src="' + json[i].poster + '" class="img-thumbnail" alt="..." data-toggle="modal" data-target="#myModal"> ' +
                    '</div> ';
           if (i < 6) {

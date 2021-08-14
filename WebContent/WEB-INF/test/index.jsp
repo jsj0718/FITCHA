@@ -165,10 +165,10 @@
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="prev" style="width: 30px;">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next w-30" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide="next" style="width: 30px;">
         <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
       </button>
     </div>
