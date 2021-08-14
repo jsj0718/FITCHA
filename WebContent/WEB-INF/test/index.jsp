@@ -79,36 +79,9 @@
     </div>
   </div>
 
-  <div style="margin: 800px"></div>
+  <div style="height: 800px"></div>
 
   <div class="container">
-    <h3 class="recommend-title">보고싶은 작품을 찾아보세요.</h3>
-    <form class="d-flex">
-      <!-- 장르 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 장르</option>
-          <option>드라마</option>
-          <option>판타지</option>
-        </select>
-      </div>
-      <!-- 나라 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 나라</option>
-          <option>한국</option>
-          <option>미국</option>
-        </select>
-      </div>
-      <!-- 선택 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>추천순</option>
-          <option>최신순</option>
-          <option>러닝타임순</option>
-        </select>
-      </div>
-    </form>
   </div>
 
 
@@ -144,14 +117,14 @@
 
   <!-- 최신 -->
   <div class="container">
-    <div class="contents-title">최신 컨텐츠</div>
+    <div class="contents-title mx-5">최신 컨텐츠</div>
     <div id="carouselExampleIndicators2" class="carousel slide pb-3 " data-bs-ride="carousel">
       <div class="carousel-indicators m-0">
         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators2" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-      <div class="carousel-inner px-3 pb-4">
+      <div class="carousel-inner px-3 py-2">
         <div class="carousel-item active">
           <div class="row" id="recent-1">
           </div>
@@ -172,7 +145,6 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
       </button>
     </div>
-    
   </div>
 
   <!-- 성별 -->
