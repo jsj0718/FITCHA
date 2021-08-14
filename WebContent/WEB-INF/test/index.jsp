@@ -12,7 +12,7 @@
   <script src="${pageContext.request.contextPath }/test/js/home.js"></script>
 
 </head>
-<body>
+<body class="bg-black">
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
@@ -62,28 +62,28 @@
   </nav>
 
   <!-- Carausel -->
-  <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div id="carouselExampleFade" class="carousel slide carousel-fade" style="position: fixed" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="${pageContext.request.contextPath }/img/배경.JPG" class="d-block w-100" alt="...">
+        <img src="${pageContext.request.contextPath }/img/login5.jpg" class="d-inline w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="${pageContext.request.contextPath }/img/avenger.jpg" class="d-block w-100" alt="...">
+        <img src="${pageContext.request.contextPath }/img/login6.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="${pageContext.request.contextPath }/img/login7.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="${pageContext.request.contextPath }/img/login9.jpg" class="d-block w-100" alt="...">
       </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
+
+  <div style="margin: 800px"></div>
 
   <div class="container">
     <h3 class="recommend-title">보고싶은 작품을 찾아보세요.</h3>
-    <form>
+    <form class="d-flex">
       <!-- 장르 -->
       <div class="form-group col-xs-3">
         <select class="form-control">

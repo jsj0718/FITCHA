@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 /* z-index 적용을 위해서는 position 지정 필요 */
-body {
+/* body {
   /*  padding-top: 70px;  */
-  background-color: black;
-}
+  /* background-color: black; */
+/* } */
 
 .navbar {
   background-color: black;
@@ -30,12 +30,12 @@ body {
   width: 171px;
   height: 180px;
 }
-
+/* 
 .container {
   background-color: black;
   position: relative;
   z-index: 0;
-}
+} */
 
 .carousel-control {
   width: 3%;
