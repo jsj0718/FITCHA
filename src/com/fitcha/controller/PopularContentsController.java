@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fitcha.model.dao.MovieDAO;
-import com.fitcha.model.vo.BoardVO;
 import com.fitcha.model.vo.MovieVO;
 import com.fitcha.pagination.Pagination;
 import com.google.gson.Gson;
@@ -19,7 +18,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 @WebServlet("/popular-contents")
-public class PopularContents extends HttpServlet {
+public class PopularContentsController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    

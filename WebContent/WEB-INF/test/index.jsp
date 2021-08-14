@@ -6,10 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FITCHA</title>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">  <link rel="stylesheet" href="${pageContext.request.contextPath }/test/css/index.css">
   <script src="${pageContext.request.contextPath }/test/js/home.js"></script>
+
 </head>
 <body>
     
@@ -87,72 +87,79 @@
     <!-- /.container-fluid -->
   </nav>
 
-  <div class="container">
-    <h3 class="recommend-title">보고싶은 작품을 찾아보세요.</h3>
-    <form>
-      <!-- 장르 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 장르</option>
-          <option>드라마</option>
-          <option>판타지</option>
-        </select>
-      </div>
-      <!-- 나라 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>모든 나라</option>
-          <option>한국</option>
-          <option>미국</option>
-        </select>
-      </div>
-      <!-- 선택 -->
-      <div class="form-group col-xs-3">
-        <select class="form-control">
-          <option>추천순</option>
-          <option>최신순</option>
-          <option>러닝타임순</option>
-        </select>
-      </div>
-    </form>
-  </div>
-
-
   <!-- 인기 컨텐츠 -->
   <div class="container mx-2">
     <div class="contents-title">FITCHA 인기 콘텐츠</div>
-    <div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="false" style="position: relative; z-index: 0;">
-      <ol class="carousel-indicators">
-        <li data-target="#myCarosel1" data-slide-to="1" class="active"></li>
-        <li data-target="#myCarosel1" data-slide-to="2"></li>
-        <li data-target="#myCarosel1" data-slide-to="3"></li>
-      </ol>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
       <div class="carousel-inner">
-        <div class="item active">
-          <div class="row" id="row-1"></div>
+        <div class="carousel-item active">
+          <img src="..." class="d-block w-100" alt="...">
         </div>
-        <div class="item" style="position: relative; z-index: 1;">
-          <div class="row"></div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
         </div>
-        <div class="item">
-          <div class="row"></div>
+        <div class="carousel-item">
+          <img src="..." class="d-block w-100" alt="...">
         </div>
       </div>
-
-      <a id="prev" class="left carousel-control" href="#myCarousel1" data-slide="prev" onclick="$('#myCarousel1').carousel('prev')">
-        <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span>
-      </a>
-      <a id="next" class="right carousel-control" href="#myCarousel1" data-slide="next" onclick="$('#myCarousel1').carousel('next')">
-        <span class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span>
-      </a>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+      </button>
     </div>
 
+  </div>
+
+  <!-- 최신 -->
+  <div class="container">
+    <div class="contents-title">최신 컨텐츠</div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="row" id="recent-1">
+          
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row" id="recent-2">
+          
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row" id="recent-3">
+          
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    
   </div>
 
   <!-- 성별 -->
   <div class="container">
     <div class="contents-title">성별 추천 컨텐츠</div>
-    <div class="row" id="row-2"></div>
+    
+    <div class="row">
+    
+    </div>
   </div>
 
   <!-- 나이 -->
@@ -269,6 +276,9 @@
     <!-- /.modal-dialog -->
   </div>
   <!-- /.modal -->
-
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
 </html>
