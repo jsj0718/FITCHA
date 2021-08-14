@@ -137,7 +137,7 @@ window.onload = function () {
 
   //         }
 
-  var postConnect = function (url) {
+  var postConnect = function (url, block) {
     var xhrpost = new XMLHttpRequest();
 
     // 통신할 방식, url, 동기 여부 설정
@@ -160,9 +160,9 @@ window.onload = function () {
         var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
 
         console.log(jsonStr);
-        var block1 = document.querySelector("#recent-1");
-        var block2 = document.querySelector("#recent-2");
-        var block3 = document.querySelector("#recent-3");
+        var block1 = document.querySelector("#" + block + "-1");
+        var block2 = document.querySelector("#" + block + "-2");
+        var block3 = document.querySelector("#" + block + "-3");
         
         for (var i = 0; i < json.length; i++) {
           html += '<div class="col-xs-4 col-md-2 text-center"> ' +
@@ -184,7 +184,7 @@ window.onload = function () {
     }
   }
 
-  postConnect("recent-contents");
-  
+  postConnect("recent-contents", "recent");
+  postConnect("gender-contents", "gender");
   
 }

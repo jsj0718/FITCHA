@@ -62,8 +62,8 @@
   </nav>
 
   <!-- Carausel -->
-  <div id="carouselExampleFade" class="carousel slide carousel-fade" style="position: fixed" data-bs-ride="carousel">
-    <div class="carousel-inner">
+  <div id="background-image" class="carousel slide carousel-fade" style="position: fixed" data-bs-ride="carousel">
+    <div class="carousel-inner opacity-25">
       <div class="carousel-item active">
         <img src="${pageContext.request.contextPath }/img/login5.jpg" class="d-inline w-100" alt="...">
       </div>
@@ -112,7 +112,6 @@
 <!--         <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span> -->
 <!--       </button> -->
 <!--     </div> -->
-
 <!--   </div> -->
 
   <!-- 최신 -->
@@ -150,9 +149,35 @@
   <!-- 성별 -->
   <div class="container">
     <div class="contents-title">성별 추천 컨텐츠</div>
-    
-    <div class="row">
-    
+    <div id="carouselExampleIndicators3" class="carousel slide pb-3" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner p-4">
+        <div class="carousel-item active">
+          <div class="row" id="gender-1">
+          
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row" id="gender-2">
+          
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row" id="gender-3">
+          
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="prev" style="width: 30px;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators3" data-bs-slide="next" style="width: 30px;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+      </button>
     </div>
   </div>
 
