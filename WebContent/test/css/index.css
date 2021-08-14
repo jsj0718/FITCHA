@@ -18,84 +18,50 @@
 }
 
 #fitcha {
-  position: relative;
-  z-index: 2;
+/*   position: relative; */
+/*   z-index: 2; */
   padding: 0px;
   margin: 0px;
   height: 45px;
   width: auto;
 }
 
-.row .thumnail img, .thumnail .poster-btn {
-  width: 171px;
-  height: 180px;
-}
-/* 
-.container {
-  background-color: black;
-  position: relative;
-  z-index: 0;
-} */
-
-.carousel-control {
-  width: 3%;
-}
-
-.contents-title {
-  position: relative;
-  font-size: 1.4vw;
-  color: #e5e5e5;
-  font-weight: 700;
-  z-index: 100;
-}
-
-.recommend-title {
-  font-size: 1.4vw;
-  color: #e5e5e5;
-  font-weight: 700;
-}
-
-div .row {
-  /* 	width: 90%; */
-  
+.container-fluid {
+  position: fixed;
 }
 
 #bs-example-navbar-collapse-1 {
   position: relative;
   z-index: 1;
   background-color: black;
-  /* 	opacity: 0.8; */
+  opacity: 0.8;
 }
 
-.left .carousel-control {
-  width: 0px;
-}
-
-.right.carousel-control {
-  width: 0px;
-}
-
-.container {
+.contents-title, .recommend-title {
   position: relative;
   z-index: 100;
+  font-size: 1.4vw;
+  font-weight: 700;
+  color: #e5e5e5;
 }
 
-.thumbnail {
-  position: relative;
+.img-thumbnail {
   transition-property: transform;
   transition-duration: 0.2s;
   transform-origin: top center;
   box-sizing: inherit;
+  height: 220px;
 }
 
-.thumbnail:hover {
+.img-thumbnail:hover {
   transform: scale(1.08);
+}
+
+.carousel-control-prev, .carousel-control-next {
+  width: 30px;
 }
 
 .modal-dialog {
   width: 1000px;
 }
 
-.row div a img {
-  height: 220px;
-}

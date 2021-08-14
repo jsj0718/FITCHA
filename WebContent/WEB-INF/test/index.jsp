@@ -13,7 +13,7 @@
 
 </head>
 <body class="bg-black">
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+  <nav id="navigator" class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img id="fitcha" alt="FITCHA" src="${pageContext.request.contextPath }/img/fitcha.png">
