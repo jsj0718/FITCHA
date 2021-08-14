@@ -160,13 +160,25 @@ window.onload = function () {
         var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
 
         console.log(jsonStr);
-        var block;
+        var block1 = document.querySelector("#recent-1");
+        var block2 = document.querySelector("#recent-2");
+        var block3 = document.querySelector("#recent-3");
+        
         for (var i = 0; i < json.length; i++) {
-          block = document.querySelector("#row-" + (i / 6));
           html += '<div class="col-xs-4 col-md-2"> ' +
                       '<img src="' + json[i].poster + '" class="img-thumbnail" alt="..." data-toggle="modal" data-target="#myModal"> ' +
                    '</div> ';
-          block.innerHTML = html;
+          if (i < 6) {
+            block1.innerHTML = html;
+          } else if (i < 12) {
+            block2.innerHTML = html;
+          } else if (i < 18) {
+            block3.innerHTML = html;
+          }
+          
+          if (i % 6 === 5) {
+            html = "";
+          }
         }
       }
     }

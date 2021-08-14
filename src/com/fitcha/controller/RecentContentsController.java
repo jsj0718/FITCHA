@@ -29,7 +29,7 @@ public class RecentContentsController extends HttpServlet {
         
         MovieDAO mdao = new MovieDAO();
 
-        ArrayList<MovieVO> mlist = mdao.selectMovieByAttendance(1, 18);
+        ArrayList<MovieVO> mlist = mdao.selectMovieByOpenDate(1, 18);
         
         JsonArray jsonArr = new JsonArray();
         
