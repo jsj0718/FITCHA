@@ -57,10 +57,6 @@
   transform: scale(1.08);
 }
 
-.carousel-control-prev, .carousel-control-next {
-  width: 30px;
-}
-
 .modal-dialog {
   width: 1000px;
 }
