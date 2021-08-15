@@ -20,7 +20,7 @@ import com.google.gson.JsonObject;
 public class SearchContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
-        
+	    
 	    String genre = request.getParameter("genre");
 	    String country = request.getParameter("country");
         String order = request.getParameter("order");

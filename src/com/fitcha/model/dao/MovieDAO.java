@@ -430,7 +430,7 @@ public class MovieDAO {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, "%" + country + "%");
             pstmt.setString(2, "%" + genre + "%");
-            pstmt.setString(3, order);
+            pstmt.setString(3, "M." + order);
             pstmt.setInt(4, start);
             pstmt.setInt(5, end);
             rs = pstmt.executeQuery();
