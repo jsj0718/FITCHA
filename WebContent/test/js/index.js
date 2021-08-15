@@ -1,61 +1,4 @@
-//     $('#myModal').on('shown.bs.modal', function () {
-//         $('#myInput').focus()
-// 	})
-
-window.onload = function () {
-  // mouseover 시 상세 썸네일 보여주기
-  //     	var timer;      
-  //         $('#test1').on({
-  //             'mouseenter': function () {
-  //                 timer = setTimeout(function () {
-  //                     console.log(1);
-  //                     var element1 = document.getElementById("test1");
-  //                     var element2 = document.getElementById("test2");
-  //                     element1.style.display = 'none';
-  //                     element2.style.display = 'block';
-  //                 }, 1);
-  //             }, function() {
-  //             	clearTimeout(timer);
-  //             }
-  //         });
-
-  //         $('#test2').on({
-  //         	'mouseleave' : function () {
-  //                 var element1 = document.getElementById("test1");
-  //                 var element2 = document.getElementById("test2");
-  //                 element1.style.display = 'block';
-  //                 element2.style.display = 'none';
-  //             }
-  //         });
-
-  //      var timer;
-  //      $('#next').on({
-  //          'click': function () {
-  //              timer = setTimeout(function () {
-  // //                   var curPage = document.getElementById("myCarousel1").querySelector("ol").querySelector(".active").getAttribute("data-slide-to");
-  // //                   var popularContents = document.querySelector(".item.active div");
-
-  //                  postConnect(curPage, popularContents);
-  //                  console.log(popularContents);
-  //              }, 1000);
-  //          }, function() {
-  //              clearTimeout(timer);
-  //          }
-  //      });
-
-  //      $('#prev').on({
-  //             'click': function () {
-  //                 timer = setTimeout(function () {
-  //                  var curPage = document.getElementById("myCarousel1").querySelector("ol").querySelector(".active").getAttribute("data-slide-to");
-  //                     var popularContents = document.querySelector(".item.active div");
-
-  //                     postConnect(curPage, popularContents);
-  //                     console.log(popularContents);
-  //                 }, 1000);
-  //             }, function() {
-  //              clearTimeout(timer);
-  //             }
-  //         });
+window.onload = function() {
 
   //     $.ajax({
   //          type : 'post', // 타입 (get, post, put 등등)
@@ -137,7 +80,7 @@ window.onload = function () {
 
   //         }
 
-  var getConnect = function (url, block) {
+  var getConnect = function(url, block) {
     var xhrget = new XMLHttpRequest();
 
     // 통신할 방식, url, 동기 여부 설정
@@ -145,44 +88,44 @@ window.onload = function () {
     // 요청
     xhrget.send();
     // 응답
-    xhrget.onreadystatechange = function () {
+    xhrget.onreadystatechange = function() {
       if (xhrget.readyState == XMLHttpRequest.DONE && xhrget.status == 200) {
-        
+
         // 응답 값 (서버로부터 받아온 데이터)
         var jsonStr = xhrget.responseText; // json 형태의 문자열
         var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
-        
+
         console.log(url);
         console.log(jsonStr);
 
         // html에 들어갈 요소 및 블록
-        var barBlock = document.querySelector("#" + block +"-bar");
+        var barBlock = document.querySelector("#" + block + "-bar");
         var contentsBlock = document.querySelector("#" + block + "-contents");
         var barHtml = "";
         var contentsHtml = "";
-        
+
         for (var i = 0; i < json.length; i++) {
           if (i % 6 === 0 && i === 0) {
             barHtml += '<button type="button" data-bs-target="#' + block + 'Indicators" data-bs-slide-to="' + (parseInt((i + 1) / 6)) + '" class="active" aria-current="true" aria-label="Slide ' + (parseInt(i / 6) + 1) + '"></button>';
             contentsHtml += '<div class="carousel-item active" > ' +
-                              '<div class="row"> ';
+              '<div class="row"> ';
           }
-          
+
           contentsHtml += '<div class="col-xs-4 col-md-2 text-center"> ' +
-                             '<img src="' + json[i].poster + '" class="rounded" alt="..."> ' +
-                          '</div> ';
-          
+            '<img src="' + json[i].poster + '" class="rounded" alt="..."> ' +
+            '</div> ';
+
           if (i === (json.length - 1)) {
-            contentsHtml +=   '</div> ' +
-                            '</div> ';
-          } else if (i % 6 === 5){
+            contentsHtml += '</div> ' +
+              '</div> ';
+          } else if (i % 6 === 5) {
             barHtml += '<button type="button" data-bs-target="#' + block + 'Indicators" data-bs-slide-to="' + (parseInt((i + 1) / 6)) + '" aria-label="Slide ' + (parseInt((i + 1) / 6) + 1) + '"></button>';
-            contentsHtml +=   '</div> ' +
-                            '</div> ' +
-                            '<div class="carousel-item" > ' +
-                              '<div class="row"> ';
+            contentsHtml += '</div> ' +
+              '</div> ' +
+              '<div class="carousel-item" > ' +
+              '<div class="row"> ';
           }
-          
+
           barBlock.innerHTML = barHtml;
           contentsBlock.innerHTML = contentsHtml;
         }
@@ -194,5 +137,7 @@ window.onload = function () {
   getConnect("recommend-contents", "recommend");
   getConnect("gender-contents", "gender");
   getConnect("age-contents", "age");
-  
+
+
 }
+

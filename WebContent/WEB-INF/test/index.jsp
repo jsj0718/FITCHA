@@ -10,18 +10,39 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/test/css/index.css">
   <script src="${pageContext.request.contextPath }/test/js/index.js"></script>
-
+  <script>
+    var logout = function() {
+      var xhrpost = new XMLHttpRequest();
+  
+      // 통신할 방식, url, 동기 여부 설정
+      xhrpost.open("POST", "logout", true);
+      // 요청
+      xhrpost.send();
+      // 응답
+      xhrpost.onreadystatechange = function() {
+        if (xhrpost.readyState == XMLHttpRequest.DONE && xhrpost.status == 200) {
+          location.href = "${pageContext.request.contextPath}/sign-in";
+        }
+      }
+    }
+  </script>
 </head>
+<%
+  String id = (String) session.getAttribute("id");
+  if (id == null) {
+      response.sendRedirect(request.getContextPath() + "/sign-in");
+  }
+%>
 <body class="bg-black">
-  <nav id="navigator" class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
+  <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img id="fitcha" alt="FITCHA" src="${pageContext.request.contextPath }/img/fitcha.png">
+      <a class="navbar-brand mt-1 ml-1" href="#">
+        <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav">
+      <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav" style="background-color : black;">
         <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" href="${pageContext.request.contextPath }/main-movie">홈</a>
@@ -50,10 +71,10 @@
               회원 정보
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="#">회원 정보</a></li>
               <li><a class="dropdown-item" href="#">회원 수정</a></li>
-              <li><a class="dropdown-item" href="#">회원 탈퇴</a></li>
               <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">로그아웃</a></li>
+              <li><a class="dropdown-item" href="javascript:logout();">로그아웃</a></li>
             </ul>
           </li>
         </ul>
@@ -79,7 +100,7 @@
     </div>
   </div>
 
-  <div style="height: 800px"></div>
+  <div style="height: 1100px"></div>
 
   <!-- 인기 컨텐츠 -->
 <!--   <div class="container mx-2"> -->
@@ -131,7 +152,7 @@
 
   <!-- 추천 -->
   <div class="container">
-    <div class="contents-title mx-5">ID 님에게 추천하는 컨텐츠</div>
+    <div class="contents-title mx-5">${id } 님에게 추천하는 컨텐츠</div>
     <div id="recommendIndicators" class="carousel slide pb-3" data-bs-ride="carousel">
       <div class="carousel-indicators m-0" id="recommend-bar">
       

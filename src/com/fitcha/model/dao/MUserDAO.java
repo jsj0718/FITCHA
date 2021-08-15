@@ -27,12 +27,12 @@ public class MUserDAO {
 	}
 	
 	// 로그인
-	public String login(String id, String pw) {
+	public String signin(String id, String pw) {
 		Connection conn = DBConnect.getInstance();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String result = null;
-
+		
 		String sql = "SELECT USERID " 
 				+ "FROM MUSER " 
 				+ "WHERE USERID = ? " 
@@ -45,9 +45,9 @@ public class MUserDAO {
 			// resultSet
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				result = rs.getString("ID");
-
+				result = rs.getString(1);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class MUserDAO {
 	}
 
 	// 가입(id, pw, email)등록
-	public int join(MUserVO muservo) {
+	public int signup(MUserVO muservo) {
 		// conn
 		Connection conn = DBConnect.getInstance();
 
@@ -112,7 +112,7 @@ public class MUserDAO {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				// result
-				result = rs.getString("USERID");
+				result = rs.getString(1);
 
 			}
 		} catch (SQLException e) {

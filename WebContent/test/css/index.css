@@ -1,42 +1,5 @@
 @charset "UTF-8";
 
-/* z-index 적용을 위해서는 position 지정 필요 */
-/* body {
-  /*  padding-top: 70px;  */
-  /* background-color: black; */
-/* } */
-
-.navbar {
-  background-color: black;
-  border: 0;
-  height: 50px;
-}
-
-.navbar-brand {
-  padding: 5px;
-  margin: 0px;
-}
-
-#fitcha {
-/*   position: relative; */
-/*   z-index: 2; */
-  padding: 0px;
-  margin: 0px;
-  height: 45px;
-  width: auto;
-}
-
-.container-fluid {
-  position: fixed;
-}
-
-#bs-example-navbar-collapse-1 {
-  position: relative;
-  z-index: 1;
-  background-color: black;
-  opacity: 0.8;
-}
-
 .contents-title, .recommend-title {
   position: relative;
   z-index: 100;
