@@ -36,6 +36,9 @@ public class SearchContentsController extends HttpServlet {
             JsonObject json = new JsonObject();
             json.addProperty("title", mvo.getTitle());
             json.addProperty("poster", mvo.getPoster());
+            json.addProperty("rate", mvo.getRate());
+            json.addProperty("opendate", mvo.getOpenDate());
+            json.addProperty("runningtime", mvo.getRunningTime());
             
             jsonArr.add(json);
         }

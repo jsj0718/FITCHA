@@ -161,16 +161,6 @@ window.onload = function () {
         var barHtml = "";
         var contentsHtml = "";
         
-//        
-//        <div class="carousel-item active" >
-//          <div class="row" id="recent-contents">
-//            <div class="col-xs-4 col-md-2 text-center">
-//              <img src="' + json[i].poster + '" class="rounded" alt="..." data-toggle="modal" data-target="#myModal">
-//            </div>
-//          </div>
-//        </div>
-
-
         for (var i = 0; i < json.length; i++) {
           if (i % 6 === 0 && i === 0) {
             barHtml += '<button type="button" data-bs-target="#' + block + 'Indicators" data-bs-slide-to="' + (parseInt((i + 1) / 6)) + '" class="active" aria-current="true" aria-label="Slide ' + (parseInt(i / 6) + 1) + '"></button>';

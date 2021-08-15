@@ -406,10 +406,10 @@ public class MovieDAO {
     
     // 조건에 맞는 영화 탐색
     public ArrayList<MovieVO> selectMovieBySearch(String country, String genre, String order, int index) {
-        String SQL = "SELECT TITLE, POSTER "
+        String SQL = "SELECT TITLE, POSTER, RATE, OPENDATE, RUNNINGTIME "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM (SELECT DISTINCT M.* "
-                + "            FROM (SELECT M.TITLE, M.POSTER "
+                + "            FROM (SELECT M.TITLE, M.POSTER, M.RATE, M.OPENDATE, M.RUNNINGTIME "
                 + "                  FROM MOVIE M, GENRE G, MOVIEANDGENRE MAG "
                 + "                  WHERE MAG.MOVIEID = M.MOVIEID "
                 + "                  AND MAG.GENREID = G.GENREID "
@@ -417,7 +417,7 @@ public class MovieDAO {
                 + "                  AND G.GENRENAME LIKE ? "
                 + "                  AND M.OPENDATE IS NOT NULL "
                 + "                  AND M.COUNTRY IS NOT NULL) M "
-                + "            ORDER BY ? DESC) A) "
+                + "            ORDER BY " + order + " DESC) A) "
                 + "WHERE RNUM BETWEEN ? AND ?";
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -430,15 +430,17 @@ public class MovieDAO {
             pstmt = conn.prepareStatement(SQL);
             pstmt.setString(1, "%" + country + "%");
             pstmt.setString(2, "%" + genre + "%");
-            pstmt.setString(3, "M." + order);
-            pstmt.setInt(4, start);
-            pstmt.setInt(5, end);
+            pstmt.setInt(3, start);
+            pstmt.setInt(4, end);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
                 MovieVO mvo = new MovieVO();
                 mvo.setTitle(rs.getString(1));
                 mvo.setPoster(rs.getString(2));
+                mvo.setRate(rs.getDouble(3));
+                mvo.setOpenDate(rs.getString(4));
+                mvo.setRunningTime(rs.getInt(5));
                 mlist.add(mvo);
             }
 
