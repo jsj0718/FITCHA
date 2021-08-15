@@ -45,15 +45,15 @@
   color: #e5e5e5;
 }
 
-.rounded {
+.poster {
   transition-property: transform;
   transition-duration: 0.2s;
   transform-origin: center center;
   box-sizing: inherit;
-  height: 220px;
+  /* height: 220px; */
 }
 
-.rounded:hover {
+.poster:hover {
   transform: scale(1.08);
 }
 

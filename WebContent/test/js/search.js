@@ -1,40 +1,62 @@
-$(function(){
-  console.log("222")
-  $('#content').click(function(){
-    var scrollT = $(this).scrollTop(); //스크롤바의 상단위치
-    var scrollH = $(this).height(); //스크롤바를 갖는 div의 높이
-    var contentH = $('#divContent').height(); //문서 전체 내용을 갖는 div의 높이
-    if(scrollT + scrollH +1 >= contentH) { // 스크롤바가 아래 쪽에 위치할 때
-      // $('#divContent').append(imgs);
-      console.log("#####")
-    }
-    console.log("###")
+let cnt = 1
+
+let openModal = function(movieCd){
+  $.get('search-', movieCd)
+  .fail(function(){
+    console.log('성공')
+    console.log('성공 끝')
   })
-  $('#content').click(function(){
-    console.log("###")
+  .done(function(){
+    console.log('실패')
+  })
+}
+
+let loadMovies = function(){
+  let req = { // 보낼 데이터 (Object , String, Array)
+    "genre" : $("#genreSelect").val(),
+    "country": $("#countrySelect").val(),
+    "order": $("#orderSelect").val(),
+    "index": cnt
+  }
+  $.get('search-contents', req, function(res, status){
+    if (status=='success') {
+      let resJSON = JSON.parse(res)
+      for (let i = 0; i < resJSON.length; i++) {
+        const element = resJSON[i];
+        $("#searchContent")
+          .append($('<img>')
+            .attr('src', element.poster)
+            .attr('class', 'col-xxl-1 col-lg-2 col-sm-3 col-6 p-1 poster')
+            .attr('data-bs-toggle', 'modal')
+            .attr('data-bs-target', '#movieModal')
+            .on('click', function(){
+              let modal = $('#movieModal')
+
+          })
+        )
+      }
+      cnt += 1
+    } else {
+      console.log(status)
+    }
+  })
+}
+
+
+$(document).ready(function(){
+  loadMovies()
+})
+
+$(function(){
+  $(document).scroll(function(){
+    let scrollT = $(this).scrollTop();
+    let scrollH = $(window).height();
+    let contentH = $(this).height();
+    if(scrollT + scrollH >= contentH) {
+      loadMovies()
+    }
   })
   // document.addEventListener('scroll', function(){
   //   console.log('scroll')
   // })
 })
-/*
-$.ajax({
-  type: 'get', // 타입 (get, post, put 등등)
-  url: '${pageContext.request.contextPath }/popular-contents', // 요청할 서버url
-  async: true, // 비동기화 여부 (default : true)
-  headers: { // Http header
-    "Content-Type": "application/json",
-    "X-HTTP-Method-Override": "GET"
-  },
-  dataType: 'json', // 데이터 타입 (html, xml, json, text 등등)
-  data: JSON.stringify({ // 보낼 데이터 (Object , String, Array)
-    //               "id" : id
-  }),
-  success: function (result) { // 결과 성공 콜백함수
-    console.log(result);
-  },
-  error: function (request, status, error) { // 결과 에러 콜백함수
-    console.log(error)
-  }
-});
-*/
