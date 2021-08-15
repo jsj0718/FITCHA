@@ -406,10 +406,10 @@ public class MovieDAO {
     
     // 조건에 맞는 영화 탐색
     public ArrayList<MovieVO> selectMovieBySearch(String country, String genre, String order, int index) {
-        String SQL = "SELECT TITLE, POSTER, RATE, OPENDATE, RUNNINGTIME "
+        String SQL = "SELECT MOVIEID, TITLE, POSTER, RATE, OPENDATE, RUNNINGTIME "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM (SELECT DISTINCT M.* "
-                + "            FROM (SELECT M.TITLE, M.POSTER, M.RATE, M.OPENDATE, M.RUNNINGTIME "
+                + "            FROM (SELECT M.MOVIEID, M.TITLE, M.POSTER, M.RATE, M.OPENDATE, M.RUNNINGTIME "
                 + "                  FROM MOVIE M, GENRE G, MOVIEANDGENRE MAG "
                 + "                  WHERE MAG.MOVIEID = M.MOVIEID "
                 + "                  AND MAG.GENREID = G.GENREID "
@@ -436,11 +436,7 @@ public class MovieDAO {
 
             while (rs.next()) {
                 MovieVO mvo = new MovieVO();
-                mvo.setTitle(rs.getString(1));
-                mvo.setPoster(rs.getString(2));
-                mvo.setRate(rs.getDouble(3));
-                mvo.setOpenDate(rs.getString(4));
-                mvo.setRunningTime(rs.getInt(5));
+                mvo.setMovieId(rs.getInt(1));
                 mlist.add(mvo);
             }
 

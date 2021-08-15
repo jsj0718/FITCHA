@@ -52,7 +52,7 @@ public class MovieAndStaffDAO {
     
     // Movie에 출연한 모든 Staff 조회
     public ArrayList<MovieAndStaffVO> selectStaffList(int movieId) {
-        String SQL = "SELECT MAS.MOVIEID, MAS.STAFFID, MAS.ROLE, MAS.ROLENAME "
+        String SQL = "SELECT DISTINCT S.NAME, S.IMG, MAS.ROLE, MAS.ROLENAME "
                 + "     FROM MOVIEANDSTAFF MAS, MOVIE M, STAFF S "
                 + "     WHERE MAS.MOVIEID = M.MOVIEID "
                 + "     AND MAS.STAFFID = S.STAFFID "
@@ -70,8 +70,8 @@ public class MovieAndStaffDAO {
 
             while (rs.next()) {
                 MovieAndStaffVO masvo = new MovieAndStaffVO();
-                masvo.setMovieId(rs.getInt(1));
-                masvo.setStaffId(rs.getInt(2));
+                masvo.setStaffName(rs.getString(1));
+                masvo.setStaffImg(rs.getString(2));
                 masvo.setRole(rs.getString(3));
                 masvo.setRoleName(rs.getString(4));
                 

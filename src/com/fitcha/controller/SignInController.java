@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import com.fitcha.model.dao.MUserDAO;
 
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/sign-in")
+public class SignInController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/test/login.jsp");

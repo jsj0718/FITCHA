@@ -61,10 +61,7 @@
 <!--       </div> -->
 <!--     </div> -->
 <!--   </nav> -->
-  <a class="fixed-top" href="https://fontmeme.com/ko/netflix-type/">
-    <img id="fitcha" src="https://fontmeme.com/permalink/210815/a286ab8b02196be47db63b9059f49797.png" alt="netflix-type" border="0">
-  </a>
-
+  
   <!-- Carausel -->
   <div id="background-image" class="carousel slide carousel-fade" style="position: fixed" data-bs-ride="carousel">
     <div class="carousel-inner opacity-50">
@@ -82,7 +79,39 @@
       </div>
     </div>
   </div>
-  
+
+  <nav class="navbar navbar-light bg-transparent">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/login">
+        <img id="fitcha" class="fixed-top m-3" src="https://fontmeme.com/permalink/210815/a286ab8b02196be47db63b9059f49797.png" alt="netflix-type" border="0">
+      </a>
+      <div class="d-flex m-3 pt-4">
+        <button type="button" class="btn btn-light btn-lg">회원가입</button>      
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid position-absolute top-50 start-50 translate-middle">   
+    <div class="row justify-content-center">
+      <form class="col-4">
+        <div class="mb-3">
+          <label for="sign-in" class="form-label fs-4 text-center">로그인</label>
+          <input type="text" class="form-control" id="user-id" name="user-id" placeholder="아이디">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="user-password" name="user-password" placeholder="비밀번호">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="cookie-check" name="cookie-check">
+          <label class="form-check-label" for="cookie-check">Check me out</label>
+        </div>
+        <div class=" d-grid gap-2">
+          <button type="submit" class="btn btn-danger">login</button>
+        </div>      
+      </form>    
+    </div>
+  </div>
+
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 </body>
