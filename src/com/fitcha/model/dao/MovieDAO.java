@@ -416,6 +416,7 @@ public class MovieDAO {
                 + "                  AND M.TITLE LIKE ? "
                 + "                  AND M.COUNTRY LIKE ? "
                 + "                  AND G.GENRENAME LIKE ? "
+                + "                  AND M.POSTER <> 'https://ssl.pstatic.net/static/movie/2012/06/dft_img203x290.png' "
                 + "                  AND M.OPENDATE IS NOT NULL "
                 + "                  AND M.COUNTRY IS NOT NULL) M "
                 + "            ORDER BY " + order + " DESC) A) "

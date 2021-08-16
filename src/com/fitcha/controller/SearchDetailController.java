@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fitcha.model.dao.MovieAndGenreDAO;
 import com.fitcha.model.dao.MovieAndStaffDAO;
 import com.fitcha.model.dao.MovieDAO;
+import com.fitcha.model.vo.MovieAndGenreVO;
 import com.fitcha.model.vo.MovieAndStaffVO;
 import com.fitcha.model.vo.MovieVO;
 import com.google.gson.Gson;
@@ -27,11 +29,14 @@ public class SearchDetailController extends HttpServlet {
 	    
         MovieDAO mdao = new MovieDAO();
         MovieAndStaffDAO masdao = new MovieAndStaffDAO();
+        MovieAndGenreDAO magdao = new MovieAndGenreDAO();
         
         MovieVO mvo = mdao.selectMovie(movieId);
         ArrayList<MovieAndStaffVO> maslist = masdao.selectStaffList(movieId);
+        ArrayList<MovieAndGenreVO> maglist = magdao.selectGenreList(movieId);
         JsonArray movieArr = new JsonArray();
         JsonArray staffArr = new JsonArray();
+        JsonArray genreArr = new JsonArray();
         
         for (MovieAndStaffVO masvo : maslist) {
             JsonObject staff = new JsonObject();
@@ -43,6 +48,13 @@ public class SearchDetailController extends HttpServlet {
             staffArr.add(staff);
         }
          
+        for (MovieAndGenreVO magvo : maglist) {
+            JsonObject genre = new JsonObject();
+            genre.addProperty("genrename", magvo.getGenreName());
+            
+            genreArr.add(genre);
+        }
+        
         JsonObject movie = new JsonObject();
         movie.addProperty("movieid", mvo.getMovieId());
         movie.addProperty("title", mvo.getTitle());
@@ -58,10 +70,16 @@ public class SearchDetailController extends HttpServlet {
     
         
         Gson gson = new Gson();
+        
         String staffStr = gson.toJson(staffArr);
         JsonObject staffObj = new JsonObject();
         staffObj.addProperty("staffList", staffStr);
         movieArr.add(staffObj);
+        
+        String genreStr = gson.toJson(genreArr);
+        JsonObject genreObj = new JsonObject();
+        genreObj.addProperty("genreList", genreStr);
+        movieArr.add(genreObj);
         
         String jsonResponse = gson.toJson(movieArr);
                 

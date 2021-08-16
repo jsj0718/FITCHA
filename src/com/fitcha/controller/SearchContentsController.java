@@ -47,7 +47,6 @@ public class SearchContentsController extends HttpServlet {
             index = Integer.parseInt(indexStr);
         }
         
-        System.out.println(title + ", " + genre + ", " + country + ", " + order + ", " + index);
         MovieDAO mdao = new MovieDAO();
         
         ArrayList<MovieVO> mlist = mdao.selectMovieBySearch(title, country, genre, order, index);
