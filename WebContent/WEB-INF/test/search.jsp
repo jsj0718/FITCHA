@@ -5,8 +5,8 @@
       response.sendRedirect(request.getContextPath() + "/sign-in");
   }
   
-  String movieName = request.getParameter("movie-name");
-  System.out.println(movieName);
+  String title = request.getParameter("title");
+  System.out.println(title);
 %>
 <!DOCTYPE html>
 <html>
@@ -36,8 +36,7 @@
     }
     
     window.onload = function() {
-      var movieName = "${movieName}";
-      console.log(movieName);      
+      console.log(<%=title%>);
     }
   </script>
 </head>

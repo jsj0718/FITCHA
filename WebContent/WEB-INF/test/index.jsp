@@ -110,7 +110,7 @@
         <div class="input-group mb-4 flex-nowrap">
           <div class="input-group flex-nowrap input-group-lg">
             <span class="input-group-text bg-black text-light" id="addon-wrapping" style="border-top-left-radius: 15px; border-bottom-left-radius: 15px;"><i class="fas fa-search" type="submit"></i></span>
-            <input type="text" class="form-control bg-black text-light" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="movie-name">
+            <input type="text" class="form-control bg-black text-light" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="title">
           </div>
         </div>
       </form>

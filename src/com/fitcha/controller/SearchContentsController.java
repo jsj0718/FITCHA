@@ -23,12 +23,31 @@ public class SearchContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
 	    
+	    
 	    String title = request.getParameter("title");
 	    String genre = request.getParameter("genre");
 	    String country = request.getParameter("country");
         String order = request.getParameter("order");
-        int index = Integer.parseInt(request.getParameter("index"));
+        String indexStr = request.getParameter("index");
 	    
+        int index = 1;
+        if (title == null) {
+            title = "";
+        } 
+        if (genre == null) {
+            genre = "";
+        }
+        if (country == null) {
+            country = "";
+        } 
+        if (order == null) {
+            order = "rate";
+        } 
+        if (indexStr != null) {
+            index = Integer.parseInt(indexStr);
+        }
+        
+        System.out.println(title + ", " + genre + ", " + country + ", " + order + ", " + index);
         MovieDAO mdao = new MovieDAO();
         
         ArrayList<MovieVO> mlist = mdao.selectMovieBySearch(title, country, genre, order, index);

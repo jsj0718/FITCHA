@@ -23,9 +23,7 @@ public class SearchDetailController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
 	    
-	    String movieName = request.getParameter("movie-name");
 	    int movieId = Integer.parseInt(request.getParameter("movieid"));
-	    
 	    
         MovieDAO mdao = new MovieDAO();
         MovieAndStaffDAO masdao = new MovieAndStaffDAO();
