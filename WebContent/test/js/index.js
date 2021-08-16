@@ -80,7 +80,7 @@ window.onload = function() {
 
   //         }
 
-  var getConnect = function(url, block) {
+  var getConnect = function(url, block, style) {
     var xhrget = new XMLHttpRequest();
 
     // 통신할 방식, url, 동기 여부 설정
@@ -112,7 +112,7 @@ window.onload = function() {
           }
 
           contentsHtml += '<div class="col-xs-4 col-md-2 text-center"> ' +
-            '<img src="' + json[i].poster + '" class="rounded" alt="..."> ' +
+            '<img src="' + json[i].poster + '" class="rounded ' + style + '" alt="..." data-bs-toggle="modal" data-bs-target="#exampleModal"> ' +
             '</div> ';
 
           if (i === (json.length - 1)) {
@@ -133,10 +133,12 @@ window.onload = function() {
     }
   }
 
-  getConnect("recent-contents", "recent");
-  getConnect("recommend-contents", "recommend");
-  getConnect("gender-contents", "gender");
-  getConnect("age-contents", "age");
+
+  getConnect("popular-contents", "popular", "poster")
+  getConnect("recent-contents", "recent", "poster");
+  getConnect("recommend-contents", "recommend", "poster");
+  getConnect("gender-contents", "gender", "poster");
+  getConnect("age-contents", "age", "poster");
 
 
 }

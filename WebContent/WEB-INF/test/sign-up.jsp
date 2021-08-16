@@ -60,16 +60,16 @@
       <form class="col-4" action="${pageContext.request.contextPath}/sign-up" method="POST">
         <div class="mb-4">
           <label for="sign-in" class="form-label fs-4 text-center" style="font-size: 1.4vw; font-weight: 700;">회원가입</label>
-          <input type="text" class="form-control" id="user-id" name="user-id" placeholder="아이디" required>
+          <input type="text" class="form-control" id="user-id" name="user-id" placeholder="아이디 (5~20자 영문, 한글)" required>
         </div>
         <div class="mb-4">
-          <input type="password" class="form-control" id="user-password" name="user-password" placeholder="비밀번호" required>
+          <input type="password" class="form-control" id="user-password" name="user-password" placeholder="비밀번호 (8~20자 영문, 숫자, 특수문자 포함)" required>
         </div>
         <div class="mb-4">
           <input type="password" class="form-control" id="user-password-check" name="user-password-check" placeholder="비밀번호 확인" required>
         </div>
         <div class="mb-4">
-          <input type="text" class="form-control" id="user-name" name="user-name" placeholder="이름" required>
+          <input type="text" class="form-control" id="user-name" name="user-name" placeholder="이름 (2~30자 영문, 한글)" required>
         </div>
         <div class="mb-4">
           <input type="email" class="form-control" id="user-email" name="user-email" placeholder="이메일" required>

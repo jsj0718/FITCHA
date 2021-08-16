@@ -23,6 +23,7 @@ public class SearchContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
 	    
+	    String title = request.getParameter("title");
 	    String genre = request.getParameter("genre");
 	    String country = request.getParameter("country");
         String order = request.getParameter("order");
@@ -30,7 +31,7 @@ public class SearchContentsController extends HttpServlet {
 	    
         MovieDAO mdao = new MovieDAO();
         
-        ArrayList<MovieVO> mlist = mdao.selectMovieBySearch(country, genre, order, index);
+        ArrayList<MovieVO> mlist = mdao.selectMovieBySearch(title, country, genre, order, index);
         
         JsonArray jsonArr = new JsonArray();
         

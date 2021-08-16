@@ -21,25 +21,11 @@ import com.google.gson.JsonObject;
 public class PopularContentsController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-request.setCharacterEncoding("UTF-8");
+	    request.setCharacterEncoding("UTF-8");
         
         MovieDAO mdao = new MovieDAO();
 
-        String curPage = request.getParameter("curpage");
-        if (curPage == null) {
-            curPage = "1";
-        }
-        
-        int curPageInt = Integer.parseInt(curPage);
-        int totalContent = mdao.selectMovieCountByAttendance();
-        Pagination pagination = new Pagination(curPageInt, totalContent, 6);
-        
-        // 한 page 내 보여줘야하는 게시물의 첫 번째 Rownum
-        int start = (curPageInt * pagination.getContentCnt()) - (pagination.getContentCnt() - 1);
-        // 한 page 내 보여줘야하는 게시물의 마지막 Rownum
-        int end = curPageInt * pagination.getContentCnt();
-        
-        ArrayList<MovieVO> mlist = mdao.selectMovieByAttendance(start, end);
+        ArrayList<MovieVO> mlist = mdao.selectMovieByAttendance(1, 10);
         
         JsonArray jsonArr = new JsonArray();
         
