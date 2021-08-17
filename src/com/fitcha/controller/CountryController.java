@@ -10,34 +10,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fitcha.model.dao.MovieDAO;
+import com.fitcha.model.dao.CountryDAO;
+import com.fitcha.model.vo.CountryVO;
 import com.fitcha.model.vo.MovieVO;
-import com.fitcha.pagination.Pagination;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/recent-contents")
-public class RecentContentsController extends HttpServlet {
+@WebServlet("/country")
+public class CountryController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
-        
-	    // 최근 개봉한 영화 최대 36개 조회
-        MovieDAO mdao = new MovieDAO();
-        ArrayList<MovieVO> mlist = mdao.selectMovieByOpenDate(1, 36);
-        
-        JsonArray jsonArr = new JsonArray();
-        for (MovieVO mvo : mlist) {
+	    
+	    CountryDAO cdao = new CountryDAO();
+	    ArrayList<CountryVO> clist = cdao.selectCountryList();
+	    
+	    JsonArray jsonArr = new JsonArray();
+        for (CountryVO cvo : clist) {
             JsonObject json = new JsonObject();
-            json.addProperty("movieid", mvo.getMovieId());
-            json.addProperty("title", mvo.getTitle());
-            json.addProperty("poster", mvo.getPoster());
-            
+            json.addProperty("countryid", cvo.getCountryId());
+            json.addProperty("name", cvo.getCountryName());
             jsonArr.add(json);
         }
         
-        
-        Gson gson = new Gson();
+        Gson gson = new Gson();        
         String jsonResponse = gson.toJson(jsonArr);
                 
         response.setContentType("text/html; charset=UTF-8");
@@ -45,9 +41,7 @@ public class RecentContentsController extends HttpServlet {
         out.print(jsonResponse);
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    
 
 	}
 

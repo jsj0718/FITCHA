@@ -37,6 +37,7 @@ if (title == null) {
       }
     }
   }
+
 </script>
 </head>
 <body class="bg-black">
@@ -101,13 +102,9 @@ if (title == null) {
       <div id="searchForm" class="d-flex">
         <select id="genreSelect" class="form-select form-select-sm mx-1">
           <option value="">모든 장르</option>
-          <option value="드라마">드라마</option>
-          <option value="판타지">판타지</option>
         </select>
         <select id="countrySelect" class="form-select form-select-sm mx-1">
           <option value="">모든 나라</option>
-          <option value="한국">한국</option>
-          <option value="미국">미국</option>
         </select>
         <select id="orderSelect" class="form-select form-select-sm mx-1">
           <option value="rate">추천순</option>
@@ -149,24 +146,63 @@ if (title == null) {
                 <p id="movieStaff" class="text-light m-3"></p>
               </div>
             </div>
-            <div id="staffList" class="d-flex" style="overflow-x: scroll;">
-              <div class="col-xs-6 col-md-3 text-center">
-                <img src='https://search.pstatic.net/common/?src=https%3A%2F%2Fssl.pstatic.net%2Fsstatic%2Fpeople%2F37%2F201504171519202401.jpg&type=u120_150&quality=95'>
-                <p class="text-light m-3">로버트 다우니 주니어</p>
-                <p class="text-light m-3">주연 | 토니 스타크 역</p>
+            <div id="staffList" class="d-flex" style="overflow-x: scroll;"></div>
+          </div>
+          <div class="modal-footer" style="display: inline;">
+            <div class="row buttonList">
+              <div class="col-sm-9">
+                <button type="button" class="btn btn-secondary" id="dipBtn" value="none" style="border-radius : 50%"><i class="fas fa-plus text-dark"></i></button>
+                <button type="button" class="btn btn-secondary" id="likeBtn" value="none" style="border-radius : 50%"><i class="fas fa-thumbs-up text-dark"></i></button>
+              </div>
+              <div class="col-sm-3">
+                <button type="button" class="btn btn-secondary ms-5" data-bs-target="#reviewModal" data-bs-toggle="modal" data-bs-dismiss="modal">리뷰 작성</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary">리뷰 작성</button>
-            <button type="button" class="btn btn-secondary">찜 하기</button>
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- 리뷰 작성 모달창 -->
+  <div class="modal fade" id="reviewModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalToggleLabel2">Review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="reviewTitle" class="form-label">TITLE</label>
+            <input type="text" class="form-control" id="reviewTitle" placeholder="제목" required>
+          </div>
+          <div class="mb-3">
+            <label for="reviewDate" class="form-label">DATE</label>
+            <input type="date" class="form-control" id="reviewDate" readonly="readonly">
+          </div>
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="reviewAccess" id="open" value="O">
+            <label class="form-check-label" for="open"> 공개 </label>
+            <br>
+            <input class="form-check-input" type="radio" name="reviewAccess" id="close" value="C" checked>
+            <label class="form-check-label" for="close"> 비공개 </label>
+          </div>
+          <div class="mb-3">
+            <label for="contents" class="form-label">내용</label>
+            <textarea class="form-control" id="reviewContents" rows="3" placeholder="내용" required></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="reviewBtn">작성</button>
+          <button class="btn btn-light" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">취소</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
   <script src="${pageContext.request.contextPath }/test/js/search.js"></script>

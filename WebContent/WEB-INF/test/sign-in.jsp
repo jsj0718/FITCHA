@@ -28,7 +28,7 @@
   <link href="https://fontmeme.com/permalink/210816/95cfd40502d9ebe4522b74e094042fcb.png" rel="shortcut icon" type="image/x-icon">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <script src="${pageContext.request.contextPath }/test/js/sign-in.js"></script>
+<%--   <script src="${pageContext.request.contextPath }/test/js/sign-in.js"></script> --%>
   <script type="text/javascript">
     window.onload = function() {
       const moveToSignup = document.getElementById("move-to-signup");
@@ -43,13 +43,13 @@
   <div id="background-image" class="carousel slide carousel-fade" style="position: fixed" data-bs-ride="carousel">
     <div class="carousel-inner opacity-75">
       <div class="carousel-item active">
-        <img src="${pageContext.request.contextPath }/img/login20.jpg" class="d-inline w-100" alt="...">
+        <img src="${pageContext.request.contextPath }/img/login13.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
         <img src="${pageContext.request.contextPath }/img/login19.jpg" class="d-block w-100" alt="...">
       </div>
       <div class="carousel-item">
-        <img src="${pageContext.request.contextPath }/img/login13.jpg" class="d-block w-100" alt="...">
+        <img src="${pageContext.request.contextPath }/img/login20.jpg" class="d-inline w-100" alt="...">
       </div>
       <div class="carousel-item">
         <img src="${pageContext.request.contextPath }/img/login6.jpg" class="d-block w-100" alt="...">

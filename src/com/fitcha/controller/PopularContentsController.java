@@ -23,14 +23,14 @@ public class PopularContentsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
         
+	    // 상영중인 영화 중 인기있는 영화 최대 10개 조회
         MovieDAO mdao = new MovieDAO();
-
         ArrayList<MovieVO> mlist = mdao.selectMovieByAttendance(1, 10);
         
         JsonArray jsonArr = new JsonArray();
-        
         for (MovieVO mvo : mlist) {
             JsonObject json = new JsonObject();
+            json.addProperty("movieid", mvo.getMovieId());
             json.addProperty("title", mvo.getTitle());
             json.addProperty("poster", mvo.getPoster());
             

@@ -27,10 +27,11 @@ public class GenreDAO {
         }
     }
     
-    // 모든 장르 조회
+    // 선택된 장르 조회
     public ArrayList<GenreVO> selectGenreList() {
         String SQL = "SELECT GENREID, GENRENAME "
-                + "FROM GENRE ";
+                + "FROM GENRE "
+                + "WHERE GENREID IN (1, 2, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)";
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;

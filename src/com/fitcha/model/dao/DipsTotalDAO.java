@@ -24,36 +24,24 @@ public class DipsTotalDAO {
         }
     }
     
-    // 찜하기 추가
-    public int insertDips(int movieId, String gender, String age) {
+    // 찜 누적 테이블 추가 혹은 제거
+    public int mergeDipsTotal(int movieId, String gender, String generation, String operator) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String SQL = "MERGE "
                 + "    INTO DIPSTOTAL DT "
                 + "    USING DUAL "
-                + "    ON (DT.MOVIEID = ?) "
+                + "    ON (DT.MOVIEID = "+movieId+") "
                 + "    WHEN MATCHED THEN "
                 + "                UPDATE "
-                + "                SET ? = ? + 1, ? = ? + 1 "
-                + "                WHERE DT.MOVIEID = ? "
+                + "                SET "+gender+" = "+gender+" " + operator + " 1, "+generation+" = "+generation+" " + operator + " 1 "
+                + "                WHERE DT.MOVIEID = "+movieId+" "
                 + "    WHEN NOT MATCHED THEN "
-                + "                INSERT (MOVIEID, ?, ?) "
-                + "                VALUES (?, 1, 1)";
+                + "                INSERT (DT.MOVIEID, "+gender+", "+generation+") "
+                + "                VALUES ("+movieId+", 1, 1)";
         try {
             conn = DBConnect.getInstance();
-            pstmt = conn.prepareStatement(SQL);
-            pstmt.setInt(1, movieId);
-            
-            pstmt.setString(2, gender);
-            pstmt.setString(3, gender);
-            pstmt.setString(4, age);
-            pstmt.setString(5, age);
-            pstmt.setInt(6, movieId);
-
-            pstmt.setString(7, gender);
-            pstmt.setString(8, age);
-            pstmt.setInt(9, movieId);
-            
+            pstmt = conn.prepareStatement(SQL);        
             return pstmt.executeUpdate();
 
         } catch (SQLException e) {

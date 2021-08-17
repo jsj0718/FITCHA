@@ -125,5 +125,36 @@ public class MUserDAO {
 		return result;
 
 	}
+	
+	// 사용자 정보 가져오기
+	public MUserVO selectUserInfo(String userId) {
+        String sql = "SELECT USERID, USERNAME, BIRTH, GENDER " 
+                + "FROM MUSER " 
+                + "WHERE USERID = ?";
+
+        Connection conn = DBConnect.getInstance();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        MUserVO uvo = new MUserVO();
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                uvo.setUserId(rs.getString(1));
+                uvo.setUserName(rs.getString(2));
+                uvo.setBirth(Date.valueOf(rs.getString(3).substring(0, 10)));
+                uvo.setGender(rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, pstmt, conn);
+        }
+
+        return uvo;
+
+    }
 
 }

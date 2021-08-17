@@ -120,9 +120,9 @@ public class MovieDAO {
     
     // 개봉일 순으로 조회
     public ArrayList<MovieVO> selectMovieByOpenDate(int start, int end) {
-        String SQL = "SELECT TITLE, POSTER, OPENDATE "
+        String SQL = "SELECT MOVIEID, TITLE, POSTER, OPENDATE "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
-                + "      FROM (SELECT TITLE, POSTER, OPENDATE "
+                + "      FROM (SELECT MOVIEID, TITLE, POSTER, OPENDATE "
                 + "            FROM MOVIE "
                 + "            WHERE OPENDATE IS NOT NULL "
                 + "            ORDER BY OPENDATE DESC) A "
@@ -142,9 +142,10 @@ public class MovieDAO {
             
             while(rs.next()) {
                 MovieVO mvo = new MovieVO();
-                mvo.setTitle(rs.getString(1));
-                mvo.setPoster(rs.getString(2));
-//                mvo.setOpenDate(rs.getString(3));
+                mvo.setMovieId(rs.getInt(1));
+                mvo.setTitle(rs.getString(2));
+                mvo.setPoster(rs.getString(3));
+//                mvo.setOpenDate(rs.getString(4));
                 
                 mlist.add(mvo);
             }
@@ -189,10 +190,10 @@ public class MovieDAO {
     
     // 상영 중인 영화면 관객수 순으로 조회
     public ArrayList<MovieVO> selectMovieByAttendance(int start, int end) {
-        String SQL = "SELECT TITLE, POSTER, ATTENDANCE "
+        String SQL = "SELECT MOVIEID, TITLE, POSTER, ATTENDANCE "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM ( "
-                + "            SELECT TITLE, POSTER, ATTENDANCE "
+                + "            SELECT MOVIEID, TITLE, POSTER, ATTENDANCE "
                 + "            FROM MOVIE "
                 + "            WHERE ATTENDANCE > 0 "
                 + "            ORDER BY ATTENDANCE DESC "
@@ -213,9 +214,10 @@ public class MovieDAO {
             
             while(rs.next()) {
                 MovieVO mvo = new MovieVO();
-                mvo.setTitle(rs.getString(1));
-                mvo.setPoster(rs.getString(2));
-//                mvo.setOpenDate(rs.getString(3));
+                mvo.setMovieId(rs.getInt(1));
+                mvo.setTitle(rs.getString(2));
+                mvo.setPoster(rs.getString(3));
+//                mvo.setOpenDate(rs.getString(4));
                 
                 mlist.add(mvo);
             }
@@ -231,10 +233,10 @@ public class MovieDAO {
     
     // 유저가 선호하는 장르(최대 3개)를 평점순으로 추천
     public ArrayList<MovieVO> selectMovieByUser(String userId, int start, int end) {
-        String SQL = "SELECT DISTINCT TITLE, POSTER "
+        String SQL = "SELECT DISTINCT MOVIEID, TITLE, POSTER "
                 + "FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "      FROM ( "
-                + "            SELECT M.TITLE, M.POSTER "
+                + "            SELECT M.MOVIEID, M.TITLE, M.POSTER "
                 + "            FROM MOVIEANDGENRE MAG, MOVIE M, GENRE G "
                 + "            WHERE MAG.MOVIEID = M.MOVIEID "
                 + "            AND MAG.GENREID = G.GENREID "
@@ -266,8 +268,9 @@ public class MovieDAO {
             
             while(rs.next()) {
                 MovieVO mvo = new MovieVO();
-                mvo.setTitle(rs.getString(1));
-                mvo.setPoster(rs.getString(2));
+                mvo.setMovieId(rs.getInt(1));
+                mvo.setTitle(rs.getString(2));
+                mvo.setPoster(rs.getString(3));
                 
                 mlist.add(mvo);
             }
@@ -283,14 +286,14 @@ public class MovieDAO {
     
     // 성별, 나이로 선호하는 영화 조회
     public ArrayList<MovieVO> selectMovieByUserInfo(String userInfo, int start, int end) {
-        String SQL = "SELECT TITLE, POSTER "
+        String SQL = "SELECT MOVIEID, TITLE, POSTER "
                 + "     FROM MOVIE "
                 + "     WHERE MOVIEID IN (SELECT MOVIEID "
                 + "                         FROM (SELECT ROWNUM AS RNUM, A.* "
                 + "                                 FROM ( "
                 + "                                       SELECT MOVIEID "
                 + "                                       FROM DIPSTOTAL "
-                + "                                       ORDER BY ? DESC "
+                + "                                       ORDER BY "+userInfo+" DESC "
                 + "                                      ) A "
                 + "                               ) "
                 + "                        WHERE RNUM BETWEEN ? AND ?)";
@@ -302,15 +305,15 @@ public class MovieDAO {
         try {
             conn = DBConnect.getInstance();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, userInfo);
-            pstmt.setInt(2, start);
-            pstmt.setInt(3, end);
+            pstmt.setInt(1, start);
+            pstmt.setInt(2, end);
             rs = pstmt.executeQuery();
             
             while(rs.next()) {
                 MovieVO mvo = new MovieVO();
-                mvo.setTitle(rs.getString(1));
-                mvo.setPoster(rs.getString(2));
+                mvo.setMovieId(rs.getInt(1));
+                mvo.setTitle(rs.getString(2));
+                mvo.setPoster(rs.getString(3));
                 
                 mlist.add(mvo);
             }
@@ -367,7 +370,7 @@ public class MovieDAO {
         return mlist;
     }
     
-    // 영화 검색 시 관련 영화 조회 (최신순)
+    // 영화 검색 시 관련 영화 조회 (추천순)
     public ArrayList<MovieVO> selectMovieByTitle(int title, int start, int end) {
         String SQL = "SELECT DISTINCT M.TITLE, M.POSTER "
                 + "FROM MOVIEANDGENRE MAG, MOVIE M, GENRE G "

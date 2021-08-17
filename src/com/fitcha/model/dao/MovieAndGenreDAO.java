@@ -49,7 +49,7 @@ public class MovieAndGenreDAO {
     
     // Movie에 관련된 모든 genre 조회
     public ArrayList<MovieAndGenreVO> selectGenreList(int movieId) {
-        String SQL = "SELECT G.GENRENAME "
+        String SQL = "SELECT  G.GENREID, G.GENRENAME "
                 + "     FROM MOVIEANDGENRE MAG, MOVIE M, GENRE G "
                 + "     WHERE MAG.MOVIEID = M.MOVIEID "
                 + "     AND MAG.GENREID = G.GENREID "
@@ -67,7 +67,8 @@ public class MovieAndGenreDAO {
 
             while (rs.next()) {
                 MovieAndGenreVO magvo = new MovieAndGenreVO();
-                magvo.setGenreName(rs.getString(1));               
+                magvo.setGenreId(rs.getInt(1));
+                magvo.setGenreName(rs.getString(2));
                 maglist.add(magvo);
             }
 

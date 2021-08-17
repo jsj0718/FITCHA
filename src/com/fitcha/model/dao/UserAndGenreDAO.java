@@ -25,35 +25,25 @@ public class UserAndGenreDAO {
     }
     
     // 유저-장르 테이블 누적
-    public int insertDips(String userId, int genreId) {
+    public int mergeDips(String userId, int genreId, String operator) {
         Connection conn = null;
         PreparedStatement pstmt = null;
         String SQL = "MERGE "
                 + "    INTO USERANDGENRE UAG "
                 + "    USING DUAL "
-                + "    ON (UAG.USERID = ? AND UAG.GENREID = ?) "
+                + "    ON (UAG.USERID = '"+userId+"' AND UAG.GENREID = "+genreId+") "
                 + "    WHEN MATCHED THEN "
                 + "                UPDATE "
-                + "                SET UAG.COUNT = COUNT + 1 "
-                + "                WHERE UAG.USERID = ? "
-                + "                AND UAG.GENREID = ? "
+                + "                SET UAG.COUNT = UAG.COUNT "+operator+" 1 "
+                + "                WHERE UAG.USERID = '"+userId+"' "
+                + "                AND UAG.GENREID = "+genreId+" "
                 + "    WHEN NOT MATCHED THEN "
                 + "                INSERT (USERID, GENREID, COUNT) "
-                + "                VALUES (?, ?, 1)";
+                + "                VALUES ('"+userId+"', "+genreId+", 1)";
         
         try {
             conn = DBConnect.getInstance();
-            pstmt = conn.prepareStatement(SQL);
-            
-            pstmt.setString(1, userId);
-            pstmt.setInt(2, genreId);
-            
-            pstmt.setString(3, userId);
-            pstmt.setInt(4, genreId);
-            
-            pstmt.setString(5, userId);
-            pstmt.setInt(6, genreId);
-            
+            pstmt = conn.prepareStatement(SQL);   
             return pstmt.executeUpdate();
 
         } catch (SQLException e) {

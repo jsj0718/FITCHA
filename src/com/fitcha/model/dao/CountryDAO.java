@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.util.ArrayList;
 
 import com.fitcha.model.dbconn.DBConnect;
+import com.fitcha.model.vo.CountryVO;
+import com.fitcha.model.vo.GenreVO;
 
-public class BoardDAO {
+public class CountryDAO {
     public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection conn) {
         try {
             if (rs != null && !rs.isClosed()) {
@@ -25,28 +27,32 @@ public class BoardDAO {
         }
     }
     
-    // 리뷰 추가
-    public int insertBoard(String userId, int movieId, String title, String content, String bdate, String flag) {
+    // 선택된 나라 조회
+    public ArrayList<CountryVO> selectCountryList() {
+        String SQL = "SELECT COUNTRYID, COUNTRYNAME "
+                + "FROM COUNTRY";
         Connection conn = null;
         PreparedStatement pstmt = null;
-        String SQL = "INSERT INTO BOARD (BOARDID, USERID, MOVIEID, TITLE, CONTENT, BDATE, FLAG) "
-                + "VALUES (BOARD_BOARDID_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?)";
+        ResultSet rs = null;
+        
+        ArrayList<CountryVO> clist = new ArrayList<>();
         try {
             conn = DBConnect.getInstance();
             pstmt = conn.prepareStatement(SQL);
-            pstmt.setString(1, userId);
-            pstmt.setInt(2, movieId);
-            pstmt.setString(3, title);
-            pstmt.setString(4, content);
-            pstmt.setString(5, bdate);
-            pstmt.setString(6, flag);
-            return pstmt.executeUpdate();
+            rs = pstmt.executeQuery();
 
+            while (rs.next()) {
+                CountryVO cvo = new CountryVO();
+                cvo.setCountryId(rs.getInt(1));
+                cvo.setCountryName(rs.getString(2));   
+                clist.add(cvo);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closeAll(null, pstmt, conn);
+            closeAll(rs, pstmt, conn);
         }
-        return -1; // DB 오류
+
+        return clist;
     }
 }
