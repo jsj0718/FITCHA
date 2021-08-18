@@ -58,10 +58,10 @@ if (title == null) {
             <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Page</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/my-board">My Page</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">찜 목록</a>

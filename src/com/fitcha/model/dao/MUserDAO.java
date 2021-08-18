@@ -10,7 +10,7 @@ import com.fitcha.model.dbconn.DBConnect;
 import com.fitcha.model.vo.MUserVO;
 
 public class MUserDAO {
-		public void closeAll(Connection conn, PreparedStatement pstmt, ResultSet rs ) {
+		public void closeAll(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		
 		try {
 			if(rs!=null && !rs.isClosed()) {
@@ -151,7 +151,7 @@ public class MUserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            closeAll(rs, pstmt, conn);
+            closeAll(conn, pstmt, rs);
         }
 
         return uvo;

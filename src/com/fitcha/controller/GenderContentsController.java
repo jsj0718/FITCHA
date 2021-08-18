@@ -13,10 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.fitcha.model.dao.MUserDAO;
 import com.fitcha.model.dao.MovieDAO;
-import com.fitcha.model.vo.BoardVO;
 import com.fitcha.model.vo.MUserVO;
 import com.fitcha.model.vo.MovieVO;
-import com.fitcha.pagination.Pagination;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

@@ -47,16 +47,16 @@
       <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav" style="background-color : black;">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="${pageContext.request.contextPath }/main-movie">홈</a>
+            <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/main-movie">홈</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">My Page</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/my-board">My Page</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">게시판</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">찜 목록</a>
@@ -107,7 +107,7 @@
         <div class="input-group mb-4 flex-nowrap">
           <div class="input-group flex-nowrap input-group-lg">
             <span class="input-group-text bg-black text-light" id="addon-wrapping" style="border-top-left-radius: 15px; border-bottom-left-radius: 15px;"><i class="fas fa-search" type="submit"></i></span>
-            <input type="text" class="form-control bg-black text-light" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping" name="title">
+            <input type="text" class="form-control bg-black text-light" style="border-top-right-radius: 15px; border-bottom-right-radius: 15px;" placeholder="영화 제목" aria-label="Username" aria-describedby="addon-wrapping" name="title">
           </div>
         </div>
       </form>
