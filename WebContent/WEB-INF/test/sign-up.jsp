@@ -16,7 +16,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link rel="stylesheet" href="${pageContext.request.contextPath }/test/css/sign.css">
-<%--   <script src="${pageContext.request.contextPath }/test/js/sign-up.js"></script> --%>
   <script type="text/javascript">  
     window.onload = function() {
       const moveToSignin = document.getElementById("move-to-signin");

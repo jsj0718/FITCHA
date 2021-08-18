@@ -86,8 +86,8 @@ public class MyBoardDAO {
 	   PreparedStatement pstmt = null;
 	   ResultSet rs = null;
 	   
-	   String sql ="SELECT BOARDID, USERID, TITLE, POSTER "
-	   		+ "FROM(SELECT ROWNUM AS RNUM, A.* FROM (SELECT B.BOARDID, B.USERID, M.TITLE, M.POSTER "
+	   String sql ="SELECT BOARDID, USERID, TITLE, CONTENT, POSTER "
+	   		+ "FROM(SELECT ROWNUM AS RNUM, A.* FROM (SELECT B.BOARDID, B.USERID, B.TITLE, B.CONTENT, M.POSTER "
 	   												+ "FROM BOARD B, MOVIE M "
 	   												+ "WHERE B.MOVIEID = M.MOVIEID "
 	   		+ "                                        AND B.USERID ='"+ id +"' "
@@ -109,7 +109,8 @@ public class MyBoardDAO {
 			   bvo.setBoardId(rs.getInt(1));
 			   bvo.setUserId(rs.getString(2));
 			   bvo.setTitle(rs.getString(3));
-			   bvo.setPoster(rs.getString(4));
+			   bvo.setContent(rs.getString(4));
+			   bvo.setPoster(rs.getString(5));
 			   
 			   blist.add(bvo);
 			   
@@ -169,7 +170,7 @@ public class MyBoardDAO {
 	   Statement stmt = null;
 	   ResultSet rs = null;
 	   
-	   String sql ="SELECT B.BOARDID, B.USERID, M.TITLE, M.POSTER"
+	   String sql ="SELECT B.BOARDID, B.USERID, B.TITLE, B.CONTENT, M.POSTER"
 	            + " FROM BOARD B, MOVIE M"
 	            + " WHERE B.MOVIEID = M.MOVIEID"
 	            + " AND B.USERID = '"+ id +"'"
@@ -189,7 +190,8 @@ public class MyBoardDAO {
 			   bvo.setBoardId(rs.getInt(1));
 			   bvo.setUserId(rs.getString(2));
 			   bvo.setTitle(rs.getString(3));
-			   bvo.setPoster(rs.getString(4));
+			   bvo.setContent(rs.getString(4));
+			   bvo.setPoster(rs.getString(5));
 			   
 			   blist.add(bvo);
 			   
@@ -213,14 +215,19 @@ public class MyBoardDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<MyBoardVO> bslist= new ArrayList<MyBoardVO>();
-
-		String sql = "SELECT DISTINCT M.TITLE, M.POSTER, B.BOARDID, B.USERID " 
-				+ "FROM MOVIE M, GENRE G, MOVIEANDGENRE MAG, BOARD B "
-				+ "WHERE MAG.MOVIEID = M.MOVIEID "
-				+ "AND MAG.GENREID = G.GENREID "
-				+ "AND B.MOVIEID = MAG.MOVIEID "
-				+ "AND B.USERID = '"+ id +"' "
-				+ "AND M.TITLE LIKE ?"; 
+		
+		String sql = "SELECT B.BOARDID, B.USERID, B.TITLE, B.CONTENT, M.POSTER "
+		        + "FROM MOVIE M, BOARD B "
+		        + "WHERE M.MOVIEID = B.MOVIEID "
+		        + "AND B.USERID = '" + id + "' "
+		        + "AND M.TITLE LIKE ?"; 
+//        String sql = "SELECT DISTINCT M.TITLE, M.POSTER, B.BOARDID, B.USERID " 
+//				+ "FROM MOVIE M, GENRE G, MOVIEANDGENRE MAG, BOARD B "
+//				+ "WHERE MAG.MOVIEID = M.MOVIEID "
+//				+ "AND MAG.GENREID = G.GENREID "
+//				+ "AND B.MOVIEID = MAG.MOVIEID "
+//				+ "AND B.USERID = '"+ id +"' "
+//				+ "AND M.TITLE LIKE ?"; 
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -230,16 +237,21 @@ public class MyBoardDAO {
 			rs = pstmt.executeQuery();
 			  while(rs.next()) {
 				   MyBoardVO bvo = new MyBoardVO();
-				   bvo.setTitle(rs.getString(1));
-				   bvo.setPoster(rs.getString(2));
-				   bvo.setBoardId(rs.getInt(3));
-				   bvo.setUserId(rs.getString(4));
+				   bvo.setBoardId(rs.getInt(1));
+	               bvo.setUserId(rs.getString(2));
+	               bvo.setTitle(rs.getString(3));
+	               bvo.setContent(rs.getString(4));
+	               bvo.setPoster(rs.getString(5));
 				   
 				   bslist.add(bvo);
+
+//				   bvo.setTitle(rs.getString(1));
+//				   bvo.setPoster(rs.getString(2));
+//				   bvo.setBoardId(rs.getInt(3));
+//				   bvo.setUserId(rs.getString(4));
 				   
 			   }
 			
-			System.out.println("searchDAO="+bslist);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

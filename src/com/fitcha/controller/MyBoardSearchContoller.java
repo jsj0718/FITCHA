@@ -41,14 +41,16 @@ public class MyBoardSearchContoller extends HttpServlet {
         	//로그인이 된 상태
         	
         	MyBoardDAO bdao = new MyBoardDAO();
-        	List<MyBoardVO> blist = bdao.search(id,searchTitle);
+        	List<MyBoardVO> blist = bdao.search(id, searchTitle);
         	JsonArray jsonArr = new JsonArray();
         	
         	for(MyBoardVO bvo: blist) {
         		JsonObject json = new JsonObject();
         		json.addProperty("boardId", bvo.getBoardId());
         		json.addProperty("userId", bvo.getUserId());
-        		json.addProperty("title", bvo.getTitle());
+                json.addProperty("boardtitle", bvo.getTitle());
+                json.addProperty("boardcontent", bvo.getContent());
+//        		json.addProperty("title", bvo.getTitle());
         		json.addProperty("poster", bvo.getPoster());
         		jsonArr.add(json);
         		
