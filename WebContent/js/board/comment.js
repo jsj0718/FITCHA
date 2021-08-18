@@ -1,6 +1,5 @@
-/**
- * 
- */
+
+	
 function warnEmpty(){
 	alert("댓글을 입력해주세요.");
 }
@@ -12,6 +11,8 @@ function dateToString(date){
 function submitComment(){
 	const newcommentEL = document.getElementById("new-comment");
 	const newcomment = newcommentEL.value.trim();
+	var boardId = document.location.href.split("=");
+	
 	
 	if(newcomment){
 		const dateEL = document.createElement('div');
@@ -42,10 +43,31 @@ function submitComment(){
 		document.getElementById('comments').appendChild(commentEL);
 		newcommentEL.value = "";
 		
-		const countEL = document.getElementById('comment-count');
-		const count = countEL.innerText;
-		countEL.innerText = parseInt(count) +1;
+//		const countEL = document.getElementById('comment-count');
+//		const count = countEL.innerText;
+//		countEL.innerText = parseInt(count) +1;
+		
+		var xhrpost = new XMLHttpRequest();
+		xhrpost.open("POST","comment",true);
+		xhrpost.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhrpost.send("boardId="+boardId[1]+"&newComment="+newcomment+"&userId="+writerString);
+		
+		
 	}
 	else warnEmpty();
 	
 }
+
+//function insertComment(){
+//	var boardId = document.location.href.split("=");
+//	const newcomment = newcommentEL.value.trim();
+//	//로그인된 아이디로 넣기
+//	const writerString = "작성자";
+//	
+//	var xhrpost = new XMLHttpRequest();
+//	xhrpost.open("POST","review_board",true);
+//	xhrpost.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//	xhrpost.send("boardId="+boardId[1]+"&content="+newcomment+"&userId="+writerString);
+//	
+//
+//}

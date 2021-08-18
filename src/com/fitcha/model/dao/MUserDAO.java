@@ -10,22 +10,23 @@ import com.fitcha.model.dbconn.DBConnect;
 import com.fitcha.model.vo.MUserVO;
 
 public class MUserDAO {
-	public void closeAll(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+		public void closeAll(Connection conn, PreparedStatement pstmt, ResultSet rs ) {
+		
 		try {
-			if (rs != null && !rs.isClosed()) {
+			if(rs!=null && !rs.isClosed()) {
 				rs.close();
 			}
-			if (pstmt != null && !pstmt.isClosed()) {
+			if(pstmt!=null && !pstmt.isClosed()) {
 				pstmt.close();
 			}
-			if (conn != null && !conn.isClosed()) {
+			if(conn!=null && !conn.isClosed()) {
 				conn.close();
 			}
-		} catch (Exception e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
-	
 	// 로그인
 	public String login(String id, String pw) {
 		Connection conn = DBConnect.getInstance();
@@ -45,14 +46,15 @@ public class MUserDAO {
 			// resultSet
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				result = rs.getString("ID");
+				result = rs.getString("USERID");
 
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			closeAll(rs, pstmt, conn);
+			closeAll(conn, pstmt, rs);
 		}
 
 		return result;
@@ -87,7 +89,7 @@ public class MUserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			closeAll(null, pstmt, conn);
+			closeAll(conn, pstmt, null);
 		}
 		return result;
 	}
@@ -119,7 +121,7 @@ public class MUserDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			closeAll(rs, pstmt, conn);
+			closeAll(conn, pstmt, rs);
 		}
 
 		return result;

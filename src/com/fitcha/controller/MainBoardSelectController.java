@@ -18,14 +18,34 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/main_board")
-public class MainBoardController extends HttpServlet {
+@WebServlet("/main_board_select")
+public class MainBoardSelectController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MainBoardDAO bdao = new MainBoardDAO();
-        List<MainBoardVO> blist = bdao.allBoard();
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		String genre = request.getParameter("genre");
+		String recommend = request.getParameter("recommend");
+		
+//		System.out.println("서블릿 받아온 장르: "+genre+", 추천순: "+recommend);
+		
+		MainBoardDAO bdao = new MainBoardDAO();
+		List<MainBoardVO> blist=null;
+		
+		//recommend 1=최신순, 2=추천순, 3=평점순, 4=러닝타임 짧은순
+		if(recommend.equals("1")) {
+			 blist = bdao.latestBoard(genre);
+		}else if(recommend.equals("2")){
+			blist = bdao.recommendBoard(genre);
+		}else if(recommend.equals("3")) {
+			 blist = bdao.rateBoard(genre);
+		}else {
+			 blist = bdao.runningTimeBoard(genre);
+		}
         JsonArray jsonArr = new JsonArray();
-        
         for(MainBoardVO bvo: blist) {
         	JsonObject json = new JsonObject();
         	json.addProperty("boardId", bvo.getBoardId());
@@ -42,16 +62,8 @@ public class MainBoardController extends HttpServlet {
         response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonResponse);
-//		System.out.println(jsonResponse);
 		
-//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/board/main-board.jsp");
-//		rd.forward(request, response);
-
 		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
 	}
 

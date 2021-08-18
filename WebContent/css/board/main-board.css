@@ -182,41 +182,61 @@ header {
 #review-p > h3{
 	font-weight: bold;
 }
+#select-box{
+	display: flex;
+}
 #genre{
-	color: black;
-	background-color: rgba(255,255,255,0.8);
+	color: white;
+	background-color: black;
 	padding: 5px;
 	width: 300px;
 	font-size: 20px;
+	border-radius: 20px;
 	margin: 20px 20px 20px 70px;
 }
 #recommend{
-	color: black;
-	background-color: rgba(255,255,255,0.8);
+	color: white;
+	background-color: black;
 	padding: 5px;
 	width: 300px;
 	font-size: 20px;
+	border-radius: 20px;
 	margin: 20px 0 20px 0px;
 }
+#searchBox{
+	color: white;
+	background-color: black;
+	border-radius: 20px;
+	padding: 5px;
+	width: 300px;
+	font-size: 20px;
+	margin: 20px 10px 20px 20px;
+}
 
-
+/* hr{ */
+/* 	background-color:red; */
+/* } */
 #review-text{
 	font-size: 24px;
 	color: white;
 	font-weight: bold;
-	margin: 150px 0 0 70px;
+	margin: 100px 0 20px 70px;
 }
 #review-box{
 	margin: 0px 60px 0 60px;
 }
 .row{
 	display: inline-block;
-	margin: 30px 10px 0 30px;
+	
+	margin: 30px 10px 0 200px;
 	
 }
+
 .thumbnail{
 	width: 200px;
+	height: 350px;
 	background-color: rgba(255,255,255,0.5);
+	margin: 20px auto;
 	
 }
 .thumbnail img{
@@ -224,9 +244,20 @@ header {
 	height:250px;
 }
 
-.thumbnail img:hover{
+.thumbnail:hover{
 	transform: scale(1.1);
 }
+
+.thumbnail-title{
+	height: 38.4px;
+}
+
+
+
+
+
+
+
 
 
 .main-container {

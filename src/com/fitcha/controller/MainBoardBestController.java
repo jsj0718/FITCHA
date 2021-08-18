@@ -18,23 +18,22 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
-@WebServlet("/main_board")
-public class MainBoardController extends HttpServlet {
+@WebServlet("/main_board_best")
+public class MainBoardBestController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         MainBoardDAO bdao = new MainBoardDAO();
-        List<MainBoardVO> blist = bdao.allBoard();
+        MainBoardVO bvo = bdao.bestBoard();
         JsonArray jsonArr = new JsonArray();
         
-        for(MainBoardVO bvo: blist) {
         	JsonObject json = new JsonObject();
-        	json.addProperty("boardId", bvo.getBoardId());
         	json.addProperty("userId", bvo.getUserId());
         	json.addProperty("title", bvo.getTitle());
         	json.addProperty("poster", bvo.getPoster());
+        	json.addProperty("boardId", bvo.getBoardId());
         	jsonArr.add(json);
         	
-        }
+      
         
         Gson gson = new Gson();
         String jsonResponse = gson.toJson(jsonArr);

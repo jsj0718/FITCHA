@@ -1,6 +1,7 @@
 package com.fitcha.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,11 +14,12 @@ import javax.servlet.http.HttpSession;
 import com.fitcha.model.dao.MUserDAO;
 
 
-@WebServlet("/main-login")
+@WebServlet("/index-login")
 public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/login.jsp");
+    	
+    	RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/login.jsp");
         rd.forward(request, response);
     }
 
@@ -40,7 +42,7 @@ public class LoginController extends HttpServlet {
 			
 			//페이지이동(index)
 			//sendRedirect는 contextPath 필수!!
-			response.sendRedirect(request.getContextPath()+"/main/index.jsp");
+			response.sendRedirect(request.getContextPath()+"/main-movie");
 			
 		}else {
 			//로그인 실패! 페이지이동(로그인)
@@ -51,6 +53,9 @@ public class LoginController extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/main/login.jsp");	
 			rd.forward(request, response);
 		}
+		response.setContentType("text/html;charset=utf-8");
+		
+		
     	
     }
 
