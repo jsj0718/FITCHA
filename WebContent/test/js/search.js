@@ -75,9 +75,9 @@ let openModal = function(movieid) {
       let staffStr = "출연진 : "
       let genreStr = "장르 : "
       $('#staffList').empty()
-
+  
       let req = {
-        'key': youtubeKey,
+//        'key': youtubeKey.substring(1, youtubeKey.length-1),
         'part': 'snippet',
         'type': 'video',
         'q': resJSON[0].title + ' ' + resJSON[0].subtitle + ' ' + 'trailer'
@@ -311,9 +311,6 @@ window.onload = function() {
         // 응답 값 (서버로부터 받아온 데이터)
         var jsonStr = xhrget.responseText; // json 형태의 문자열
         var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
-
-        console.log(url);
-        console.log(jsonStr);
 
         for (var i = 0; i < json.length; i++) {
           $('#'+ block +'Select')
