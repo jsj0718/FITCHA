@@ -7,28 +7,29 @@
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>Insert title here</title>
  <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main/index.css" >
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/main/index.css" >
  <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 </head>
 <body>
+<script src="${pageContext.request.contextPath }/js/main/index.js"></script>
  <div class="wrapper">
 
     <!-- HEADER -->
+    <form action="${pageContext.request.contextPath}/main-movie" method="post" name="mainMovie">
     <header>
       <div class="netflixLogo">
         <a id="logo" href="#home"><img src="img/name.png" alt="Logo Image"></a>
        </div>
       
-      <div>
+      <div >
      	 <nav class="sub-nav">
        		<a id="login" href="#">로그인</a>     
         	<a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
        		<a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
      	 	<a href="#">전체 게시판</a>
-     	 	<a href="#">나의 게시판</a>
      	 	<a href="#">캘린더</a>
      	 	<a href="#">로그아웃</a>
-     	   
+     	   <div id= "navBox"></div>
      	 </nav>    
       </div>      
      	 
@@ -201,6 +202,7 @@
       <p>&copy 1997-2018 Netflix, Inc.</p>
       <p>Carlos Avila &copy 2018</p>
     </footer>
+    </form>
   </div>
 </body>
 </html>

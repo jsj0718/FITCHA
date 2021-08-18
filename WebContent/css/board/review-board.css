@@ -110,7 +110,11 @@ header {
 	margin: 30px auto 0px 220px;
 	font-weight: bold;
 }
-.review-box{
+#like-btn{
+	margin: 30px 1000px 0px 220px;
+}
+
+#review-box{
 	display: flex;
 	width: 1200px;
 	height: 500px;
@@ -118,9 +122,9 @@ header {
 	margin: 0px 200px 20px 200px;
 }
 
-#movie-img{
+#movie-img img{
 	width: 300px;
-	height: 350px;
+	height: 420px;
 	margin: 50px 20px 0px 20px;
 }
 .movie-info{
@@ -141,7 +145,7 @@ header {
 	margin: 50px 20px 0px 0;
 	width: 500px;
 	height: 420px;
-	border: 1px solid white;
+/* 	border: 1px solid white; */
 }
 #review-writer{
 	width: 500px;
@@ -152,15 +156,37 @@ header {
 #review-title{
 	width: 500px;
 	height: 50px;
+/* 	border: 1px solid white;	 */
+}
+#title{
+	width: 500px;
+	height: 50px;
 	padding: 10px;
-	border: 1px solid white;	
+	overflow:auto;
+	background-color: black;
+	color: white;
+	border: 1px solid white;
+}
+.p{
+	width: 500px;
+	height: 50px;
 }
 #review-content{
 	width: 500px;
-	height: 330px;
+	height: 273px;
+/* 	border: 1px solid white;	 */
+}
+
+#content{
+	width: 500px;
+	height: 273px;
 	padding: 10px;
+	overflow:auto;
+	background-color: black;
+	color: white;
 	border: 1px solid white;	
 }
+
 #update-btn{
 	color: black;
 	margin: 0 200px 0 1200px;

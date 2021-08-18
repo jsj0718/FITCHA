@@ -1,5 +1,20 @@
+<%@page import="com.fitcha.model.vo.MainBoardVO"%>
+<%@page import="com.fitcha.model.dao.MainBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+//  String userId = (String)session.getAttribute("userId");
+	String userId = "rrr";
+   if(userId==null){
+	   
+	   response.sendRedirect("login.jsp");
+   }
+   
+   String boardId = request.getParameter("boardId");
+   MainBoardDAO bdao = new MainBoardDAO();
+   MainBoardVO bvo = bdao.reviewDetail(boardId);
+%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +22,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>FitCha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap/bootstrap.min.css" >
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/board/review-board.css" >
-  <script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script>
+<%--   <script src="${pageContext.request.contextPath}/js/bootstrap/bootstrap.min.js"></script> --%>
+  <script src="${pageContext.request.contextPath}/js/board/review-board.js"></script>
   <script src="${pageContext.request.contextPath}/js/board/comment.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
 
 </head>
 <body>
+
 	 <div class="wrapper">
 
     <!-- HEADER -->
@@ -35,41 +53,37 @@
         <a id="logo" href="#home"><img src="img/fitcha.png" alt="Logo Image"></a>
       </div>      
 
-<!--       <nav class="sub-nav"> -->
-<!--         <a href="#"><i class="fas fa-search sub-nav-logo"></i></a> -->
-<!--         <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a> -->
-<!--         <a href="#">Account</a>         -->
-<!--       </nav>       -->
     </header>
     <!-- END OF HEADER -->
-    <h1 id="review-h1">kangjisoo님의 Review</h1>
-    <div class="review-box">
-    	<div id="movie-img">
-    		<img src="img/avenger.jpg" alt="Logo Image">
-    	</div>
-    	
-    	<div class="movie-info">
-			<div id="movie-content">
-				<p>영화정보</p>
-			</div>
-		</div >
-		
-		<div class="write-box">
-	    	<div id="review-writer">
-					<p>작성자</p>
-			</div>
-			<div id="review-title">
-					<p>제목</p>
-			</div>
-			<div id="review-content">
-					<p>내용</p>
-			</div>
-    	</div>
+    <h1 id="review-h1"><!-- ~님의 REVIEW (review-board.js) -->
+    </h1>
+    
+    
+    <div id="like-btn"></div>
+	    <button type="button" class="btn btn-secondary" onclick="like()" style="border-radius: 50%">
+			<i class="fas fa-heart text-light" ></i>
+		</button>
+	</div>
+    
+    
+    
+    <div id="review-box">
+<!--    해당되는 게시물 보여주기 (review-board.js) -->
     </div>
+    <%
+		if(userId.equals(bvo.getUserId())){
+						
+	%>
     <div id="update-btn">
-	    	<button type="submit">수정</button>
-	    	<button type="submit">삭제</button>
+	    	<button type="submit" onclick="updateBoard()">수정</button>
+	    	<button type="submit" onclick="deleteBoard()">삭제</button>
     </div>
+    <%
+		}
+    %>
+
+	
+	
     <hr class="hr">
     <div id="comments">
 		<div class="comment-row">
@@ -77,13 +91,11 @@
 	    	<button type="submit" id="comment-btn" onclick="submitComment()">등록</button>
 	    </div>
 	    
-	    <div class="comment-row1">
-	    	<div id="comment-box">
-			    <div class="comment-writer">작성자</div>
-			    <div class="comment-date">2021-08-10 14:05:55</div>
-		    </div>
-	    	<div class="comment-content">sample comment1</div>
-	    	<hr class="hr">
+	    
+	    
+	    
+	    <div id="comment-row1">
+	    <!-- 댓글로드 -->
 	    </div>
 	 </div>
 

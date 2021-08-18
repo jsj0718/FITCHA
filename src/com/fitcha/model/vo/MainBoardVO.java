@@ -1,6 +1,6 @@
 package com.fitcha.model.vo;
 
-public class BoardVO {
+public class MainBoardVO {
     private int boardId;
     private String userId;
     private int movieId;
@@ -10,6 +10,8 @@ public class BoardVO {
     private String flag;
     private int views;
     private int likes;
+    private String poster;
+    private String story;
 
     public int getBoardId() {
         return boardId;
@@ -82,5 +84,21 @@ public class BoardVO {
     public void setLikes(int likes) {
         this.likes = likes;
     }
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public String getStory() {
+		return story;
+	}
+
+	public void setStory(String story) {
+		this.story = story;
+	}
 
 }
