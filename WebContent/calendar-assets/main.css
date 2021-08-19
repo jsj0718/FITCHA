@@ -126,6 +126,7 @@
 
 .fc-icon-x:before {
   content: "\e906";
+  color:black;
 }
 /*
 Lots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css
@@ -134,6 +135,7 @@ These styles only apply when the standard-theme is activated.
 When it's NOT activated, the fc-button classes won't even be in the DOM.
 */
 .fc {
+	
 
   /* reset */
 
@@ -428,6 +430,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 .fc .fc-col-header-cell-cushion {
     display: inline-block; /* x-browser for when sticky (when multi-tier header) */
     padding: 2px 4px;
+    color:white;
+    text-decoration: none;
   }
 .fc .fc-bg-event,
   .fc .fc-non-business,
@@ -469,6 +473,8 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 a.fc-event,
 a.fc-event:hover {
   text-decoration: none;
+  border:1px solid black;
+  cursor: pointer;
 }
 /* cursor */
 .fc-event[href],
@@ -580,6 +586,9 @@ A HORIZONTAL event
 .fc-h-event .fc-event-main {
     color: #fff;
     color: var(--fc-event-text-color, #fff);
+    background-color: black;
+    border:1px solid black;
+    cursor: pointer;
   }
 .fc-h-event .fc-event-main-frame {
     display: flex; /* for make fc-event-title-container expand */
@@ -668,6 +677,7 @@ A HORIZONTAL event
   }
 .fc .fc-popover-title {
     margin: 0 2px;
+    color:black;
   }
 .fc .fc-popover-close {
     cursor: pointer;
@@ -687,7 +697,7 @@ A HORIZONTAL event
 
 
 :root {
-  --fc-daygrid-event-dot-width: 8px;
+  --fc-daygrid-event-dot-width: 10px;
 }
 /* help things clear margins of inner content */
 .fc-daygrid-day-frame,
@@ -737,6 +747,8 @@ A HORIZONTAL event
     position: relative;
     z-index: 4;
     padding: 4px;
+    color:white;
+    text-decoration: none;
   }
 .fc {
 
@@ -821,6 +833,8 @@ A HORIZONTAL event
     position: relative;
     z-index: 4;
     cursor: pointer;
+    color:white;
+    text-decoration: none;
   }
 .fc {
 
@@ -1320,6 +1334,10 @@ A VERTICAL event
 :root {
   --fc-list-event-dot-width: 10px;
   --fc-list-event-hover-bg-color: #f5f5f5;
+  /*width:10px;
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 10px;*/
 }
 .fc-theme-standard .fc-list {
     border: 1px solid #ddd;

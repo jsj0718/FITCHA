@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.fitcha.model.dbconn.DBConnect;
 import com.fitcha.model.vo.MyBoardVO;
-import com.fitcha.model.vo.MovieVO;
 
 
 
@@ -36,7 +35,75 @@ public class MyBoardDAO {
 
    }
    
+   public ArrayList<MyBoardVO> selectBoardList(String id, String btitle, String bcontent, String country, String mtitle, String genre, String order, int start, int end){
+       Connection conn = DBConnect.getInstance();
+       PreparedStatement pstmt = null;
+       ResultSet rs = null;
+       String sql ="SELECT BOARDID, USERID, TITLE, POSTER "
+               + "FROM(SELECT ROWNUM AS RNUM, A.* FROM ("   
+                   + "SELECT DISTINCT B.BOARDID, B.USERID, B.TITLE, M.POSTER, B.VIEWS, B.LIKES "
+                   + "FROM BOARD B, MOVIE M, GENRE G, MOVIEANDGENRE MAG "
+                   + "WHERE B.MOVIEID = M.MOVIEID "
+                   + "AND M.MOVIEID = MAG.MOVIEID "
+                   + "AND MAG.GENREID = G.GENREID "
+                   + "AND B.USERID LIKE ? "
+                   + "AND B.TITLE LIKE ? "
+                   + "AND B.CONTENT LIKE ? "
+                   + "AND M.TITLE LIKE ? "
+                   + "AND M.COUNTRY LIKE ? "
+                   + "AND G.GENRENAME LIKE ? "
+                   + "ORDER BY "+order+" DESC"     
+               + ") A ) "
+               + "WHERE RNUM BETWEEN ? AND ?";
+       
+       ArrayList<MyBoardVO> blist= new ArrayList<MyBoardVO>();
+       
+       try {
+           //prepared는 값 넣을 때필요
+           pstmt = conn.prepareStatement(sql);
+           pstmt.setString(1, "%"+id+"%");
+           pstmt.setString(2,"%"+btitle+"%");
+           pstmt.setString(3,"%"+bcontent+"%");
+           pstmt.setString(4, "%"+mtitle+"%");
+           pstmt.setString(5, "%"+country+"%");
+           pstmt.setString(6, "%"+genre+"%");
+           pstmt.setInt(7, start);
+           pstmt.setInt(8, end);
+           rs = pstmt.executeQuery();
+           
+           while(rs.next()) {
+               MyBoardVO bvo = new MyBoardVO();
+               bvo.setBoardId(rs.getInt(1));
+               bvo.setUserId(rs.getString(2));
+               bvo.setBtitle(rs.getString(3));
+               bvo.setPoster(rs.getString(4));
+               
+               System.out.println(bvo.getPoster());
+               blist.add(bvo);
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }finally {
+           closeAll(conn, pstmt, null, rs);
+       }
+       return blist;
+   }   
+   
+   
  
+//   String SQL = 
+//           "SELECT B.BOARDID, B.USERID, B.TITLE, B.CONTENT, M.POSTER "
+//           + "FROM BOARD B, MOVIE M, GENRE G, MOVIEANDGENRE MAG "
+//           + "WHERE B.MOVIEID = M.MOVIEID "
+//           + "AND M.MOVIEID = MAG.MOVIEID "
+//           + "AND MAG.GENREID = G.GENREID "
+//           + "AND B.USERID LIKE ? "
+//           + "AND B.TITLE LIKE ? "
+//           + "AND B.CONTENT LIKE ? "
+//           + "AND M.COUNTRY LIKE ? "
+//           + "AND G.GENRENAME LIKE ? "
+//           + "ORDER BY "+ +" DESC";
+   
    //나의 게시판에서  recently add , 전체 글들 보기(String id)넣기
    public List<MyBoardVO> myBoardList(String id){
 	   Connection conn = DBConnect.getInstance();
@@ -49,6 +116,7 @@ public class MyBoardDAO {
 	            + " AND B.USERID = '"+ id +"'"
 	            + " ORDER BY B.BOARDID DESC";
 	          
+	   
 	   
 	   List<MyBoardVO> blist= new ArrayList<MyBoardVO>();
 	   
@@ -63,6 +131,7 @@ public class MyBoardDAO {
 			   bvo.setUserId(rs.getString(2));
 			   bvo.setTitle(rs.getString(3));
 			   bvo.setPoster(rs.getString(4));
+			   
 			   
 			   blist.add(bvo);
 			   
@@ -149,7 +218,7 @@ public class MyBoardDAO {
 				
 				//result(int)
 				result = rs.getInt(1);
-				
+				System.out.println(result);
 			}
 		
 		

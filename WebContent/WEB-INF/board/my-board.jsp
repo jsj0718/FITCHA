@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.fitcha.model.vo.MyBoardVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.fitcha.controller.Pagination"%>
@@ -7,8 +8,36 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
   String id = (String) session.getAttribute("id");
+  if (id == null) {
+      response.sendRedirect(request.getContextPath() + "/sign-in");
+  }
   MyBoardDAO bdao = new MyBoardDAO();
-  //List<BoardVO> blist = bdao.selectBoardList();
+  
+  String btitle = request.getParameter("btitle");
+  String bcontent = request.getParameter("bcontent");
+  String mtitle = request.getParameter("mtitle");
+  String country = request.getParameter("country");
+  String genre = request.getParameter("genre");
+  String order = request.getParameter("order");
+  
+  if (btitle == null) {
+      btitle = "";
+  }
+  if (bcontent == null) {
+      bcontent = "";
+  }
+  if (mtitle == null) {
+      mtitle = "";
+  }
+  if (country == null) {
+      country = "";
+  }
+  if (genre == null) {
+      genre = "";
+  }
+  if (order == null) {
+      order = "b.boardid";
+  }
   
   //페이징 처리 적용
   // String keyword = (String)session.getAttribute("keyword");
@@ -26,9 +55,13 @@
   //한페이지 내에 보여줘야하는 게시물의 마지막 rownum
   int end = curPageInt * pagination.getContentCnt();
   
-  List<MyBoardVO> blist = bdao.myBoardListPage(id, start, end);
+  ArrayList<MyBoardVO> blist = bdao.selectBoardList(id, btitle, bcontent, country, mtitle, genre, order, start, end);
   
-  // List<BoardVO> pblist = bdao.mySelectListPage(id, keyword, genreId, start, end);
+  for (MyBoardVO mbvo : blist) {
+      System.out.println(mbvo.getBtitle());
+  }
+//   List<MyBoardVO> blist = bdao.myBoardListPage(id, start, end);
+//   List<BoardVO> pblist = bdao.mySelectListPage(id, keyword, genreId, start, end);
 %>
 
 <!DOCTYPE html>
@@ -38,9 +71,6 @@
 
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,7 +104,58 @@
         }
       }
     }
+    
+    window.onload = function() {
+   // 장르, 나라 넣기
+      var getConnect = function(url, block) {
+        var xhrget = new XMLHttpRequest();
+
+        // 통신할 방식, url, 동기 여부 설정
+        xhrget.open("GET", url, true);
+        // 요청
+        xhrget.send();
+        // 응답
+        xhrget.onreadystatechange = function() {
+          if (xhrget.readyState == XMLHttpRequest.DONE && xhrget.status == 200) {
+
+            // 응답 값 (서버로부터 받아온 데이터)
+            var jsonStr = xhrget.responseText; // json 형태의 문자열
+            var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
+
+            console.log(url);
+            console.log(jsonStr);
+
+            for (var i = 0; i < json.length; i++) {
+              $('#' + block)
+                .append($('<option>')
+                  .attr('value', json[i].genreid)
+                  .text(json[i].name))
+
+            }
+          }
+        }
+      }
+
+      getConnect("genre", "genre");
+      getConnect("country", "country");
+
+      var totalData;  // 총 데이터 수
+      var dataPerPage = 5;
+      var pageCount = 10;
+      var currentPage = 1;
+
+      var searchBtn = document.getElementById("search_btn");
+      searchBtn.onclick = function() {
+        var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].value;
+        var country = document.getElementById("country").options[document.getElementById("country").selectedIndex].value;
+        var order = document.getElementById("order").options[document.getElementById("order").selectedIndex].value;
+        var text = document.getElementById("searchBox").value;
+        
+        location.href = "${pageContext.request.contextPath}/my-board?genre="+genre+"&country="+country+"&order="+order+"&mtitle="+text;
+      }      
+    }
   </script>
+</head>
 <body class="bg-black">
   <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
     <div class="container-fluid">
@@ -134,22 +215,21 @@
     <h3 class="recommend-title text-light">보고싶은 게시글을 찾아보세요.</h3>
     <div id="searchForm" class="d-flex col-8">
       <select id="genre" class="form-select w-25 form-select-sm mx-1">
-        <option value="0">모든 장르</option>
+        <option value="">모든 장르</option>
       </select>
       <select id="country" class="form-select w-25 form-select-sm mx-1">
-        <option value="0">모든 나라</option>
+        <option value="">모든 나라</option>
       </select>
-      <select id="recommend" name="recommend" class="form-select w-25 form-select-sm mx-1">
-        <option value="1">최신리뷰 순</option>
-        <option value="2">추천 순</option>
-        <option value="3">평균별점 순</option>
-        <option value="4">러닝타임 짧은 순</option>
+      <select id="order" name="order" class="form-select w-25 form-select-sm mx-1">
+        <option value="b.boardid">최신리뷰 순</option>
+        <option value="b.likes">추천 순</option>
+        <option value="b.views">조회수 순</option>
       </select>
       <div class="input-group mx-1 flex-nowrap">
         <button class="btn btn-outline-secondary" type="button" id="search_btn" onclick="searchInput()">
           <i class="fas fa-search text-light"></i>
         </button>
-        <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" id="searchBox" name="searchBox">
+        <input type="text" class="form-control" placeholder="Search" aria-label="Example text with button addon" aria-describedby="button-addon1" id="searchBox" name="searchBox" value="">
       </div>
     </div>
   </div>
@@ -160,7 +240,7 @@
   <section>
     <!-- paging처리를 적용한 첫화면 최신 업데이트 순  -->
     <div id="recently-box">
-      <h2 id="recently" class="text-light ms-5 mb-3" style="font-size: 1.4vw; font-weight: 700; color: #e5e5e5;">최신 글</h2>
+      <h2 id="recently" class="text-light ms-5 mb-3" style="font-size: 1.4vw; font-weight: 700; color: #e5e5e5;">나의 게시판</h2>
       <div class="row">
         <c:forEach var="bvo" items="${blist }">
           <div class="card col-3 m-3 bg-dark" style="width: 18rem;">
@@ -168,11 +248,11 @@
             <div class="card-body">
               <h4 id="review_title" class="card-title text-light">
                 <c:choose>
-                  <c:when test="${fn:length(bvo.title) > 14}">
-                    <c:out value="${fn:substring(bvo.title,0,13)}" />….
+                  <c:when test="${fn:length(bvo.btitle) > 14}">
+                    <c:out value="${fn:substring(bvo.btitle,0,13)}" />….
                           </c:when>
                   <c:otherwise>
-                    <c:out value="${bvo.title}" />
+                    <c:out value="${bvo.btitle}" />
                   </c:otherwise>
                 </c:choose>
               </h4>
@@ -222,27 +302,6 @@
       </div>
     </div>
 
-    <div id="search-result-box" style="display:none;">
-      <h2 id="search" class="text-light ms-5 mb-3" style="font-size: 1.4vw; font-weight: 700; color: #e5e5e5;">검색 결과</h2>
-      <div class="row" id="search-row"></div>
-    </div>
-
-<!--     ' <div class="card" style="width: 18rem;"> ' -->
-<!-- +      ' <img src="' +  json[i].poster + '" class="json_box card-img-top" alt="..." onclick="thumbnail(' + json[i].boardId + ')"> ' -->
-<!-- +      ' <div class="card-body"> ' -->
-<!-- +        ' <h5 class="card-title"> ' + boardtitle + ' </h5> ' -->
-<!-- +        ' <p class="card-text"> ' + boardcontent + ' </p> ' -->
-<!-- +      ' </div> ' -->
-<!-- +    ' </div> ' -->
-
-    <!--     <h2 id="genreTitle">SELECT BOX</h2> -->
-<!--     <div id="review_box"> -->
-<!--       <div class="row"> -->
-<!--         <div class="col-sm-6 col-md-4"> -->
-<!--           <div id="genreBox"></div> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
   </section>
 
   <footer class="text-center">

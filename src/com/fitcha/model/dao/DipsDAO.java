@@ -22,7 +22,7 @@ public class DipsDAO {
                 pstmt.close();
             }
 			if (stmt != null && !stmt.isClosed()) {
-                pstmt.close();
+                stmt.close();
             }
             if (conn != null && !conn.isClosed()) {
                 conn.close();

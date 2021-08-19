@@ -13,9 +13,8 @@
     
     
     --%>
-<!DOCTYPE html>
-<%-- <c:set var="movieInfo" value="<%=dlist2 %>"/> --%>
 <%@ page import="com.google.gson.Gson"%>
+<!DOCTYPE html>
 <html>
 <head>
 <title>FITCHA</title>
@@ -77,6 +76,7 @@
 			alert(obj[x]);
 		} --%>
 		var calendar = new FullCalendar.Calendar(calendarEl, {
+			width: "100px",
 			initialView : 'dayGridMonth',
 			dayMaxEventRows: true,
 			views: {
@@ -90,11 +90,9 @@
 			events: <%=mjson2%>
 			,
 			dateClick : function(info) { // 날짜 클릭 시, 해당날짜
-
 				dipsNo.value=""; // 공백 값, null 값이 들어온다..
 				movieTitle.value="";
 				image_url.value="";
-
 				ddate.value = info.dateStr; // info 날짜 값?
 				
 				saveBtn.setAttribute("type","button"); // 저장버튼
@@ -156,7 +154,6 @@
 // 				cell.html("<img src='" +img+"' >");
 // 			}
 			//events : ${mjson}
-
 		});
 		calendar.render(); // 달력 출력?
 	
@@ -192,7 +189,7 @@
 			//ajax 통신 요청
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST","${pageContext.request.contextPath}/Dips-regist", true); // post 통신
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send("ddate="+ddate.value+"&movieId="+movieId.value+"&userId="+userId.value); // 날짜는 날짜값, 제목은 제목값, 메모는 메모에 적힌 글 +"&memo="+memo.value
 			
 // 			xhr.onreadystatechange = function() {
@@ -321,7 +318,7 @@
 
       <!-- Me -->
       <article id="home" class="panel intro">
-        <div id='calendar'></div>
+        <div id='calendar'  class="text-light text-white w-50 position-absolute top-50 start-50 translate-middle" style="font-color:white"></div>
       </article>
 
       <!-- memo -->
@@ -332,27 +329,30 @@
         <form action="${pageContext.request.contextPath }/Dips-regist" method="post" name="form">
           <input type="hidden" name="no" id="no">
 
-          <div>
-            <div class="row">
-              <div>
-                <input type="date" name="ddate" id="ddate" readonly>
+          <div class="w-50 h-50 d-inline-block position-relative position-absolute top-50 start-50 translate-middle">
+            <div class="row d-grid gap-4 ">
+            
+              <div class=" fw-bolder fs-4 position-absolute top-0 end-0 text-end">
+                <input type="date" name="ddate" id="ddate" class="mt-5" readonly>
               </div>
-              <div class="col-12">
+              
+              <div class="col-12  fw-bolder fs-4 position-absolute top-50 end-0 translate-middle-y text-end" >
                 <input type="text" name="movieTitle" id="movieTitle" placeholder="movieTitle" readonly>
               </div>
-              <div class="col-12">
-                <input type="text" name="dipsNo" id="dipsNo" readonly>
+              
+              <div class="col-12  fw-bolder fs-4 position-absolute bottom-0 end-0 text-end">
+                <input type="text" name="dipsNo" id="dipsNo" class="mb-5" readonly>
               </div>
 
-              <div class="col-12">
-                <img src='' id="image_url" name="image_url" alt="포스터" />
+              <div class="col-12 mw-100 position-absolute top-50 start-0 translate-middle-y">
+                <img src='' id="image_url" name="image_url" alt="포스터" style="width:300px" />
                 <!-- 												out.print("Poster"); -->
                 <!-- 												<input type="text" name="image_url" id="image_url" > -->
               </div>
               <!-- 											<div class="col-12"> -->
               <!-- 												<textarea name="memo" id="memo-area" placeholder="Memo" rows="6"></textarea> -->
               <!-- 											</div> -->
-              <div class="col-12">
+              <div class="fw-bolder position-absolute top-100 start-50 translate-middle text-center">
                 <input type="button" value="저장" id="save-btn">
                 <input type="hidden" value="수정" id="update-btn">
                 <input type="hidden" value="삭제" id="delete-btn">
@@ -376,7 +376,7 @@
 <!--       </ul> -->
 <!--     </div> -->
 
-    <footer class="text-center text-light">
+    <footer class="text-center text-light position-absolute bottom-0 start-50 translate-middle-x">
       <p>&copy; Untitled.</p>
       <p>
         Design:

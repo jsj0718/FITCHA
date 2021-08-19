@@ -25,37 +25,28 @@ public class MyBoardPopularController extends HttpServlet {
         HttpSession session = request.getSession();
         String id = (String) session.getAttribute("id");
 
-        if (id == null) {
-            // 로그인 안된 상태
-            response.sendRedirect(request.getContextPath() + "/index-login");
-
-        } else {
-            // 로그인이 된 상태
-
-            MyBoardDAO bdao = new MyBoardDAO();
-            List<MyBoardVO> blist = bdao.myBoardBestList(id);
-            JsonArray jsonArr = new JsonArray();
-
-            for (MyBoardVO bvo : blist) {
-                JsonObject json = new JsonObject();
-                json.addProperty("boardId", bvo.getBoardId());
-                json.addProperty("userId", bvo.getUserId());
-                json.addProperty("boardtitle", bvo.getTitle());
-                json.addProperty("boardcontent", bvo.getContent());
+        MyBoardDAO bdao = new MyBoardDAO();
+        List<MyBoardVO> blist = bdao.myBoardBestList(id);
+        JsonArray jsonArr = new JsonArray();
+        
+        for (MyBoardVO bvo : blist) {
+            JsonObject json = new JsonObject();
+            json.addProperty("boardId", bvo.getBoardId());
+            json.addProperty("userId", bvo.getUserId());
+            json.addProperty("boardtitle", bvo.getTitle());
+            json.addProperty("boardcontent", bvo.getContent());
 //                json.addProperty("title", bvo.getTitle());
-                json.addProperty("poster", bvo.getPoster());
-                jsonArr.add(json);
-
-            }
-            System.out.println("test:" + jsonArr);
-
-            Gson gson = new Gson();
-            String jsonResponse = gson.toJson(jsonArr);
-            response.setContentType("application/json; charset=utf-8");
-            PrintWriter out = response.getWriter();
-            out.print(jsonResponse);
-
+            json.addProperty("poster", bvo.getPoster());
+            jsonArr.add(json);
+            
         }
+        System.out.println("test:" + jsonArr);
+        
+        Gson gson = new Gson();
+        String jsonResponse = gson.toJson(jsonArr);
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.print(jsonResponse);
 
     }
 

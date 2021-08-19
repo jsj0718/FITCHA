@@ -35,7 +35,7 @@ public class MyBoardSearchContoller extends HttpServlet {
         String searchTitle = request.getParameter("searchBox");
         if(id==null) {
         	//로그인 안된 상태
-        	response.sendRedirect(request.getContextPath()+"/index-login");
+        	response.sendRedirect(request.getContextPath()+"/sign-in");
         	
         }else {
         	//로그인이 된 상태
