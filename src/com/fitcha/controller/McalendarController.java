@@ -30,7 +30,7 @@ public class McalendarController extends HttpServlet {
 		
 		if(id == null) { // id가 null일 때 없을 때
 //			로그인 안된 상태에서는 로그인을 할 수 있게 로그인창으로 넘김 , 로그인 페이지 호출
-			response.sendRedirect(request.getContextPath() + "/login");
+			response.sendRedirect(request.getContextPath() + "/sign-in");
 		} else { // id가 들어왔으면
 //			로그인 상태가 되면 dips의 내용을 가져와 캘린더에 넣어줌
 			DipsDAO ddao = new DipsDAO(); // DipsDAO를 사용하기위해 선언

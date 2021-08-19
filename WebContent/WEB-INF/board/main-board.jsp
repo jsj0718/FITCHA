@@ -109,7 +109,7 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">찜 목록</a>
+              <a class="nav-link" aria-current="page" href="${pageContext.request.contextPath }/mcalendar">찜 목록</a>
             </li>
           </ul>
           <ul class="navbar-nav">

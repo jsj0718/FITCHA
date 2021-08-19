@@ -64,7 +64,7 @@ if (title == null) {
             <a class="nav-link" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">찜 목록</a>
+            <a class="nav-link" href="${pageContext.request.contextPath }/mcalendar">찜 목록</a>
           </li>
         </ul>
         <ul class="navbar-nav">
