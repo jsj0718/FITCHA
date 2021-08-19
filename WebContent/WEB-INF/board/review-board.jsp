@@ -2,14 +2,14 @@
 <%@page import="com.fitcha.model.dao.MainBoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <%
  	String userId = (String)session.getAttribute("id");
 	System.out.println("userId: "+ userId);
 // 	String userId = "rrr";
    if(userId==null){
 	   
-// 	   response.sendRedirect("login.jsp");
-	   System.out.println("로그인실패");
+       response.sendRedirect(request.getContextPath() + "/sign-in");
    }
    
    String boardId = request.getParameter("boardId");
@@ -26,6 +26,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS only -->
+  <link href="https://fontmeme.com/permalink/210816/95cfd40502d9ebe4522b74e094042fcb.png" rel="shortcut icon" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/board/review-board.css" >
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -36,6 +37,22 @@
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
   <script>
     var userId = '<%=(String)session.getAttribute("id")%>';
+    
+ // 로그아웃
+    var logout = function() {
+      var xhrpost = new XMLHttpRequest();
+
+      // 통신할 방식, url, 동기 여부 설정
+      xhrpost.open("POST", "logout", true);
+      // 요청
+      xhrpost.send();
+      // 응답
+      xhrpost.onreadystatechange = function() {
+        if (xhrpost.readyState == XMLHttpRequest.DONE && xhrpost.status == 200) {
+          location.href = "${pageContext.request.contextPath}/sign-in";
+        }
+      }
+    }
   </script>
 </head>
 <body>
@@ -45,7 +62,7 @@
     <!-- HEADER -->
 <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
       <div class="container-fluid">
-        <a class="navbar-brand mt-1 ml-1" href="#">
+        <a class="navbar-brand mt-1 ml-1" href="${pageContext.request.contextPath }/main-movie">
           <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +83,7 @@
               <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">찜 목록</a>
+              <a class="nav-link" href="${pageContext.request.contextPath }/mcalendar">찜 목록</a>
             </li>
           </ul>
           <ul class="navbar-nav">
@@ -114,7 +131,7 @@
 <!--    해당되는 게시물 보여주기 (review-board.js) -->
     	</div>
     <%
-		if(userId.equals(bvo.getUserId())){
+		if(userId != null && userId.equals(bvo.getUserId())){
 						
 	%>
     <div id="update-btn">

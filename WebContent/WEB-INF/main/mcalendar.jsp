@@ -1,19 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> --%>
-
-<%--
-    
-    String id = (String)session.getAttribute("id"); 
-	
-	DipsDAO ddao = new DipsDAO();
-	List<DipsVO> dlist2 = ddao.getDipsMovies(id);
-    
-    
-    
-    --%>
 <%@ page import="com.google.gson.Gson"%>
+<%
+    String id = (String) session.getAttribute("id");
+    if (id == null) {
+      response.sendRedirect(request.getContextPath() + "/sign-in");
+    }
+    
+    String title = request.getParameter("title");
+    if (title == null) {
+      title = "";
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -247,7 +245,7 @@
   <header>
     <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
       <div class="container-fluid">
-        <a class="navbar-brand mt-1 ml-1" href="#">
+        <a class="navbar-brand mt-1 ml-1" href="${pageContext.request.contextPath }/main-movie">
           <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -376,16 +374,13 @@
 <!--       </ul> -->
 <!--     </div> -->
 
-    <footer class="text-center text-light position-absolute bottom-0 start-50 translate-middle-x">
-      <p>&copy; Untitled.</p>
-      <p>
-        Design:
-        <a href="#" class="text-light">FITCHA</a>
-      </p>
-    </footer>
+  <footer class="text-center">
+    <p class="text-light">&copy 2021 FITCHA, Inc.</p>
+    <p class="text-light">KITRI &copy 2021</p>
+  </footer>
 
   </div>
-
+  
   <!-- Scripts -->
   <script src="${pageContext.request.contextPath }/js/main/jquery.min.js"></script>
   <script src="${pageContext.request.contextPath }/js/main/browser.min.js"></script>

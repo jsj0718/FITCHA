@@ -40,7 +40,7 @@
 <body class="bg-black">
   <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
     <div class="container-fluid">
-      <a class="navbar-brand mt-1 ml-1" href="#">
+      <a class="navbar-brand mt-1 ml-1" href="${pageContext.request.contextPath }/main-movie">
         <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -268,7 +268,10 @@
       </div>
     </div>
   </div>
-
+  <footer class="text-center">
+    <p>&copy 2021 FITCHA, Inc.</p>
+    <p>KITRI &copy 2021</p>
+  </footer>
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
   

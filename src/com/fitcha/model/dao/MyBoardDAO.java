@@ -46,7 +46,7 @@ public class MyBoardDAO {
                    + "WHERE B.MOVIEID = M.MOVIEID "
                    + "AND M.MOVIEID = MAG.MOVIEID "
                    + "AND MAG.GENREID = G.GENREID "
-                   + "AND B.USERID LIKE ? "
+                   + "AND B.USERID = ? "
                    + "AND B.TITLE LIKE ? "
                    + "AND B.CONTENT LIKE ? "
                    + "AND M.TITLE LIKE ? "
@@ -61,7 +61,7 @@ public class MyBoardDAO {
        try {
            //prepared는 값 넣을 때필요
            pstmt = conn.prepareStatement(sql);
-           pstmt.setString(1, "%"+id+"%");
+           pstmt.setString(1, id);
            pstmt.setString(2,"%"+btitle+"%");
            pstmt.setString(3,"%"+bcontent+"%");
            pstmt.setString(4, "%"+mtitle+"%");
@@ -78,7 +78,6 @@ public class MyBoardDAO {
                bvo.setBtitle(rs.getString(3));
                bvo.setPoster(rs.getString(4));
                
-               System.out.println(bvo.getPoster());
                blist.add(bvo);
            }
        } catch (SQLException e) {
@@ -110,7 +109,7 @@ public class MyBoardDAO {
 	   Statement stmt = null;
 	   ResultSet rs = null;
 	   
-	   String sql ="SELECT B.BOARDID, B.USERID, M.TITLE, M.POSTER"
+	   String sql ="SELECT B.BOARDID, B.USERID, M.TITLE, M.POSTER "
 	            + " FROM BOARD B, MOVIE M"
 	            + " WHERE B.MOVIEID = M.MOVIEID"
 	            + " AND B.USERID = '"+ id +"'"
@@ -185,7 +184,6 @@ public class MyBoardDAO {
 			   
 		   }
 		   
-		   System.out.println("페이징:"+blist);
 	   } catch (SQLException e) {
 		   // TODO Auto-generated catch block
 		   e.printStackTrace();
@@ -197,39 +195,39 @@ public class MyBoardDAO {
 	   return blist;
    }   
    //페이징 처리를 위한 게시물 수 세기
-   public int selectBoardCnt(String id) {
-		//conn
+   public int selectBoardCnt(String id,  String mtitle, String country, String genre) {
+		String sql = "SELECT COUNT(COUNT(B.BOARDID)) "
+				+ "FROM BOARD B, MOVIEANDGENRE MAG, GENRE G, MOVIE M "
+                + "WHERE B.MOVIEID = M.MOVIEID "
+                + "AND M.MOVIEID = MAG.MOVIEID "
+                + "AND MAG.GENREID = G.GENREID "
+				+ "AND B.USERID = '"+id+"' "
+                + "AND M.TITLE LIKE '%"+mtitle+"%' "
+                + "AND M.COUNTRY LIKE '%"+country+"%' "
+                + "AND G.GENRENAME LIKE '%"+genre+"%' "
+                + "GROUP BY B.BOARDID";
 		Connection conn =DBConnect.getInstance();
-		//sql
-		String sql = "SELECT COUNT(*) "
-				+ "FROM BOARD "
-				+ "WHERE USERID = '"+ id +"'";
-		//statement
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
 		try {
-			stmt= conn.createStatement();
-		
-			//resultset
-			rs= stmt.executeQuery(sql);
-			
-			while(rs.next()) {
-				
-				//result(int)
+		    pstmt = conn.prepareStatement(sql);		  
+//		    pstmt.setString(1, id);
+//		    pstmt.setString(1, "%"+mtitle+"%");
+//		    pstmt.setString(2, "%"+country+"%");
+//		    pstmt.setString(3, "%"+genre+"%");
+		    
+			rs= pstmt.executeQuery(sql);
+			while(rs.next()) {				
 				result = rs.getInt(1);
-				System.out.println(result);
 			}
 		
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			closeAll(conn, null, stmt, rs);
+			closeAll(conn, pstmt, null, rs);
 		}
-		
-		
 		return result;
 	}
    
@@ -469,7 +467,6 @@ public class MyBoardDAO {
                 blist.add(bvo);
 
              }
-//             System.out.println("장르별 추천순:"+blist);
           } catch (SQLException e) {
              // TODO Auto-generated catch block
              e.printStackTrace();
@@ -667,7 +664,6 @@ public class MyBoardDAO {
  			   
  		   }
  		   
- 		   System.out.println("페이징:"+blist);
  	   } catch (SQLException e) {
  		   // TODO Auto-generated catch block
  		   e.printStackTrace();
@@ -710,7 +706,6 @@ public class MyBoardDAO {
   			   
   		   }
   		   
-//  		   System.out.println("allKeyword:"+blist);
   	   } catch (SQLException e) {
   		   // TODO Auto-generated catch block
   		   e.printStackTrace();

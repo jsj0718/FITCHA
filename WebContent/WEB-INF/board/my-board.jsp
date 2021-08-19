@@ -13,30 +13,30 @@
   }
   MyBoardDAO bdao = new MyBoardDAO();
   
-  String btitle = request.getParameter("btitle");
-  String bcontent = request.getParameter("bcontent");
-  String mtitle = request.getParameter("mtitle");
-  String country = request.getParameter("country");
-  String genre = request.getParameter("genre");
-  String order = request.getParameter("order");
+  String btitleVal = request.getParameter("btitle");
+  String bcontentVal = request.getParameter("bcontent");
+  String mtitleVal = request.getParameter("mtitle");
+  String countryVal = request.getParameter("country");
+  String genreVal = request.getParameter("genre");
+  String orderVal = request.getParameter("order");
   
-  if (btitle == null) {
-      btitle = "";
+  if (btitleVal == null) {
+      btitleVal = "";
   }
-  if (bcontent == null) {
-      bcontent = "";
+  if (bcontentVal == null) {
+      bcontentVal = "";
   }
-  if (mtitle == null) {
-      mtitle = "";
+  if (mtitleVal == null) {
+      mtitleVal = "";
   }
-  if (country == null) {
-      country = "";
+  if (countryVal == null) {
+      countryVal = "";
   }
-  if (genre == null) {
-      genre = "";
+  if (genreVal == null) {
+      genreVal = "";
   }
-  if (order == null) {
-      order = "b.boardid";
+  if (orderVal == null) {
+      orderVal = "b.boardid";
   }
   
   //페이징 처리 적용
@@ -47,7 +47,9 @@
   	curPage = "1";
   }
   int curPageInt = Integer.parseInt(curPage);
-  int totalContent = bdao.selectBoardCnt(id);
+  int totalContent = bdao.selectBoardCnt(id, mtitleVal, countryVal, genreVal);
+
+  
   Pagination pagination = new Pagination(curPageInt, totalContent, 6);
   
   //1page내에 보여줘야하는 게시물의 첫번째 rownum
@@ -55,7 +57,7 @@
   //한페이지 내에 보여줘야하는 게시물의 마지막 rownum
   int end = curPageInt * pagination.getContentCnt();
   
-  ArrayList<MyBoardVO> blist = bdao.selectBoardList(id, btitle, bcontent, country, mtitle, genre, order, start, end);
+  ArrayList<MyBoardVO> blist = bdao.selectBoardList(id, btitleVal, bcontentVal, countryVal, mtitleVal, genreVal, orderVal, start, end);
   
   for (MyBoardVO mbvo : blist) {
       System.out.println(mbvo.getBtitle());
@@ -128,7 +130,7 @@
             for (var i = 0; i < json.length; i++) {
               $('#' + block)
                 .append($('<option>')
-                  .attr('value', json[i].genreid)
+                  .attr('value', json[i].name)
                   .text(json[i].name))
 
             }
@@ -139,11 +141,23 @@
       getConnect("genre", "genre");
       getConnect("country", "country");
 
+      var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].value;
+      var country = document.getElementById("country").options[document.getElementById("country").selectedIndex].value;
+      var order = document.getElementById("order").options[document.getElementById("order").selectedIndex].value;
+      var text = document.getElementById("searchBox").value;
+      
+    <%
+      if (totalContent == 0) {
+    %>
+          $('#paging').attr('style', 'display:none');
+    <%
+      }
+    %>  
       var totalData;  // 총 데이터 수
       var dataPerPage = 5;
       var pageCount = 10;
       var currentPage = 1;
-
+      
       var searchBtn = document.getElementById("search_btn");
       searchBtn.onclick = function() {
         var genre = document.getElementById("genre").options[document.getElementById("genre").selectedIndex].value;
@@ -152,14 +166,14 @@
         var text = document.getElementById("searchBox").value;
         
         location.href = "${pageContext.request.contextPath}/my-board?genre="+genre+"&country="+country+"&order="+order+"&mtitle="+text;
-      }      
+      }       
     }
   </script>
 </head>
 <body class="bg-black">
   <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
     <div class="container-fluid">
-      <a class="navbar-brand mt-1 ml-1" href="#">
+      <a class="navbar-brand mt-1 ml-1" href="${pageContext.request.contextPath }/main-movie">
         <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -270,12 +284,13 @@
           </div>
         </c:forEach>
 
+
         <!-- 페이징 처리 -->
-        <nav aria-label="Page navigation example">
+        <nav id="paging" aria-label="Page navigation example" style="display : block;">
           <ul class="pagination d-flex justify-content-center">
             <c:if test="${page.prevBtn }">
               <li class="page-item">
-                <a class="page-link bg-dark text-light" href="myBoardView?curpage=${page.startPage-1 }">Previous</a>
+                <a class="page-link bg-dark text-light" href="myBoardView?curpage=${page.startPage-1 }&genre=<%=genreVal %>&country=<%=countryVal %>&order=<%=orderVal %>&mtitle=<%=mtitleVal%>">Previous</a>
               </li>
             </c:if>
             <c:forEach var="i" begin="${page.startPage }" end="${page.endPage }" step="1">
@@ -287,26 +302,32 @@
                 </c:when>
                 <c:otherwise>
                   <li class="page-item">
-                    <a class="page-link bg-dark text-light" href="myBoardView?curpage=${i}">${i}</a>
+                    <a class="page-link bg-dark text-light" href="myBoardView?curpage=${i}&genre=<%=genreVal %>&country=<%=countryVal %>&order=<%=orderVal %>&mtitle=<%=mtitleVal%>">${i}</a>
                   </li>
                 </c:otherwise>
               </c:choose>
             </c:forEach>
             <c:if test="${page.nextBtn }">
               <li class="page-item">
-                <a class="page-link bg-dark text-light" href="myBoardView?curpage=${page.endPage+1 }">Previous</a>
+                <a class="page-link bg-dark text-light" href="myBoardView?curpage=${page.endPage+1 }&genre=<%=genreVal %>&country=<%=countryVal %>&order=<%=orderVal %>&mtitle=<%=mtitleVal%>">Previous</a>
               </li>
             </c:if>
           </ul>
         </nav>
       </div>
     </div>
-
+  <%    
+    if (totalContent == 0) {
+  %>
+      <h3 class="text-center mt-5">검색된 게시물이 없습니다. 다시 검색해주세요.</h3>
+  <%
+    }
+  %>
   </section>
 
   <footer class="text-center">
-    <p>&copy 1997-2018 Netflix, Inc.</p>
-    <p>Carlos Avila &copy 2018</p>
+    <p>&copy 2021 FITCHA, Inc.</p>
+    <p>KITRI &copy 2021</p>
   </footer>
 
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>

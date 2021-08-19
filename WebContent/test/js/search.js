@@ -77,7 +77,7 @@ let openModal = function(movieid) {
       $('#staffList').empty()
 
       let req = {
-        'key': youtubeKey,
+        'key': youtubeKey.substring(1, youtubeKey.length-1),
         'part': 'snippet',
         'type': 'video',
         'q': resJSON[0].title + ' ' + resJSON[0].subtitle + ' ' + 'trailer'

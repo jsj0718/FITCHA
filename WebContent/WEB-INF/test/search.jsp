@@ -43,7 +43,7 @@
 <body class="bg-black">
   <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
     <div class="container-fluid">
-      <a class="navbar-brand mt-1 ml-1" href="#">
+      <a class="navbar-brand mt-1 ml-1" href="${pageContext.request.contextPath }/main-movie">
         <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -17,8 +17,8 @@ window.onload = function(){
 					movieTitle = movieTitle.substring(0,19)+"...";
 				}
 				var boardId = json[i].boardId;
-				html += "<div class='col'>"
-						+" <div id='imgRond' class='thumbnail text-center' onclick='thumbnail("+boardId+")'>"
+				html += "<div class='col-2 m-3'>"
+						+" <div id='imgRond' class='thumbnail  text-center mt-3' onclick='thumbnail("+boardId+")'>"
 						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img mt-3' >"
 						+" <div class='caption'>"
 						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
@@ -89,8 +89,8 @@ function changeSelection(){
 					movieTitle = movieTitle.substring(0,19)+"...";
 				}
 				var boardId = json[i].boardId;
-			html += "<div class='col'>"
-						+" <div id='imgRond' class='thumbnail text-center' onclick='thumbnail("+boardId+")'>"
+			html += "<div class='col-2 m-3'>"
+						+" <div id='imgRond' class='thumbnail text-center mt-3' onclick='thumbnail("+boardId+")'>"
 						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img mt-3' >"
 						+" <div class='caption'>"
 						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
@@ -126,8 +126,8 @@ function searchInput(){
             }
          
  	 var boardId = json[i].boardId;
-             html += "<div class='col'>"
-						+" <div id='imgRond' class='thumbnail' onclick='thumbnail("+boardId+")'>"
+             html += "<div class='col-2 m-3'>"
+						+" <div id='imgRond' class='thumbnail text-center mt-3' onclick='thumbnail("+boardId+")'>"
 						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img'>"
 						+" <div class='caption'>"
 						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
