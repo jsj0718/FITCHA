@@ -1,12 +1,32 @@
 package com.fitcha.model.vo;
 
+import java.util.Date;
+
 public class DipsVO {
     private int dipsId;
     private String userId;
     private int movieId;
-    private String ddate;
+    private Date ddate;
+    private String title;
+    private String poster;
 
-    public int getDipsId() {
+    public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public int getDipsId() {
         return dipsId;
     }
 
@@ -30,12 +50,13 @@ public class DipsVO {
         this.movieId = movieId;
     }
 
-    public String getDdate() {
-        return ddate;
-    }
+	public Date getDdate() {
+		return ddate;
+	}
 
-    public void setDdate(String ddate) {
-        this.ddate = ddate;
-    }
+	public void setDdate(Date ddate) {
+		this.ddate = ddate;
+	}
+    
 
 }
