@@ -17,11 +17,11 @@ window.onload = function(){
 					movieTitle = movieTitle.substring(0,19)+"...";
 				}
 				var boardId = json[i].boardId;
-				html += "<div class='col-sm-4 col-md-2'>"
-						+" <div class='thumbnail' onclick='thumbnail("+boardId+")'>"
-						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img'>"
+				html += "<div class='col'>"
+						+" <div id='imgRond' class='thumbnail text-center' onclick='thumbnail("+boardId+")'>"
+						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img mt-3' >"
 						+" <div class='caption'>"
-						+" <h4 class='thumbnail-title'>" + movieTitle + "</h4>"
+						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
 						+" <p class='thumbnail-writer'>" + json[i].userId +"</p></div></div></div>";
 			}
 			row.innerHTML = html;
@@ -37,6 +37,7 @@ window.onload = function(){
 function bestReview(){
 	
 	var bestReview = document.getElementById("best-review");
+	var bestReviewTxt = document.getElementById("best-reviewText");
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET","main_board_best",true);
 	xhr.send();
@@ -47,19 +48,17 @@ function bestReview(){
 			var jsonStr = xhr.responseText;
 			var json = JSON.parse(jsonStr);
 			var html ="";
+			var html1="";
 			var boardId = json[0].boardId;
-//			console.log("JSON2: " + json[0].poster);
-			html += "<div id='best-board-img'>"
-					+ " <img src= " + json[0].poster +" alt='poster'></div>"
-					+ " <div id='best-writer'>"
-					+ " <div id='best-board-writer'>"
-					+ " <p id='writer-p'>작성자</p>"
-					+ " <p id='writer'> "+json[0].userId+" </p></div>"
-					+ " <div id='best-board-title'>"
-					+ " <p id='title-p'>제목</p>"
-					+ " <p id='title' onclick='viewsCount()'><a href='review_board_view?boardId="+boardId+"'> "+json[0].title+"</a></p></div></div>";
-				
+			
+			html += "<img id ='bestImg' src= " + json[0].poster +" alt='poster' onclick='thumbnail("+boardId+")'>";
+
+			html1 += " <div id='best-board-title'>"
+					+ " <p id='title' onclick='viewsCount()'> < <a href='review_board_view?boardId="+boardId+"'>"+json[0].userId+" 님의"+json[0].title+"</a> > 리뷰 보러가기</p>"
+					+ " </div>";
+
 			bestReview.innerHTML = html;
+			bestReviewTxt.innerHTML=html1;
 		}
 	}
 }
@@ -90,11 +89,11 @@ function changeSelection(){
 					movieTitle = movieTitle.substring(0,19)+"...";
 				}
 				var boardId = json[i].boardId;
-				html += "<div class='col-sm-4 col-md-2'>"
-						+" <div class='thumbnail' onclick='thumbnail("+boardId+")'>"
-						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img'>"
+			html += "<div class='col'>"
+						+" <div id='imgRond' class='thumbnail text-center' onclick='thumbnail("+boardId+")'>"
+						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img mt-3' >"
 						+" <div class='caption'>"
-						+" <h4 class='thumbnail-title'>" + movieTitle + "</h4>"
+						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
 						+" <p class='thumbnail-writer'>" + json[i].userId +"</p></div></div></div>";
 			}
 			row.innerHTML = html;
@@ -127,11 +126,11 @@ function searchInput(){
             }
          
  	 var boardId = json[i].boardId;
-             html += "<div class='col-sm-4 col-md-2'>"
-						+" <div class='thumbnail' onclick='thumbnail("+boardId+")'>"
+             html += "<div class='col'>"
+						+" <div id='imgRond' class='thumbnail' onclick='thumbnail("+boardId+")'>"
 						+" <img src= " + json[i].poster + " alt='포스터' class='thumbnail-img'>"
 						+" <div class='caption'>"
-						+" <h4 class='thumbnail-title'>" + movieTitle + "</h4>"
+						+" <h5 class='thumbnail-title'>" + movieTitle + "</h5>"
 						+" <p class='thumbnail-writer'>" + json[i].userId +"</p></div></div></div>";
 
          }

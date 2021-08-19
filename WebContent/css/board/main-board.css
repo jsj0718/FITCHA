@@ -5,11 +5,9 @@
   --dark: 	#686868;
 }
 
-html, body {
+ body {
   width: 100vw;
-  min-height: 100vh;
   margin: 0;
-  padding: 0;
   background-color: var(--primary);
   color: var(--light);
   font-family: Arial, Helvetica, sans-serif;
@@ -29,7 +27,9 @@ h1 {
   margin: 0;
   padding: 0;
 }
-
+#best-content-p{
+	line-height: 2.0em;
+}
 /* HEADER */
 header {
   padding: 20px 20px 0 20px;
@@ -104,25 +104,40 @@ header {
 .sub-nav a:hover {
   color: var(--dark);
 }
-
-
+/* best 게시물 이동 구간*/
+#fixImg{
+	position: relative;
+	
+}
+#space{
+	width: 200px;
+}
+#bestImg{
+	width: 350px;
+	height:470px;
+	box-shadow:0 1px 1px 0 rgba(255,255,255,.8),0 1px 1px 0 rgba(255,255,255,.25);
+	border-radius: 5px;
+	
+}
 
 /* MAIN CONTIANER */
 #best{
-	margin: 30px 0 100px 20px;
+	margin:0 auto;
 }
 #best-text{
-	width: 750px;
+/* 	width: 750px; */
 	height: 300px;
 	float:left;
-	margin: 50px 50px 80px 0px;
-	border-right: 1px solid gray;
+/* 	margin: 50px 50px 80px 0px; */
+	padding: 50px 50px 80px 0px;
+/* 	border-right: 1px solid gray; */
 /* 	border: 1px solid white; */
 }
 #best-h2{
 	font-weight: bold;
 	width: 500px;
 	margin: 50px 50px 20px 50px;
+	text-shadow: 1px 1px 1px white;
 /* 	border: 1px solid white; */
 }
 #best-sub-text{
@@ -139,15 +154,20 @@ header {
 
 #best-review{
 	display: flex;
-	float: left;
-	width: 700px;
-	height: 300px;
-	margin: 50px 0px 80px 10px;
+	
+/* 	float: right; */
+/* 	width: 700px; */
+/* 	height: 300px; */
+/* 	margin: 50px 0px 80px 10px; */
 }
-#best-board-img{
-	width:200px;
-	height:300px;
+#best-reviewText{
+	
+	float: right;
 }
+
+
+
+
 
 #best-board-writer{
 	width:500px;
@@ -160,17 +180,24 @@ header {
 	font-weight: bold;
 }
 #best-board-title{
-	width:500px;
+/* 	width:500px; */
+	float:right;
 	height: 200px;
 	padding: 30px;
 	text-decoration: none;
+	text-align: right;
 /* 	border: 1px solid white; */
 	
 }
 #best-board-title a:hover{
 	color: var(--dark);
+	box-shadow:0 1px 1px 0 rgba(255,255,255,.8),0 1px 1px 0 rgba(255,255,255,.25);
 }
-
+#best-review:hover{
+	transform: scale(1.1);
+	color: var(--dark);
+	box-shadow:0 2px 2px 0 rgba(100,100,100,.8),0 2px 2px 0 rgba(100,100,100,.25);
+}
 #title-p{
 	font-size: 20px;
 	font-weight: bold;
@@ -178,9 +205,11 @@ header {
 #review-p{
 	
 	margin: 100px 50px 20px 70px;
+	text-align: right;
 }
 #review-p > h3{
 	font-weight: bold;
+	
 }
 #select-box{
 	display: flex;
@@ -213,6 +242,7 @@ header {
 	margin: 20px 10px 20px 20px;
 }
 
+
 /* hr{ */
 /* 	background-color:red; */
 /* } */
@@ -221,35 +251,57 @@ header {
 	color: white;
 	font-weight: bold;
 	margin: 100px 0 20px 70px;
+	text-align: center;
 }
 #review-box{
 	margin: 0px 60px 0 60px;
 }
-.row{
-	display: inline-block;
+#row{
+	
 	
 	margin: 30px 10px 0 200px;
 	
 }
+a{
+	text-decoration: none;
+	color: white;
+	
+}
+h5, .thumbnail-title{
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 0;
+	text-shadow:0 2px 2px 0 rgba(0,0,0,.8),0 2px 2px 0 rgba(0,0,0,.25);
+	
+}
 
 .thumbnail{
-	width: 200px;
+	width: 250px;
 	height: 350px;
-	background-color: rgba(255,255,255,0.5);
+	background-color: rgba(182,201,216, 0.4);
 	margin: 20px auto;
 	
 }
+#imgRond{
+	border-radius: 5px;
+	
+} 
 .thumbnail img{
+	border-radius: 2px;
 	width: 200px;
 	height:250px;
+	box-shadow:0 3px 3px 0 rgba(0,0,0,.8),0 3px 3px 0 rgba(0,0,0,.25);
 }
 
 .thumbnail:hover{
 	transform: scale(1.1);
+	color: var(--dark);
+	box-shadow:0 3px 3px 0 rgba(255,255,255,.5),0 3px 3px 0 rgba(255,255,255,.25);
 }
 
-.thumbnail-title{
+.thumbnail-text title{
 	height: 38.4px;
+	color: white;
 }
 
 
