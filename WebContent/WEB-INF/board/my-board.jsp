@@ -7,33 +7,55 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%
   String id = (String) session.getAttribute("id");
+  if (id == null) {
+	  response.sendRedirect(request.getContextPath()+"/sign-in");
+  }
   MyBoardDAO bdao = new MyBoardDAO();
   //List<BoardVO> blist = bdao.selectBoardList();
   
   //페이징 처리 적용
   // String keyword = (String)session.getAttribute("keyword");
   // int genreId = (int)session.getAttribute("genreId");
-  String curPage = request.getParameter("curpage");
-  if (curPage == null) {
-  	curPage = "1";
+  String curPage1 = request.getParameter("curpage1");
+ 
+  if (curPage1 == null) {
+  	curPage1 = "1";
   }
-  int curPageInt = Integer.parseInt(curPage);
-  int totalContent = bdao.selectBoardCnt(id);
-  Pagination pagination = new Pagination(curPageInt, totalContent, 6);
+  int curPageInt1 = Integer.parseInt(curPage1);
+  int totalContent1 = bdao.selectBoardCnt(id);
+  Pagination pagination1 = new Pagination(curPageInt1, totalContent1, 6);
   
   //1page내에 보여줘야하는 게시물의 첫번째 rownum
-  int start = curPageInt * pagination.getContentCnt() - (pagination.getContentCnt() - 1);
+  int start1 = curPageInt1 * pagination1.getContentCnt() - (pagination1.getContentCnt() - 1);
   //한페이지 내에 보여줘야하는 게시물의 마지막 rownum
-  int end = curPageInt * pagination.getContentCnt();
+  int end1 = curPageInt1 * pagination1.getContentCnt();
   
-  List<MyBoardVO> blist = bdao.myBoardListPage(id, start, end);
-  
+  List<MyBoardVO> blist = bdao.myBoardListPage(id, start1, end1);
+  //-------------------------------------------------------------------------------------------------------
   // List<BoardVO> pblist = bdao.mySelectListPage(id, keyword, genreId, start, end);
+  
+   String curPage = request.getParameter("curpage");
+   if (curPage == null) {
+	  	curPage = "1";
+	  }
+	  int curPageInt = Integer.parseInt(curPage);
+	  int totalContent = bdao.selectBoardCnt(id);
+	  Pagination pagination = new Pagination(curPageInt, totalContent, 6);
+	  
+	  //1page내에 보여줘야하는 게시물의 첫번째 rownum
+	  int start = curPageInt * pagination.getContentCnt() - (pagination.getContentCnt() - 1);
+	  //한페이지 내에 보여줘야하는 게시물의 마지막 rownum
+	  int end = curPageInt * pagination.getContentCnt();
+	  
+	  List<MyBoardVO> bestList = bdao.bestListPage(id, start, end);
+  
 %>
 
 <!DOCTYPE html>
+<c:set var="page1" value="<%=pagination1%>" />
 <c:set var="page" value="<%=pagination%>" />
 <c:set var="blist" value="<%=blist%>" />
+<c:set var="bestList" value="<%=bestList%>" />
 <%-- <c:set var="pblist" value="<%=pblist %>"/> --%>
 
 <html>
@@ -53,6 +75,7 @@
 <script src="${pageContext.request.contextPath }/js/board/my-board.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/js/board/review-board.js"></script> --%>
 <script type="text/javascript">
+  	
   	//썸네일 클릭했을때 리뷰디테일 페이지로 이동
   	function thumbnail(boardId) {
   		location.href = "${pageContext.request.contextPath}/review_board_view?boardId="+ boardId;
@@ -173,6 +196,68 @@
 
   <section>
     <!-- paging처리를 적용한 첫화면 최신 업데이트 순  -->
+    <div>
+      <h2 id="recently">베스트</h2>
+      <div id="review_box">
+        <!--         <div class="row"> -->
+        <!--           <div class="col-sm-6 col-md-4"> -->
+        <div id="best">
+          <c:forEach var="bestvo" items="${bestList }">
+
+            <div id="arrange">
+              <img src="${bestvo.poster}" alt="포스터" class="json_box" onclick="thumbnail(${bestvo.boardId})">
+              <div id="caption">
+                <h4 id="review_title">
+                  <a href="#" class="btn_btn_primary" role="button">
+                    <c:choose>
+                      <c:when test="${fn:length(bestvo.title) > 14}">
+                        <c:out value="${fn:substring(bestvo.title,0,13)}" />….
+          				 				</c:when>
+                      <c:otherwise>
+                        <c:out value="${bestvo.title}" />
+                      </c:otherwise>
+                    </c:choose>
+                  </a>
+                </h4>
+              </div>
+            </div>
+          </c:forEach>
+          <!--             </div> -->
+          <!--           </div> -->
+        </div>
+
+        <!-- 페이징 처리 -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination d-flex justify-content-center">
+            <c:if test="${page1.prevBtn }">
+              <li class="page-item">
+                <a class="page-link bg-dark text-light" href="myBoardView?curpage1=${page1.startPage-1 }">Previous</a>
+              </li>
+            </c:if>
+            <c:forEach var="i" begin="${page1.startPage }" end="${page1.endPage }" step="1">
+              <c:choose>
+                <c:when test="${i eq param.curpage1 }">
+                  <li class="page-item">
+                    <a class="page-link bg-dark text-light">${i}</a>
+                  </li>
+                </c:when>
+                <c:otherwise>
+                  <li class="page-item">
+                    <a class="page-link bg-dark text-light" href="myBoardView?curpage1=${i}">${i}</a>
+                  </li>
+                </c:otherwise>
+              </c:choose>
+            </c:forEach>
+            <c:if test="${page1.nextBtn }">
+              <li class="page-item">
+                <a class="page-link bg-dark text-light" href="myBoardView?curpage1=${page1.endPage+1 }">Previous</a>
+              </li>
+            </c:if>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- -------------------------------------------------------------------베스트 테스트--------------------- -->
     <div>
       <h2 id="recently">최신글</h2>
       <div id="review_box">

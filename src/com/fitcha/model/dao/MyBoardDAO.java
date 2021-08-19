@@ -79,7 +79,51 @@ public class MyBoardDAO {
 	   
 	   return blist;
    }   
-   
+   public List<MyBoardVO> bestListPage(String id, int start, int end){
+	   Connection conn = DBConnect.getInstance();
+	   PreparedStatement pstmt = null;
+	   ResultSet rs = null;
+	   
+	   String sql ="SELECT BOARDID, USERID, TITLE, POSTER "
+	   		+ "FROM(SELECT ROWNUM AS RNUM, A.* FROM (SELECT B.BOARDID, B.USERID, M.TITLE, M.POSTER "
+	   												+ "FROM BOARD B, MOVIE M "
+	   												+ "WHERE B.MOVIEID = M.MOVIEID "
+	   		+ "                                        AND B.USERID ='"+ id +"' "
+													+ "ORDER BY B.VIEWS DESC) A ) "
+	   		+ "WHERE RNUM BETWEEN ? AND ?";
+	   
+	   
+	   List<MyBoardVO> bestList= new ArrayList<MyBoardVO>();
+	   
+	   try {
+		   //prepared는 값 넣을 때필요
+		   pstmt = conn.prepareStatement(sql);
+		   pstmt.setInt(1, start);
+		   pstmt.setInt(2, end);
+		   rs = pstmt.executeQuery();
+		   
+		   while(rs.next()) {
+			   MyBoardVO bvo = new MyBoardVO();
+			   bvo.setBoardId(rs.getInt(1));
+			   bvo.setUserId(rs.getString(2));
+			   bvo.setTitle(rs.getString(3));
+			   bvo.setPoster(rs.getString(4));
+			   
+			   bestList.add(bvo);
+			   
+		   }
+		   
+		   System.out.println("페이징:"+bestList);
+	   } catch (SQLException e) {
+		   // TODO Auto-generated catch block
+		   e.printStackTrace();
+	   }finally {
+		   closeAll(conn, pstmt, null, rs);
+		   
+	   }
+	   
+	   return bestList;
+   }   
    //나의 게시판에서 전체 글들 페이징 처리용
    public List<MyBoardVO> myBoardListPage(String id, int start, int end){
 	   Connection conn = DBConnect.getInstance();

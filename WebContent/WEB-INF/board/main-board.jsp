@@ -71,7 +71,7 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
 
 
   <%-- 	<form action="${pageContext.request.contextPath }/main-board" method="post" > --%>
-  <div class="wrapper">
+  <div>
 
     <!-- HEADER -->
     <!-- 		<header style="position: relative;"> -->
@@ -86,6 +86,7 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
     <!-- 					alt="Logo Image"></a> -->
     <!-- 			</div> -->
     <!-- 		</header> -->
+    
     <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
       <div class="container-fluid">
         <a class="navbar-brand mt-1 ml-1" href="#">
@@ -137,18 +138,32 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
         </div>
       </div>
     </nav>
+    
     <!-- END OF HEADER -->
-    <div id="best">
-      <div id="best-text">
-        <h2 id="best-h2">FITCHA 최고 인기 리뷰</h2>
-        <div id="best-sub-text">
-          <p id="best-p">다만 악에서 구하소서, 해리포터 등 지금 가장 많이 보는 작품!</p>
+ 
+    <!-- --------------------------------최고 인기 리뷰와 해당 게시물 이미지 띄어주는 박스 --------------------------------------------------------------------------- -->
+<div class="container">
+ <div id = "fixImg" > //
+  <div id="test"> 
+    <div id="best" class="d-flex justify-content-between m-5">
+    <!-- -------------------------------최고 인기 리뷰---------------------------------------------- -->
+      <div id="best-text" class="col-auto .me-auto">
+        <h2 id="best-h2" >FITCHA 최고 인기 리뷰</h2>
+        <div id="best-sub-text" class="row" >
+          <p id="best-p" class="h-auto d-inline-block" ><div>어벤져스, 해리포터 등 지금 가장 많이 보는 작품!</div></p>
         </div>
-        <div id="best-content">
-          <p id="best-content-p">극장 최신 개봉작부터 고전 영화까지, 블록버스터 영화부터 다양성 영화까지, 국내 인기 TV시리즈부터 HBO 인기 TV시리즈까지! 이 모든 작품을 2주 무료 이용으로 감상하세요. 취향에 맞는 작품을 선별하여 추천해드릴게요 :)</p>
+        <div id="best-content" class="row">
+          <p id="best-content-p" >극장 최신 개봉작부터 고전 영화까지, 블록버스터 영화부터 다양성 영화까지! <br>다양한 작품들의 감상을 자유롭게 작성해주세요:)</p>
+          <p id="best-content-p" >Fitcha의 가장 인기있는 리뷰를 보러 가고 싶다면 클릭!</p>
+        <div class="align-self-end"> <p id="best-reviewText" class="row"> </p></div>
         </div>
       </div>
-      <div id="best-review">
+        <div id="best-review" class="col-auto"></div>
+     </div>
+<!--      	<p id="best-reviewText" class="row"> </p> -->
+    </div> 
+    
+    <!-- -------------------------------------main 가장 많은 리뷰 띄어주는 부분------------------------- -->  
         <!-- 	    ajax 비동기통신으로 좋아요가 가장 많은 리뷰를 띄워주는 부분 -->
         <!-- 	    	<div id="best-board-img"> -->
         <!-- 				<img src="img/avenger.jpg" alt="Logo Image"> -->
@@ -163,18 +178,22 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
         <!-- 					<p id="title"><a href="#">어벤져스:인피니티 워 리뷰</a></p> -->
         <!-- 				</div> -->
         <!-- 			</div> -->
-      </div>
+ 
+<!-- --------------------------------------------------------------------------------------- -->
+<!-- ----------------------------------------------------------------------------------------------------------- ---------------------------------------------->
 
-
-
-
-    </div>
-
-
-    <div id="review-p">
+<!-- --------------------------------------review context 박스---------------------------------- -->
+ <div id="best" class="d-flex justify-content-start">
+<div id="selectBox" class="container">
+    <div class = "row">
+    <div id="review-p" class="d-flex justify-content-start">
       <h3>보고싶은 리뷰를 찾아보세요!</h3>
     </div>
+  </div>
 
+<!-- ---------------------------------------------------------------------------------------- -->
+
+<!-- -------------------------------select 부분------------------------------------------------ -->
     <div id="select-box">
       <select id="genre" onchange="changeSelection()">
 
@@ -209,57 +228,72 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
         <button type="button" class="fa fa-search" id="search_btn" aria-hidden="true" onclick="searchInput()"></button>
       </div>
     </div>
-
+    </div>
+  </div>
+ </div> 
+</div>   
+<!-- ----------------------------------------------------------------------------------------- -->
 
 
     <hr>
-
+    
+    
+<!-- <-----------------------------------------------review -------------------------------------->
+<div class="row">
     <h2 id="review-text">REVIEW</h2>
-
+ </div>   
+<!-- ------------------------------------------------------------------------------------------ -->
+    
+ <!--  ------------------------------------생성되는 이미지(게시물) 박스란---------------------------------------------------------------------------------- -->   
     <div>
-      <div id="container">
+<!--       <div class="container"> -->
 
 
-        <div id="row">
+        <div id="row" class="row justify-content-around">
           <!-- 				ajax 비동기통신을 통해 전체 게시물을 띄워주는 부분  -->
 
         </div>
-      </div>
-
+<!--       </div> -->
+     
       <!-- 	페이지 개수 -->
+      
+<!-- ----------------------v페이지-------------------------------------------------- -->
+<!-- <div> -->
+<!--       <ul id=page> -->
 
-      <ul id=page>
+<!--         			이전페이지 -->
+<%--         <c:if test="${page.prevBtn }"> --%>
+<!--           <li> -->
+<%--             <a href="main-board?curpage=${page.startPage-1}">이전</a> --%>
+<!--           </li> -->
+<%--         </c:if> --%>
 
-        <!-- 			이전페이지 -->
-        <c:if test="${page.prevBtn }">
-          <li>
-            <a href="main-board?curpage=${page.startPage-1}">이전</a>
-          </li>
-        </c:if>
+<!--         			페이지 넣기 -->
+<%--         <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}" step="1"> --%>
+<%--           <c:choose> --%>
+<%--             <c:when test="${i eq param.curpage}"> --%>
+<%--               <li style="background-color: gray">${i}</li> --%>
+<%--             </c:when> --%>
+<%--             <c:otherwise> --%>
+<!--               <li> -->
+<%--                 <a href="main-board?curpage=${i}">${i}</a> --%>
+<!--               </li> -->
+<%--             </c:otherwise> --%>
+<%--           </c:choose> --%>
+<%--         </c:forEach> --%>
 
-        <!-- 			페이지 넣기 -->
-        <c:forEach var="i" begin="${page.startPage}" end="${page.endPage}" step="1">
-          <c:choose>
-            <c:when test="${i eq param.curpage}">
-              <li style="background-color: gray">${i}</li>
-            </c:when>
-            <c:otherwise>
-              <li>
-                <a href="main-board?curpage=${i}">${i}</a>
-              </li>
-            </c:otherwise>
-          </c:choose>
-        </c:forEach>
-
-        <!-- 			다음페이지 -->
-        <c:if test="${page.nextBtn }">
-          <li>
-            <a href="main-board?curpage=${page.endPage+1}">다음</a>
-          </li>
-        </c:if>
-      </ul>
-
+<!--         			다음페이지 -->
+<%--         <c:if test="${page.nextBtn }"> --%>
+<!--           <li> -->
+<%--             <a href="main-board?curpage=${page.endPage+1}">다음</a> --%>
+<!--           </li> -->
+<%--         </c:if> --%>
+<!--       </ul> -->
+<!--    </div>  -->
+<!-- -------------------------------------------------------------------------------- -->
     </div>
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------------------------ -->
 
 
 
@@ -268,6 +302,7 @@ List<MainBoardVO> blist = bdao.selectBoardPage(start, end);
       <p>&copy 2021 FITCHA, Inc.</p>
     </footer>
     <!--     </form> -->
+  </div>
   </div>
 </body>
 </html>

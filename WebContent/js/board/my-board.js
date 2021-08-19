@@ -1,47 +1,47 @@
 	
 //인기 있는 글 목록
-window.onload= function(){
+//window.onload= function(){
   // 장르, 나라 넣기
-  var getConnect = function(url, block) {
-    var xhrget = new XMLHttpRequest();
-
-    // 통신할 방식, url, 동기 여부 설정
-    xhrget.open("GET", url, true);
-    // 요청
-    xhrget.send();
-    // 응답
-    xhrget.onreadystatechange = function() {
-      if (xhrget.readyState == XMLHttpRequest.DONE && xhrget.status == 200) {
-
-        // 응답 값 (서버로부터 받아온 데이터)
-        var jsonStr = xhrget.responseText; // json 형태의 문자열
-        var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
-
-        console.log(url);
-        console.log(jsonStr);
-
-        for (var i = 0; i < json.length; i++) {
-          $('#'+ block +'Select')
-            .append($('<option>')
-              .attr('value', json[i].name)
-              .text(json[i].name))
-              
-        }
-      }
-    }
-  }
+//  var getConnect = function(url, block) {
+//    var xhrget = new XMLHttpRequest();
+//
+//    // 통신할 방식, url, 동기 여부 설정
+//    xhrget.open("GET", url, true);
+//    // 요청
+//    xhrget.send();
+//    // 응답
+//    xhrget.onreadystatechange = function() {
+//      if (xhrget.readyState == XMLHttpRequest.DONE && xhrget.status == 200) {
+//
+//        // 응답 값 (서버로부터 받아온 데이터)
+//        var jsonStr = xhrget.responseText; // json 형태의 문자열
+//        var json = JSON.parse(jsonStr); // 문자열을 json으로 변환
+//
+//        console.log(url);
+//        console.log(jsonStr);
+//
+//        for (var i = 0; i < json.length; i++) {
+//          $('#'+ block +'Select')
+//            .append($('<option>')
+//              .attr('value', json[i].name)
+//              .text(json[i].name))
+//              
+//        }
+//      }
+//    }
+//  }
   
-  getConnect("genre", "genre");
-  getConnect("country", "country");
+//  getConnect("genre", "genre");
+//  getConnect("country", "country");
   
-	var totalData ;	// 총 데이터 수
-	var dataPerPage = 5;	
-	var pageCount = 10;		
-	var currentPage=1;
+//	var totalData ;	// 총 데이터 수
+//	var dataPerPage = 6;	
+//	var pageCount = 5;		
+//	var currentPage=1;
+//	var search = 
 //	var genre= document.getElementById("genre");
 //	var recommend = document.getElementById("recommend");
 //	genre.onchange = function(){
-//		changeSelection(totalData, dataPerPage, pageCount, currentPage);
 //// 		paging(totalData, dataPerPage, pageCount, currentPage);
 //	}
 //	recommend.onchange = function(){
@@ -52,78 +52,46 @@ window.onload= function(){
 	
 	
 	
-		$.ajax({
-		
-		type : 'GET',
-		url : 'my_board_popular.do',
-		dataType : 'json',
-		async:false,
-		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-		data : {},
-		success : function(result) {
-			console.log(result);
-			console.log(result.length);
-
-			var poster = document.getElementById("best");
-			var str = "";
-		
-			$.each(result, function(inx, obj) {
-
-		       
-				str += '<div id="arrange"><img src="' + obj.poster + '" alt="포스터" class="json_box" onclick="thumbnail('+ obj.boardId+'">'
-				 		+ '<div id="caption"><h4 id="review_title">'
-				 		+'<a href="#" class="btn_btn_primary" role="button">'+obj.title.substring(0,13)+"..."+'</a></h4>'
-				 		+'</div></div>';
-				
-			});
-
-//			poster.innerHTML = str;
-		},
-		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert('There is an error2 : method(group)에 에러가 있습니다.');
-		}
-	});
-	
-  
-	
-}	
 
 //검색용 js
-function searchInput(){
-   var searchBoxImage = document.getElementById("searchBoxImg");
-   var searchBox = document.getElementById("searchBox");
-  
-   var xhr = new XMLHttpRequest();
-   xhr.open("POST","my_board_search.do",true);
-   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-   xhr.send("searchBox="+searchBox.value);
-   
-   xhr.onreadystatechange = function(){
-      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status ==200){
-         var jsonStr = xhr.responseText;
-         var json = JSON.parse(jsonStr);
-         var str3 ="";
-		
-         console.log("JSON: " + json);
-         for(var i=0; i<json.length; i++){
-            var movieTitle = json[i].title;
-            if(movieTitle.length > 20){
-               movieTitle = movieTitle.substring(0,19)+"...";
-            }
-			
-           	str3 += '<div id="arrange"><img src="' +  json[i].poster + '" alt="포스터" class="json_box" onclick="thumbnail('+ json[i].boardId+'">'
-				 		+ '<div id="caption"><h4 id="review_title">'
-				 		+'<a href="#" class="btn_btn_primary" role="button">'+movieTitle+'</a></h4>'
-				 		+'</div></div>';
+//function searchInput(){
+//   var searchBoxImage = document.getElementById("searchBoxImg");
+//   var searchBox = document.getElementById("searchBox");
+//  
+//   var xhr = new XMLHttpRequest();
+//   xhr.open("POST","my_board_search.do",true);
+//   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+//   xhr.send("searchBox="+searchBox.value);
+//   
+//   xhr.onreadystatechange = function(){
+//      if(xhr.readyState == XMLHttpRequest.DONE && xhr.status ==200){
+//         var jsonStr = xhr.responseText;
+//         var json = JSON.parse(jsonStr);
+//         var str3 ="";
+//		
+//         console.log("JSON: " + json);
+//         for(var i=0; i<json.length; i++){
+//            var movieTitle = json[i].title;
+//            if(movieTitle.length > 20){
+//               movieTitle = movieTitle.substring(0,19)+"...";
+//            }
+//			
+//           	str3 += '<div id="arrange"><img src="' +  json[i].poster + '" alt="포스터" class="json_box" onclick="thumbnail('+ json[i].boardId+'">'
+//				 		+ '<div id="caption"><h4 id="review_title">'
+//				 		+'<a href="#" class="btn_btn_primary" role="button">'+movieTitle+'</a></h4>'
+//				 		+'</div></div>';
+//
+//         }
+//         searchBoxImage.innerHTML =str3;
+//		console.log(str3);
+//      }
+//   
+//   }
+//
+//}
 
-         }
-         searchBoxImage.innerHTML =str3;
-		console.log(str3);
-      }
-   
-   }
 
-}
+
 
 //------------------------------------------------------------------------------
 //select용 js
@@ -282,7 +250,8 @@ function paging(totalData, dataPerPage, pageCount, currentPage){
 		if($id == "next")    selectedPage = next;
 		if($id == "lastNo")    selectedPage = lastNo;
 		
-		changeSelection(totalData, dataPerPage, pageCount, selectedPage);
+		searchInput(totalData, dataPerPage, pageCount, selectedPage);
+//		changeSelection(totalData, dataPerPage, pageCount, selectedPage);
 //		paging(totalData, dataPerPage, pageCount, selectedPage);// 페이징
 	});
 }
