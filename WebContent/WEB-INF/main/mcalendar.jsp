@@ -1,12 +1,9 @@
-<%--<%@page import="com.fitcha.model.dao.DipsDAO"%>
-<%@page import="com.fitcha.model.vo.DipsVO"%> --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> --%>
-    
-    <%--
+
+<%--
     
     String id = (String)session.getAttribute("id"); 
 	
@@ -16,23 +13,38 @@
     
     
     --%>
+<%@ page import="com.google.gson.Gson"%>
 <!DOCTYPE html>
-<%-- <c:set var="movieInfo" value="<%=dlist2 %>"/> --%>
-<%@ page import = "com.google.gson.Gson" %>
 <html>
-	<head>
-		<title>FITCHA</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="${pageContext.request.contextPath }/css/main/main.css" />
-		<noscript><link rel="stylesheet" href="${pageContext.request.contextPath }/css/main/noscript.css" /></noscript>
-		
-		<link href='${pageContext.request.contextPath }/calendar-assets/main.css' rel='stylesheet' />
-		
-	    <script src='${pageContext.request.contextPath }/calendar-assets/main.js'></script>
+<head>
+<title>FITCHA</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link href="https://fontmeme.com/permalink/210816/95cfd40502d9ebe4522b74e094042fcb.png" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+<noscript>
+  <link rel="stylesheet" href="${pageContext.request.contextPath }/css/main/noscript.css" />
+</noscript>
+<link href='${pageContext.request.contextPath }/calendar-assets/main.css' rel='stylesheet' />
+<script src='${pageContext.request.contextPath }/calendar-assets/main.js'></script>
 
 <script>
-
+  // 로그아웃
+  var logout = function() {
+    var xhrpost = new XMLHttpRequest();
+  
+    // 통신할 방식, url, 동기 여부 설정
+    xhrpost.open("POST", "logout", true);
+    // 요청
+    xhrpost.send();
+    // 응답
+    xhrpost.onreadystatechange = function() {
+      if (xhrpost.readyState == XMLHttpRequest.DONE && xhrpost.status == 200) {
+        location.href = "${pageContext.request.contextPath}/sign-in";
+      }
+    }
+  }
 	document.addEventListener('DOMContentLoaded', function() {
 		var dipsId = document.getElementById("dipsId"); // 값선언
 		var userId = document.getElementById("userId");
@@ -50,13 +62,9 @@
 		//var mjson = .getAttribute("mjson");
 		
 		<%
-// 		String mjson1 = (String) request.getAttribute("mjson");
-		
-		String mjson2 = (String) request.getAttribute("movieJson");
-		Gson gson = new Gson();
-		
-// 		String json = gson.toJson(mjson1);
-		%>
+      String mjson2 = (String) request.getAttribute("movieJson");
+      Gson gson = new Gson();
+    %>
 <%-- 		alert(<%=mjson1%>); --%>
 <%-- 		alert(<%=json%>); --%>
 		
@@ -68,6 +76,7 @@
 			alert(obj[x]);
 		} --%>
 		var calendar = new FullCalendar.Calendar(calendarEl, {
+			width: "100px",
 			initialView : 'dayGridMonth',
 			dayMaxEventRows: true,
 			views: {
@@ -81,11 +90,9 @@
 			events: <%=mjson2%>
 			,
 			dateClick : function(info) { // 날짜 클릭 시, 해당날짜
-
 				dipsNo.value=""; // 공백 값, null 값이 들어온다..
 				movieTitle.value="";
 				image_url.value="";
-
 				ddate.value = info.dateStr; // info 날짜 값?
 				
 				saveBtn.setAttribute("type","button"); // 저장버튼
@@ -147,7 +154,6 @@
 // 				cell.html("<img src='" +img+"' >");
 // 			}
 			//events : ${mjson}
-
 		});
 		calendar.render(); // 달력 출력?
 	
@@ -183,7 +189,7 @@
 			//ajax 통신 요청
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST","${pageContext.request.contextPath}/Dips-regist", true); // post 통신
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 			xhr.send("ddate="+ddate.value+"&movieId="+movieId.value+"&userId="+userId.value); // 날짜는 날짜값, 제목은 제목값, 메모는 메모에 적힌 글 +"&memo="+memo.value
 			
 // 			xhr.onreadystatechange = function() {
@@ -236,105 +242,158 @@
 </script>
 
 </head>
-	<body class="is-preload">
-	<!-- HEADER -->
-    <header>
-      <div class="netflixLogo">
-        <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
-      </div>      
-      <nav class="main-nav">                
-        <a href="#home">Home</a>
-        <a href="#tvShows">전체 게시판</a>
-        <a href="#movies">나의 게시판</a>
-        <a href="#originals">Originals</a>
-        <a href="#">Recently Added</a>
-<!--         <a target="_blank" href="https://codepen.io/cb2307/full/NzaOrm">Portfolio</a>         -->
-      </nav>
-      <nav class="sub-nav">
-        <a href="#"><i class="fas fa-search sub-nav-logo"></i></a>
-        <a href="#"><i class="fas fa-bell sub-nav-logo"></i></a>
-        <a href="login">로그아웃</a>        
-      </nav>      
-    </header>
+<body class="is-preload bg-black">
+  <!-- HEADER -->
+  <header>
+    <nav id="navigator" class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: black; height: 70px;">
+      <div class="container-fluid">
+        <a class="navbar-brand mt-1 ml-1" href="#">
+          <img id="fitcha" alt="FITCHA" style="height: auto; width: 100px" src="${pageContext.request.contextPath }/img/fitcha.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse align-items-end justify-content-between" id="navbarNav" style="background-color: black;">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath }/main-movie">홈</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath }/main-search">탐색하기</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath }/my-board">My Page</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="${pageContext.request.contextPath }/main_board_view">게시판</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath }/mcalendar">찜 목록</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav">
+            <li>
+              <a class="btn">
+                <i class="far fa-bell"></i>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 회원 정보 </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li>
+                  <a class="dropdown-item" href="#">회원 정보</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">회원 수정</a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" href="javascript:logout();">로그아웃</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
 
-		<!-- Wrapper-->
-			<div id="wrapper">
+  <!-- Wrapper-->
+  <div id="wrapper">
 
-				<!-- Nav -->
-					<nav id="nav">
-						<a href="#home" class="icon solid fa-home"><span></span></a>
-<!-- 						<a href="#work" class="icon solid fa-folder"><span>Work</span></a> -->
-						<a href="#memo" class="icon solid fa-envelope"><span></span></a>
-<!-- 						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a> -->
-					</nav>
+    <!-- Nav -->
+    <nav id="nav">
+      <a href="#home" class="icon solid fa-home">
+        <span></span>
+      </a>
+      <!-- 						<a href="#work" class="icon solid fa-folder"><span>Work</span></a> -->
+      <a href="#memo" class="icon solid fa-envelope">
+        <span></span>
+      </a>
+      <!-- 						<a href="https://twitter.com/ajlkn" class="icon brands fa-twitter"><span>Twitter</span></a> -->
+    </nav>
 
-				<!-- Main -->
-					<div id="main">
+    <!-- Main -->
+    <div id="main">
 
-						<!-- Me -->
-							<article id="home" class="panel intro">
-								<div id='calendar'></div>
-							</article>
-						
-						<!-- memo -->
-							<article id="memo" class="panel">
-<!-- 								<header> -->
-<!-- 									<h2>My Memo</h2> -->
-<!-- 								</header> -->
-								<form action="${pageContext.request.contextPath }/Dips-regist" method="post" name="form">
-									<input type="hidden" name="no" id="no">
-								
-									<div>
-										<div class="row">
-											<div>
-												<input type="date" name="ddate" id="ddate" readonly>
-											</div>
-											<div class="col-12">
-												<input type="text" name="movieTitle" id="movieTitle" placeholder="movieTitle" readonly>
-											</div>
-											<div class="col-12">
-												<input type="text" name="dipsNo" id="dipsNo" readonly>
-											</div>
-<%-- 											<c:forEach var="dvo" items="${dlist2 }">
-							                        <img src="${dvo.poster}" alt="포스터" > --%>
-<!-- 											</c:forEach> -->
-											
-											<div class="col-12">
-												<img src='' id="image_url" name="image_url" alt="포스터"  />
-<!-- 												out.print("Poster"); -->
-<!-- 												<input type="text" name="image_url" id="image_url" > -->
-											</div>
-<!-- 											<div class="col-12"> -->
-<!-- 												<textarea name="memo" id="memo-area" placeholder="Memo" rows="6"></textarea> -->
-<!-- 											</div> -->
-											<div class="col-12">
-												<input type="button" value="저장" id="save-btn">
-												<input type="hidden" value="수정" id="update-btn">
-												<input type="hidden" value="삭제" id="delete-btn">
-												<input type="button" value="취소" id="cancel-btn">
-											</div>
-										</div>
-									</div>
-								</form>
-							</article>
+      <!-- Me -->
+      <article id="home" class="panel intro">
+        <div id='calendar'  class="text-light text-white w-50 position-absolute top-50 start-50 translate-middle" style="font-color:white"></div>
+      </article>
 
-					</div>
+      <!-- memo -->
+      <article id="memo" class="panel">
+        <!-- 								<header> -->
+        <!-- 									<h2>My Memo</h2> -->
+        <!-- 								</header> -->
+        <form action="${pageContext.request.contextPath }/Dips-regist" method="post" name="form">
+          <input type="hidden" name="no" id="no">
 
-				<!-- Footer -->
-					<div id="footer">
-						<ul class="copyright">
-							<li>&copy; Untitled.</li><li>Design: <a href="#">FITCHA</a></li>
-						</ul>
-					</div>
+          <div class="w-50 h-50 d-inline-block position-relative position-absolute top-50 start-50 translate-middle">
+            <div class="row d-grid gap-4 ">
+            
+              <div class=" fw-bolder fs-4 position-absolute top-0 end-0 text-end">
+                <input type="date" name="ddate" id="ddate" class="mt-5" readonly>
+              </div>
+              
+              <div class="col-12  fw-bolder fs-4 position-absolute top-50 end-0 translate-middle-y text-end" >
+                <input type="text" name="movieTitle" id="movieTitle" placeholder="movieTitle" readonly>
+              </div>
+              
+              <div class="col-12  fw-bolder fs-4 position-absolute bottom-0 end-0 text-end">
+                <input type="text" name="dipsNo" id="dipsNo" class="mb-5" readonly>
+              </div>
 
-			</div>
-			
-		<!-- Scripts -->
-			<script src="${pageContext.request.contextPath }/js/main/jquery.min.js"></script>
-			<script src="${pageContext.request.contextPath }/js/main/browser.min.js"></script>
-			<script src="${pageContext.request.contextPath }/js/main/breakpoints.min.js"></script>
-			<script src="${pageContext.request.contextPath }/js/main/util.js"></script>
-			<script src="${pageContext.request.contextPath }/js/main/main.js"></script>
+              <div class="col-12 mw-100 position-absolute top-50 start-0 translate-middle-y">
+                <img src='' id="image_url" name="image_url" alt="포스터" style="width:300px" />
+                <!-- 												out.print("Poster"); -->
+                <!-- 												<input type="text" name="image_url" id="image_url" > -->
+              </div>
+              <!-- 											<div class="col-12"> -->
+              <!-- 												<textarea name="memo" id="memo-area" placeholder="Memo" rows="6"></textarea> -->
+              <!-- 											</div> -->
+              <div class="fw-bolder position-absolute top-100 start-50 translate-middle text-center">
+                <input type="button" value="저장" id="save-btn">
+                <input type="hidden" value="수정" id="update-btn">
+                <input type="hidden" value="삭제" id="delete-btn">
+                <input type="button" value="취소" id="cancel-btn">
+              </div>
+            </div>
+          </div>
+        </form>
+      </article>
 
-	</body>
+    </div>
+
+    <!-- Footer -->
+<!--     <div id="footer text-center"> -->
+<!--       <ul class="copyright text-light"> -->
+<!--         <li>&copy; Untitled.</li> -->
+<!--         <li> -->
+<!--           Design: -->
+<!--           <a href="#" class="text-light">FITCHA</a> -->
+<!--         </li> -->
+<!--       </ul> -->
+<!--     </div> -->
+
+    <footer class="text-center text-light position-absolute bottom-0 start-50 translate-middle-x">
+      <p>&copy; Untitled.</p>
+      <p>
+        Design:
+        <a href="#" class="text-light">FITCHA</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="${pageContext.request.contextPath }/js/main/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath }/js/main/browser.min.js"></script>
+  <script src="${pageContext.request.contextPath }/js/main/breakpoints.min.js"></script>
+  <script src="${pageContext.request.contextPath }/js/main/util.js"></script>
+  <script src="${pageContext.request.contextPath }/js/main/main.js"></script>
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  
+</body>
 </html>
