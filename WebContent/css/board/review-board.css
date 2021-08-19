@@ -25,10 +25,11 @@ h1 {
   padding-top: 60px;  
 }
 
-.wrapper {
-  margin: 0;
-  padding: 0;
-}
+/* .wrapper { */
+/*   margin: 0; */
+/*   padding: 0; */
+/*   height: 200px; */
+/* } */
 
 /* HEADER */
 header {
@@ -106,26 +107,36 @@ header {
 }
 
 /* MAIN */
+#head-box{
+	display: flex;
+}
 #review-h1{
-	margin: 30px auto 0px 220px;
+	width: auto;
+	margin: 70px auto 20px 150px;
 	font-weight: bold;
 }
 #like-btn{
-	margin: 30px 1000px 0px 220px;
+	margin: 150px 200px 20px 100px;
 }
 
 #review-box{
 	display: flex;
-	width: 1200px;
-	height: 500px;
+	width: 1300px;
+	height: 450px;
 /* 	border: 1px solid white; */
-	margin: 0px 200px 20px 200px;
+	margin: 0px 200px 20px 100px;
 }
-
-#movie-img img{
-	width: 300px;
-	height: 420px;
-	margin: 50px 20px 0px 20px;
+#poster{
+	width: 320px;
+	height: 440px;	
+	margin: 0px 20px 0px 20px;
+}
+.img-fluid{
+	width: 320px;
+	height: 440px;
+/* 	width: 100%; */
+/* 	height: 100%; */
+	margin: 0px 20px 0px 20px;
 }
 .movie-info{
 /* 	display: flex; */
@@ -142,7 +153,8 @@ header {
 	border: 1px solid white;
 }
 .write-box{
-	margin: 50px 20px 0px 0;
+/* 	display: block; */
+	margin: 10px 20px 0px 30px;
 	width: 500px;
 	height: 420px;
 /* 	border: 1px solid white; */
@@ -155,17 +167,20 @@ header {
 }
 #review-title{
 	width: 500px;
-	height: 50px;
+	height: 80px;
 /* 	border: 1px solid white;	 */
 }
 #title{
 	width: 500px;
 	height: 50px;
+	font-size: 24px;
+	font-weight: bold;
 	padding: 10px;
 	overflow:auto;
-	background-color: black;
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 20px;
 	color: white;
-	border: 1px solid white;
+/* 	border: 1px solid white; */
 }
 .p{
 	width: 500px;
@@ -173,23 +188,33 @@ header {
 }
 #review-content{
 	width: 500px;
-	height: 273px;
+	height: 350px;
 /* 	border: 1px solid white;	 */
 }
 
 #content{
 	width: 500px;
-	height: 273px;
+	height: 350px;
 	padding: 10px;
 	overflow:auto;
-	background-color: black;
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 20px;
 	color: white;
-	border: 1px solid white;	
+/* 	border: 1px solid white;	 */
 }
-
+#movie-story{
+	width: 320px;
+	height: 440px;	
+	padding: 10px;
+	margin: 0px 20px 0px 20px;
+	overflow:auto;
+	background-color: rgba(255,255,255,0.3);
+	border-radius: 20px;
+	color: white;
+}
 #update-btn{
 	color: black;
-	margin: 0 200px 0 1200px;
+	margin: 0 200px 20px 1220px;
 }
 
 
@@ -204,13 +229,19 @@ header {
 }
 #new-comment{
 	width: 800px;
+	height: 50px;
+	background-color: rgba(255,255,255,0.7);
+	border-radius: 10px;
+	padding: 10px;
 	color: black;
 	margin: 20px 0px 20px 150px;
 }
 #comment-btn{
-	color: black;
-	height: 30px;
 	margin: 20px 0px 20px 10px;
+}
+.fa-comment-dots{
+	width: 50px;
+	height: 20px;
 }
 
 #comment-box{
@@ -219,6 +250,7 @@ header {
 .comment-writer{
 	width: 200px;
 	font-size: 12px;
+	font-weight: bold;
 	margin: 3px 3px 3px 30px;
 }
 .comment-date{
@@ -292,9 +324,9 @@ footer {
 
 @media(max-width: 500px) {
 
-  .wrapper {
-    font-size: 15px;
-  }
+/*   .wrapper { */
+/*     font-size: 15px; */
+/*   } */
 
   header {
     margin: 0;

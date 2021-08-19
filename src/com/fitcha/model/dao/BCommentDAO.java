@@ -87,7 +87,8 @@ public class BCommentDAO {
 		int boardIdInt = Integer.parseInt(boardId);
 
 		String sql ="SELECT * FROM BCOMMENT"
-					+" WHERE BOARDID =? AND FLAG ='O'";
+					+" WHERE BOARDID =? AND FLAG ='O'"
+					+" ORDER BY COMMENTID DESC";
 				
 		try {
 			pstmt = conn.prepareStatement(sql);
