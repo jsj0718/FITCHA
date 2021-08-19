@@ -4,7 +4,7 @@ public class MemoJson {
 	
 	private int id; //no
 	private String title; //title
-	private String start; //mdate
+	private String start; //ddate
 	private String description; //memo
 	
 	public String getDescription() {

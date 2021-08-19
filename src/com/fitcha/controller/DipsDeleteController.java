@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fitcha.model.dao.MemoDAO;
+import com.fitcha.model.dao.DipsDAO;
 
-@WebServlet("/memo-delete")
-public class MemoDeleteController extends HttpServlet {
+@WebServlet("/dips-delete")
+public class DipsDeleteController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -18,10 +18,10 @@ public class MemoDeleteController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String no = request.getParameter("no");
+		String dipsNo = request.getParameter("dipsNo");
 		
-		MemoDAO mdao = new MemoDAO();
-		mdao.deleteMemo(Integer.parseInt(no));
+		DipsDAO ddao = new DipsDAO();
+		ddao.deleteDips(Integer.parseInt(dipsNo));
 		
 		response.sendRedirect(request.getContextPath()+ "/mcalendar");
 		

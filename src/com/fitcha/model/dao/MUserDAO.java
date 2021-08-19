@@ -45,7 +45,7 @@ public class MUserDAO {
 			// resultSet
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				result = rs.getString("ID");
+				result = rs.getString("USERID");
 
 			}
 		} catch (SQLException e) {

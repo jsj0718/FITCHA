@@ -1,6 +1,24 @@
+<%--<%@page import="com.fitcha.model.dao.DipsDAO"%>
+<%@page import="com.fitcha.model.vo.DipsVO"%> --%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> --%>
+    
+    <%--
+    
+    String id = (String)session.getAttribute("id"); 
+	
+	DipsDAO ddao = new DipsDAO();
+	List<DipsVO> dlist2 = ddao.getDipsMovies(id);
+    
+    
+    
+    --%>
 <!DOCTYPE html>
+<%-- <c:set var="movieInfo" value="<%=dlist2 %>"/> --%>
+<%@ page import = "com.google.gson.Gson" %>
 <html>
 	<head>
 		<title>FITCHA</title>
@@ -16,24 +34,59 @@
 <script>
 
 	document.addEventListener('DOMContentLoaded', function() {
-		var no = document.getElementById("no"); // 변수선언
-		var mdate = document.getElementById("mdate");
-		var title = document.getElementById("title");
-		var memo = document.getElementById("memo-area");
+		var dipsId = document.getElementById("dipsId"); // 값선언
+		var userId = document.getElementById("userId");
+		var movieId = document.getElementById("movieId");
+		var ddate = document.getElementById("ddate");
+		var image_url =  document.getElementById("image_url");
 		var saveBtn = document.getElementById("save-btn");
 		var updateBtn = document.getElementById("update-btn");
 		var deleteBtn = document.getElementById("delete-btn");
 		
+		var movieTitle = document.getElementById("movieTitle");
+		var dipsNo = document.getElementById("dipsNo");
+		
+		var img="";
+		//var mjson = .getAttribute("mjson");
+		
+		<%
+// 		String mjson1 = (String) request.getAttribute("mjson");
+		
+		String mjson2 = (String) request.getAttribute("movieJson");
+		Gson gson = new Gson();
+		
+// 		String json = gson.toJson(mjson1);
+		%>
+<%-- 		alert(<%=mjson1%>); --%>
+<%-- 		alert(<%=json%>); --%>
+		
 		var calendarEl = document.getElementById('calendar');
+		<%-- var obj, x;
+		obj = {"id":"test"};
+		for (x in <%=mjson1%>){
+			alert(x);
+			alert(obj[x]);
+		} --%>
 		var calendar = new FullCalendar.Calendar(calendarEl, {
 			initialView : 'dayGridMonth',
-			dateClick : function(info) { // 날짜 클릭 시
+			dayMaxEventRows: true,
+			views: {
+				dayGrid: {
+				},
+					timeGrid: {
+					},
+						dayMaxEventRows:6
+			}
+		,
+			events: <%=mjson2%>
+			,
+			dateClick : function(info) { // 날짜 클릭 시, 해당날짜
 
-				no.value=""; // 공백 값
-				title.value="";
-				memo.value="";
+				dipsNo.value=""; // 공백 값, null 값이 들어온다..
+				movieTitle.value="";
+				image_url.value="";
 
-				mdate.value = info.dateStr; // info 날짜 값?
+				ddate.value = info.dateStr; // info 날짜 값?
 				
 				saveBtn.setAttribute("type","button"); // 저장버튼
 				updateBtn.setAttribute("type","hidden"); // 수정버튼 숨김
@@ -48,40 +101,71 @@
 // 							start : info.dateStr
 // 						}
 // 						);
-				
+			
 			},
+		
+			
+			eventContent: function(arg){
+				let arrayOfDomNodes = []
+				// image event
+// 				let imgEventWrap=document.createElement('div')
+				let titleEventWrap=document.createElement('div')
+// 				if(arg.event.extendedProps.image_url){
+				if(arg.event.extendedProps.movieTitle){
+// 					let imgEvent = '<img src="'+arg.event.extendedProps.image_url+'" >'
+					let titleEvent = arg.event.extendedProps.movieTitle;
+					//imgEventWrap.classList = "fc-event-img"
+					titleEventWrap.classList = "span.fc-title"
+					titleEventWrap.innerHTML=titleEvent;
+				}
+// 				arrayOfDomNodes=[imgEventWrap]
+				arrayOfDomNodes=[titleEventWrap]
+				
+				return{ domNodes: arrayOfDomNodes }
+			},
+			
 			eventClick : function(arg) { // 이벤트 클릭 시
 				
-				no.value = arg.event.id; // 넘버값 = id
-				mdate.value = arg.event.startStr; // 날짜값 = 시작날짜
-				title.value = arg.event.title; // 제목값 = 제목
-				memo.value = arg.event.extendedProps.description; // 메모 값 = 메모에 적은 문장?
+				dipsNo.value = arg.event.extendedProps.dipsNo; // 넘버값 = id
+// 				alert(arg.event.startStr);
+				ddate.value = arg.event.startStr; // 날짜값 = 시작날짜
+				movieTitle.value = arg.event.extendedProps.movieTitle; // 제목값 = 제목
+// 				memo.value = arg.event.extendedProps.description; // 메모 값 = 메모에 적은 문장?
+// 				image_url.value = arg.event.extendedProps.image_url;
+				image_url.src = arg.event.extendedProps.image_url;
+// 				alert("img경로:" +image_url.value);
 				
 				saveBtn.setAttribute("type","hidden"); // 저장 히든
-				updateBtn.setAttribute("type","button"); // 수정
+				updateBtn.setAttribute("type","hidden"); // 수정
 				deleteBtn.setAttribute("type","button"); // 삭제
 				
 				location.href="${pageContext.request.contextPath }/mcalendar#memo"; // memo로 넘어감
 				
 				
 			},
-			events : ${mjson}
+// 			dayRender: function(date, cell){
+// 				cell.html("<img src='" +img+"' >");
+// 			}
+			//events : ${mjson}
 
 		});
 		calendar.render(); // 달력 출력?
 	
 		const cancelBtn = document.getElementById("cancel-btn"); 
-		var no = document.getElementById("no");
-		var mdate = document.getElementById("mdate");
-		var title = document.getElementById("title");
-		var memo = document.getElementById("memo-area");
+		var dipsId = document.getElementById("dipsId");
+		var ddate = document.getElementById("ddate");
+		var movieId = document.getElementById("movieId");
+		var userId = document.getElementById("userId");
+// 		var image_url = document.getElementById("image_url");
+		var movieTitle = document.getElementById("movieTitle");
+		var dipsNo = document.getElementById("dipsNo");
 		
 		cancelBtn.onclick = function() { // 취소 버튼이 눌렸을 때
 			
-			no.value="";
-			mdate.value="";
-			title.value="";
-			memo.value="";
+			dipsNo.value="";
+			ddate.value="";
+			movieTitle.value="";
+// 			image_url.value="";
 			
 			var saveBtn = document.getElementById("save-btn");
 			var updateBtn = document.getElementById("update-btn");
@@ -98,52 +182,52 @@
 		saveBtn.onclick = function() { // 저장버튼을 누를 시
 			//ajax 통신 요청
 			var xhr = new XMLHttpRequest();
-			xhr.open("POST","${pageContext.request.contextPath}/memo-regist", true); // post 통신
+			xhr.open("POST","${pageContext.request.contextPath}/Dips-regist", true); // post 통신
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send("mdate="+mdate.value+"&title="+title.value+"&memo="+memo.value); // 날짜는 날짜값, 제목은 제목값, 메모는 메모에 적힌 글
+			xhr.send("ddate="+ddate.value+"&movieId="+movieId.value+"&userId="+userId.value); // 날짜는 날짜값, 제목은 제목값, 메모는 메모에 적힌 글 +"&memo="+memo.value
 			
-			xhr.onreadystatechange = function() {
-				if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+// 			xhr.onreadystatechange = function() {
+// 				if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
 					
-					var code = xhr.responseText;
+// 					var code = xhr.responseText;
 					
-					if(code) {
-						//성공
-						location.href="${pageContext.request.contextPath}/mcalendar#home"; // 저장하고 캘린더로 돌아옴
-						alert("메모 등록 성공")
+// 					if(code) {
+// 						//성공
+// 						location.href="${pageContext.request.contextPath}/mcalendar#home"; // 저장하고 캘린더로 돌아옴
+// 						alert("메모 등록 성공")
 					
-						calendar.addEvent(
-	 						{
-	 							title : title.value,
-	 							start : mdate.value,
-	 							description : memo.value
-	 						}
-		 					);
+// 						calendar.addEvent(
+// 	 						{
+// 	 							movieId : title.value,
+// 	 							start : ddate.value,
+// 	 							description : memo.value
+// 	 						}
+// 		 					);
 						
-					} else {
-						//실패
-						alert("메모 등록 실패")
+// 					} else {
+// 						//실패
+// 						alert("메모 등록 실패")
 						
-					}
+// 					}
 					
-				}
-			}
+// 				}
+// 			}
 			
 			//document.form.submit(); 
 			//서버 요청 (페이지 이동)
 		}
 		
 // 		const updateBtn = document.getElementById("update-btn");
-		updateBtn.onclick = function() {
+// 		updateBtn.onclick = function() {
 			
-			document.form.action = "${pageContext.request.contextPath }/memo-update";
-			document.form.submit();
-		}
+// 			document.form.action = "${pageContext.request.contextPath }/dips-update";
+// 			document.form.submit();
+// 		}
 		
 // 		const deleteBtn = document.getElementById("delete-btn");
 		deleteBtn.onclick = function() {
 			
-			document.form.action = "${pageContext.request.contextPath }/memo-delete";
+			document.form.action = "${pageContext.request.contextPath }/dips-delete";
 			document.form.submit();
 		}
 	
@@ -197,21 +281,32 @@
 <!-- 								<header> -->
 <!-- 									<h2>My Memo</h2> -->
 <!-- 								</header> -->
-								<form action="${pageContext.request.contextPath }/memo-regist" method="post" name="form">
+								<form action="${pageContext.request.contextPath }/Dips-regist" method="post" name="form">
 									<input type="hidden" name="no" id="no">
 								
 									<div>
 										<div class="row">
-										<img src = "assets/css/img/avenger.jpg">
 											<div>
-												<input type="date" name="mdate" id="mdate">
+												<input type="date" name="ddate" id="ddate" readonly>
 											</div>
 											<div class="col-12">
-												<input type="text" name="title" id="title" placeholder="Title" />
+												<input type="text" name="movieTitle" id="movieTitle" placeholder="movieTitle" readonly>
 											</div>
 											<div class="col-12">
-												<textarea name="memo" id="memo-area" placeholder="Memo" rows="6"></textarea>
+												<input type="text" name="dipsNo" id="dipsNo" readonly>
 											</div>
+<%-- 											<c:forEach var="dvo" items="${dlist2 }">
+							                        <img src="${dvo.poster}" alt="포스터" > --%>
+<!-- 											</c:forEach> -->
+											
+											<div class="col-12">
+												<img src='' id="image_url" name="image_url" alt="포스터"  />
+<!-- 												out.print("Poster"); -->
+<!-- 												<input type="text" name="image_url" id="image_url" > -->
+											</div>
+<!-- 											<div class="col-12"> -->
+<!-- 												<textarea name="memo" id="memo-area" placeholder="Memo" rows="6"></textarea> -->
+<!-- 											</div> -->
 											<div class="col-12">
 												<input type="button" value="저장" id="save-btn">
 												<input type="hidden" value="수정" id="update-btn">

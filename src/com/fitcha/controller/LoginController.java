@@ -1,5 +1,6 @@
 package com.fitcha.controller;
 
+import java.io.Console;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import com.fitcha.model.dao.MUserDAO;
 
 
-@WebServlet("/main-login")
+@WebServlet("/login")
 public class LoginController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,6 +32,8 @@ public class LoginController extends HttpServlet {
 		MUserDAO muserdao = new MUserDAO();
 		String result = muserdao.login(id,pw);
 		String msg="";
+		System.out.println(id);
+		System.out.println(pw);
 		
 		//세션 연결
 		if(result!=null) {
@@ -40,7 +43,7 @@ public class LoginController extends HttpServlet {
 			
 			//페이지이동(index)
 			//sendRedirect는 contextPath 필수!!
-			response.sendRedirect(request.getContextPath()+"/main/index.jsp");
+			response.sendRedirect(request.getContextPath()+"/mcalendar");
 			
 		}else {
 			//로그인 실패! 페이지이동(로그인)
