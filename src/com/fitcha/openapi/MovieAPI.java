@@ -114,23 +114,26 @@ public class MovieAPI {
  
     public static void main(String[] args) {
         // API 객체 생성
-//        MovieAPI api = new MovieAPI();
+        MovieAPI api = new MovieAPI();
  
         // API 요청 (curPage는 매개변수)
 //        for (int i=0; i>-480; i--) {
 //        	api.requestAPI(i);
 //        }
-        
-//        api.requestAPI("1");
-//        System.out.println(result);
-                
+                        
 //        for (String title : resultList) {
 //            result.append("\"").append(title).append("\"").append(", ");
 //        }
 //        
 //        System.out.println(result);
         
+  
 
+        for (String title : resultList) {
+            Scrapping sc = new Scrapping();
+            sc.selectMovieList(title);            
+        }
+        
     }
 
 }

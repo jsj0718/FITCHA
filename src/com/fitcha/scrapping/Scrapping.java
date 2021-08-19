@@ -56,6 +56,7 @@ public class Scrapping {
                 sc2.selectMovieInfo(movieCode);
             }
         } catch(Exception e) {
+            System.out.println(title);
             e.printStackTrace();
         }
 	}

@@ -4,6 +4,8 @@ public class MovieAndStaffVO {
     private int masId;
     private int movieId;
     private int staffId;
+    private String staffName;
+    private String staffImg;
     private String role;
     private String roleName;
 
@@ -45,6 +47,22 @@ public class MovieAndStaffVO {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getStaffName() {
+        return staffName;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
+
+    public String getStaffImg() {
+        return staffImg;
+    }
+
+    public void setStaffImg(String staffImg) {
+        this.staffImg = staffImg;
     }
 
 }

@@ -78,6 +78,7 @@ public class Scrapping4 {
 //                System.out.println(staffInfo);
 //            }
         } catch(Exception e) {
+            System.out.println(pcode);
             e.printStackTrace();
         }
     }

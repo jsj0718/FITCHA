@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.contents-title, .recommend-title {
+  position: relative;
+  z-index: 100;
+  font-size: 1.4vw;
+  font-weight: 700;
+  color: #e5e5e5;
+}
+
+.poster {
+  transition-property: transform;
+  transition-duration: 0.2s;
+  transform-origin: center center;
+  box-sizing: inherit;
+
+}
+
+.poster:hover {
+  transform: scale(1.08);
+}
+
+.modal-dialog {
+  width: 1000px;
+}
+

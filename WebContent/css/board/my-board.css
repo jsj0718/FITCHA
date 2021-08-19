@@ -81,59 +81,104 @@ section{
 }
 
 
-#search-box{
+/* #search-box{ */
   
-   width: 600px;
-   margin: 0 auto;
+/*    width: 600px; */
+/*    float:right; */
   
-/*    border: 1px solid white; */
+/* /*    border: 1px solid white; */ */
   
-}
+/* } */
 
-#input-search{
-   width: 500px;
-   height: 10px;
-   border: 1px solid white;
-   border-radius: 20px;
-   background-color: rgba(255,255,255,0.8);
-   margin: 0 auto;
-   padding: 10px;
-   text-align: center;
-}
-#search-btn{
-   display: inline-block;
-   color:black;
+/* #searchBox{ */
+/*    width: 500px; */
+/*    height: 10px; */
+/*    border: 1px solid white; */
+/*    border-radius: 20px; */
+/*    background-color: rgba(255,255,255,0.8); */
+/*    margin: 0 auto; */
+/*    padding: 10px; */
+/*    text-align: center; */
+/* } */
+/* #search_btn{ */
+/*    display: inline-block; */
+/*    color:black; */
    
-}
-#recently, best{
+/* } */
+#recently, #bestTitle{
    
    font-size: 24px;
    color: white;
    font-weight: bold;
    margin:  30px 100px;
 }
-#review-box{ 
-	text-align: left;
-   width: 1200px;
-  
-   border-bottom: 1px solid red;
+#searchImg, #best, #searchBoxImg{
+	 
+	  margin:  30px 100px;
 }
-#review-title{
+#review_box{ 
+   text-align: left;
+   width: 1200px;
+   border-bottom: 1px solid red;
+ 
+}
+#review_title{
    text-align: center;
+   font-size: 12px;
+   overflow: hidden;
+
 }
 
 .row{
-   display: inline-block;
-   margin: 30px 10px 0 50px;
-   
+ 	display: inline-block;
 }
-.thumbnail{
-   width: 242px;
+
+#arrange{
+	display: inline-block;
+	margin-right: 10px;
+	margin-top: 40px;
+	margin-left: 10px;
+}
+
+.json_box{
+ 
+   width: 142px;
+   height: 200px;
    background-color: rgba(255,255,255,0.5);
    
+   
 }
+
+.btn_btn_primary{
+	text-decoration: none;
+	color: white;
+	
+}
+#img{
+	display: block;
+	
+	
+}
+#pagination li{
+	
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: none;
+  color:black;
+  font-weight: bold;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 3px 3px 3px 3px;
+  padding: 0 11px;
+		}
+		
+#pagination {
+
+  text-align: center;
+}
+		
 .main-container {
- width: 1200px;
+  width: 1200px;
   padding: 50px;
 }
 
@@ -143,17 +188,14 @@ section{
   grid-template-columns: repeat(6, minmax(100px, 1fr));
 }
 
-.box a {
+.arrange img  {
   transition: transform .3s;  
 }
 
-.box a:hover {
+.arrange img :hover {
   transition: transform .3s;
   -ms-transform: scale(1.4);
   -webkit-transform: scale(1.4);  
   transform: scale(1.4);
 }
 
-.box img {
-  border-radius: 2px;
-}

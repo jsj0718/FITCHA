@@ -172,6 +172,7 @@ public class Scrapping3 {
             
 
         } catch(Exception e) {
+            System.out.println(mcode);
             e.printStackTrace();
         }
     }
