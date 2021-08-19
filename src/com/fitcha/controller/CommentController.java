@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpSession;
+
+
 import com.fitcha.model.dao.BCommentDAO;
 import com.fitcha.model.dao.MainBoardDAO;
 import com.fitcha.model.vo.BCommentVO;
@@ -31,9 +35,10 @@ public class CommentController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		String boardId = request.getParameter("boardId");
 		String newComment = request.getParameter("newComment");
-		String userId = request.getParameter("userId");
+		String userId = (String)session.getAttribute("id");
 		
 		
 		BCommentDAO bcdao = new BCommentDAO();

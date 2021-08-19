@@ -16,21 +16,29 @@ window.onload = function(){
 			var json = JSON.parse(jsonStr);
 			var html ="";
 			var html2 ="";
-			
+			if(userId == json[0].userId){
 				html += "<div id='movie-img'>"
-    					+ " <img src=" + json[0].poster + " alt='Logo Image'></div>"
-				    	+ " <div class='movie-info'>"
-						+ " <div id='movie-content' style='overflow:auto'>"
-						+ " <p>"+json[0].story+"</p></div></div>"
+    					+ " <img src=" + json[0].poster + " class='img-fluid' alt='Logo Image'></div>"
 						+ " <div class='write-box'>"
-					    + " <div id='review-writer'>"
-						+ " <p>작성자: "+json[0].userId+"</p></div><div>"
 						+ " <div id='review-title'>"	
-						+ " <div class='p'>제목</div>"
 						+ " <input type='text' name='title' id='title' value='"+json[0].title+"'></div>"
 						+ " <div id='review-content'>"
-						+ " <div class='p'>내용</div>"	
-						+ " <textarea name='content' id='content' cols='65' rows='10'>"+json[0].content+"</textarea></div>"	
+						+ " <textarea name='content' id='content' cols='65' rows='10'>"+json[0].content+"</textarea></div></div>"	
+						+ " <div id='movie-story'>" + json[0].story + "</div>";
+			}else{
+				
+				html += "<div id='movie-img'>"
+    					+ " <img src=" + json[0].poster + " class='img-fluid' alt='Logo Image'></div>"
+						+ " <div class='write-box'>"
+						+ " <div id='review-title'>"	
+						+ " <input type='text' name='title' id='title' value='"+json[0].title+"' disabled></div>"
+						+ " <div id='review-content'>"
+						+ " <textarea name='content' id='content' cols='65' rows='10' disabled>"+json[0].content+"</textarea></div></div>"	
+						+ " <div id='movie-story'>" + json[0].story + "</div>";
+				
+				
+			}
+					
 				html2 += json[0].userId+"님의 Review";
 						
 			
@@ -57,7 +65,6 @@ function commentLoad(){
 	
 	xhrpost.onreadystatechange = function(){
 		if(xhrpost.readyState == XMLHttpRequest.DONE && xhrpost.status ==200){
-	console.log("보드아디: "+boardId[1]);
 			var jsonStr = xhrpost.responseText;
 			var json = JSON.parse(jsonStr);
 			var html ="";
