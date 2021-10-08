@@ -58,7 +58,8 @@ public class DipsController extends HttpServlet {
 	    MUserVO uvo = udao.selectUserInfo(userId);
 	    String gender = uvo.getGender();
 	    Date now = new Date();
-	    long age = (now.getTime() - uvo.getBirth().getTime()) / (24*60*60*1000);   // 나이 계산
+	    long age = (now.getYear() - uvo.getBirth().getYear());
+	    System.out.println(age);
 	    String generation = "";
 	    if (age < 20) {
 	        generation = "teenager";
