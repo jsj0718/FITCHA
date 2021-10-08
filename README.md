@@ -4,8 +4,6 @@
 
 
 
-------
-
 ## 0. Project 소개
 
 - 코로나19로 인해 만나지 못하는 사람들을 위해 영화 리뷰를 공유할 수 있는 공간을 만들어보고자 기획
@@ -14,15 +12,11 @@
 
 
 
-------
-
 ## 1. Project 기능
 
 ![image-20211008110708472](https://github.com/jsj0718/FITCHA/blob/master/README.assets/image-20211008110708472.png)
 
 
-
-------
 
 ## 2. Project 개발 환경
 
@@ -36,13 +30,9 @@
 
 
 
-------
-
 ## 3. Project DB ERD
 
 ![image-20211008111110337](https://github.com/jsj0718/FITCHA/blob/master/README.assets/image-20211008111110337.png)
-
-------
 
 
 
