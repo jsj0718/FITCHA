@@ -10,7 +10,6 @@ import java.util.List;
 
 import com.fitcha.model.dbconn.DBConnect;
 import com.fitcha.model.vo.BCommentVO;
-import com.fitcha.model.vo.MainBoardVO;
 
 public class BCommentDAO {
 
